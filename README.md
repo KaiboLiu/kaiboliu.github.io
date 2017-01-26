@@ -1,2 +1,0 @@
-
-with Jekyll template
