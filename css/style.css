@@ -1057,7 +1057,7 @@
 /* One */
 
 	#one:before {
-		background-image: url("../images/banner.jpg");
+		background-image: url(".https://raw.githubusercontent.com/KaiboLiu/CS519-DL/master/Project-GAN/images/banner.jpg");
 		background-position: top right;
 		background-repeat: no-repeat;
 		background-size: cover;
