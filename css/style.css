@@ -36,7 +36,7 @@
 		a:hover {
 			border-bottom-color: transparent;
 			/*color: #4acaa8 !important;*/
-			color: #1E90FF !important;
+			color: ##ff0000 !important;
 		}
 
 	strong, b {
@@ -934,7 +934,7 @@
 
 	#header {
 		background: #1E90FF;
-		color: #00BFFF;
+		color: #f0ffff;
 		height: 100%;
 		position: fixed;
 		text-align: center;
@@ -1007,7 +1007,7 @@
 		}
 
 			#header > nav ul li {
-				border-top: solid 2px #5ccfb0;
+				border-top: solid 2px #ADD8E6;
 				display: block;
 				padding: 0;
 			}
@@ -1027,7 +1027,7 @@
 
 					#header > nav ul li a.active, #header > nav ul li .cc-active {
 						background: #fff;
-						color: ##808000 !important;
+						color: #1E90FF !important;
 					}
 
 				#header > nav ul li:first-child {
