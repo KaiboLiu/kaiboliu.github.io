@@ -1057,7 +1057,7 @@
 /* One */
 
 	#one:before {
-		background-image: url("https://raw.githubusercontent.com/KaiboLiu/kaiboliu.github.io/master/images/banner_city.jpg");
+		background-image: url("https://raw.githubusercontent.com/KaiboLiu/kaiboliu.github.io/master/images/banner_city_night.jpg");
 		/*background-image: url("{site.baseurl}/images/banner.jpg");*//*url("../images/banner.jpg");*/
 		background-position: top right;
 		background-repeat: no-repeat;
