@@ -36,7 +36,7 @@
 		a:hover {
 			border-bottom-color: transparent;
 			/*color: #4acaa8 !important;*/
-			color: ##ff0000 !important;
+			color: #00BFFE !important;
 		}
 
 	strong, b {
@@ -860,7 +860,7 @@
 			input[type="reset"].special:hover,
 			input[type="button"].special:hover,
 			.button.special:hover {
-				background-color: #5ed0b1;
+				background-color: #00ccff;
 			}
 
 			input[type="submit"].special:active,
@@ -934,7 +934,7 @@
 
 	#header {
 		background: #1E90FF;
-		color: #f0ffff;
+		color: #d1f1e9;
 		height: 100%;
 		position: fixed;
 		text-align: center;
@@ -979,7 +979,7 @@
 			}
 
 			#header > header p {
-				color: #00BFFF;
+				color: #AFEEEE;
 				font-style: italic;
 				margin: 1em 0 0 0;
 			}
@@ -1007,7 +1007,7 @@
 		}
 
 			#header > nav ul li {
-				border-top: solid 2px #ADD8E6;
+				border-top: solid 2px #56acff;
 				display: block;
 				padding: 0;
 			}
