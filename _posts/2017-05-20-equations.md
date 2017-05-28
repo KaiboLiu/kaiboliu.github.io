@@ -7,9 +7,9 @@ date: 2017-05-20 10:16:25 -0800
 ![sample equ](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign*%7D%20%5Cnabla%20%5Ccdot%20%5Cvec%7B%5Cmathbf%7BE%7D%7D%20%26%20%3D%204%20%5Cpi%20%5Crho%20%26%5Ctext%7B%5Crlap%7B%28Loi%20de%20Gauss%29%7D%7D%5C%5C%20%5Cnabla%20%5Ccdot%20%5Cvec%7B%5Cmathbf%7BB%7D%7D%20%26%20%3D%200%20%26%5Ctext%7B%5Crlap%7B%28Loi%20de%20Coulomb%29%7D%7D%5C%5C%20%5Cnabla%20%5Ctimes%20%5Cvec%7B%5Cmathbf%7BE%7D%7D%20%26%20%3D%20-%20%5Cfrac1c%5C%2C%20%5Cfrac%7B%5Cpartial%5Cvec%7B%5Cmathbf%7BB%7D%7D%7D%7B%5Cpartial%20t%7D%20%26%5Ctext%7B%5Crlap%7B%28Loi%20de%20Faraday%29%7D%7D%5C%5C%20%5Cnabla%20%5Ctimes%20%5Cvec%7B%5Cmathbf%7BB%7D%7D%20%26%20%3D%20%5C%20%5Cfrac1c%284%5Cpi%5Cvec%7B%5Cmathbf%7Bj%7D%7D%20&plus;%20%5Cfrac%7B%5Cpartial%5Cvec%7B%5Cmathbf%7BE%7D%7D%7D%7B%5Cpartial%20t%7D%29%20%26%5Ctext%7B%5Crlap%7B%28Loi%20d%27Ampere%29%7D%7D%20%5Cend%7Balign%7D "Maxwell")
 
 
-#### Never insert equations as image links generated from online latex services!
+### Never insert equations as image links generated from online latex services!!!
 
-There several ways to insert equations with latex format instead of image link.
+There several ways to insert equations with latex format instead of image link. Last is the best!
 1. Google Chart Server  
     ```html
     <img src="http://chart.googleapis.com/chart?cht=tx&chl= Latex_Equation" style="border:none;">
@@ -19,7 +19,7 @@ There several ways to insert equations with latex format instead of image link.
 The result:  
 <img src="http://chart.googleapis.com/chart?cht=tx&chl=\Large x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}" style="border:none;">
 
-    They looks good in normal markdown previews. But, there may be some size problem in different jekyll supported sites because they may be converted to images. Response is reasonable but seems invalid for some complex equations. This can be used in atom and github, but void in YoudaoNote.
+    They looks good in normal markdown previews. **But**, there may be some size problem in different jekyll supported sites because they may be converted to images. Response is reasonable but seems invalid for some complex equations. This can be used in atom and github, but void in YoudaoNote.
 
 2. forkosh server  
 The code with forkosh is:
@@ -49,7 +49,9 @@ The code with forkosh is:
     \\(x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}\\)
     ```
     result:  
+    between-line:
     $$x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$$  
+    in-line:
     \\(x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}\\)    
     Moreover, we can edit with right click on the equation.
 
