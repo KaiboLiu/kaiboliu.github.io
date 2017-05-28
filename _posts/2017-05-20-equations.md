@@ -49,7 +49,7 @@ The code with forkosh is:
     \\(x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}\\)
     ```
     result:  
-    between-line:
+    between-line:  
     $$x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$$  
     in-line:
     \\(x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}\\)    
