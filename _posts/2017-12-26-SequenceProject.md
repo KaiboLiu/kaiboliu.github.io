@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Memo for Sequence Project - note for better
+title: Memo for Sequence Project
 date: 2017-12-26 22:16:25 -0800
 ---
 
@@ -26,7 +26,7 @@ date: 2017-12-26 22:16:25 -0800
 
 #### 12/05/2017 Tue
 Meeting with Prof. Huang and Dezhong, on the project of RNA sequence pairing.
-RNA paring for pseudoknot-free mode is perfectly improved in linear solution. Next step is to optimize different types of crossing, from `$O(n^3)$` to `$O(n^6)$`, to linear.  
+RNA paring for pseudoknot-free mode is perfectly improved in linear solution. Next step is to optimize different types of crossing, from \\(O(n^3)\\) to \\(O(n^6)\\), to linear.  
 The group also needs a web demo for visual illustration, especially for beam tunning. So I took the task for web development. Everything needs to study from the very beginning. 
 
 
