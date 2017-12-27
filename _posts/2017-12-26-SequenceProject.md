@@ -1,8 +1,8 @@
- ---
- layout: post
- title: Memo for Sequence Project - note for better
- date: 2017-12-26 22:16:25 -0800
- ---
+---
+layout: post
+title: Memo for Sequence Project - note for better
+date: 2017-12-26 22:16:25 -0800
+---
 
 # CONTENTS
 - [2017 Fall](#2017-fall)  
