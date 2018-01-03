@@ -468,7 +468,7 @@ google.charts.setOnLoadCallback(function(){load_draw_go(d,R,circleScale,halfOpen
 [***Back*** to subcontents ***RNA web demo***](#rna-web-demo)
 
 #### 01/02/2018 Tue
-- Meeting with Prof. Huang and Dezhong, discussed a little about the web demo, then asked me to read about R&E \\($n^6$\\) and D&P \\($n^5$\\), then run the corresponding software ? and NUPACK.
+- Meeting with Prof. Huang and Dezhong, discussed a little about the web demo, then asked me to read about R&E \\(n^6\\) and D&P \\(n^5\\), then run the corresponding software ? and NUPACK.
 - Prof. Huang felt the webpage may freeze when we slide to much. I explained with console log that each move on slide bar, beam value is updated then data file loaded and graphs/plots are rendered.
 - At home, I tried two methods to speed up the demo for frequent silde.
     - I tried to load data at the beginning, save it to a `global` variable (pairingList). Then the draw module and plot module can use the current pairingList to finish the job. Codes are updated and rearranged. But I found that the beam value is always the same as last click, not from current click. 
