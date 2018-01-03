@@ -385,7 +385,7 @@ Research a lot for **SVG** draw with javascript.
         ...
         };
         ```
-    - Here is the result I'm satisfied with:
+    - Here is the result I'm satisfied with:  
     ![customized tooltips in R-P plot](https://kaiboliu.github.io/images/web%20demo/customized%20tooltips%20in%20R-P%20plot.png "customized tooltips in R-P plot")
 - [ ] (★★★★★) In P/R-beam plot, use "b=1" instead of "1" in mouse hover(tooltip).
     - I can use the `category` option to list all series on hover, but x-label(domain label) is still missing from default.  
@@ -443,7 +443,7 @@ Re-write the function `plot_411`, combine two dataTable instead of generating tw
 	    ```
 	    The second element in a row is a tooltip, added as a column header `data_C_1.addColumn({'type': 'string', 'role': 'tooltip', 'p': {'html': true}});`
     - In the function `createCustomHTMLContent_1`, I editted a new html line, including series line color, with times of trails of hex colors.
-    - Here is the result I'm satisfied with:
+    - Here is the result I'm satisfied with:  
     ![customized tooltips in PR-beam plot](https://kaiboliu.github.io/images/web%20demo/customized%20tooltips%20in%20PR-beam%20plot.png "customized tooltips in PR-beam plot")
             
 [***Back*** to subcontents ***RNA web demo***](#rna-web-demo)
