@@ -3,6 +3,9 @@ layout: post
 title: Memo for Sequence Project
 date: 2017-12-26 22:16:25 -0800
 ---
+
+
+
 # CONTENTS
 - [2017 Fall](#2017-fall)  
     - [RNA web demo (->)](#rna-web-demo)  
@@ -36,7 +39,7 @@ date: 2017-12-26 22:16:25 -0800
 
 #### 12/05/2017 Tue
 Meeting with Prof. Huang and Dezhong, on the project of RNA sequence pairing.
-RNA paring for pseudoknot-free mode is perfectly improved in linear solution. Next step is to optimize different types of crossing, from \\(O(n^3)\\) to \\(O(n^6)\\), to linear.  
+RNA paring for pseudoknot-free mode is perfectly improved in linear solution. Next step is to optimize different types of crossing, from `$O(n^3)$` to `$O(n^6)$`, to linear.  
 The group also needs a web demo for visual illustration, especially for beam tunning. So I took the task for web development. Everything needs to study from the very beginning. 
 
 
@@ -230,10 +233,10 @@ As boss asked, I need to:
 - [x] Add sequence names to corresponding dropdown manu items.
     - Dezhong updated an `Mathews.clean.txt` on his RNA_visual directory. There are 3867 sequences(11571 lines) in the file. I need to match all the 27 (22 in 16s and 5 in 23s) by searching sequence string. Results are [attached later](#sequence-names).
 - [x] Add PPV (precision), Sensitivity (recall), F-score, and number of (predicted) pairs for each plot under subtiles.
-    - \\(P=\frac{\#\ of\ correctly\ predicted pairs}{\#\ of\ predicted\ pairs}\\)
-    - \\(R=\frac{\#\ of\ correctly\ predicted\ pairs}{\#\ of\ gold\ pairs}\\)
-    - \\(F=\frac{2PR}{P+R}\\)
-    - At first I calculate these 3 parameters from the number of my 3 tpye of pairs(`wrong`, `hit`, `missing`). Actually the number \\(hit+missing\neq \#\ of\ ref\ pairs\\), because there is a slip in pairing(use `agree` as equivalence). 
+    - `$P=\frac{\#\ of\ correctly\ predicted pairs}{\#\ of\ predicted\ pairs}$`
+    - `$R=\frac{\#\ of\ correctly\ predicted\ pairs}{\#\ of\ gold\ pairs}$`
+    - `$F=\frac{2PR}{P+R}$`
+    - At first I calculate these 3 parameters from the number of my 3 tpye of pairs(`wrong`, `hit`, `missing`). Actually the number `$hit+missing\neq \#\ of\ ref\ pairs$`, because there is a slip in pairing(use `agree` as equivalence). 
         - For example, `(1,30)` in result and `(1,29),(2,30)` in ref, finally `(1,30)` will be counted as blue(hit) while no grey pair.
         - So I need to pass more para into json format data file for js, detailed in [JSON file layout](#json-file-for-js).
 - [x] Update `agree` function from Dezhong's fix in my `arc_pairing.py` for correct blue pair statistics, after 1.5h voice call. We both had a bug in counting correct-predicted pairs. Now we get the same corresponsive P/R/F result with Dezhong.  
@@ -360,7 +363,7 @@ Research a lot for **SVG** draw with javascript.
         pathEl.setAttribute('d','M'+_l+' 100 Q 100  300 '+_l+' 500' );
     
         ISVGPathSegArcAbs retVal = object.createSVGPathSegArcAbs(in float x, in float y, in float r1, in float r2, in float angle, in boolean largeArcFlag, in boolean sweepFlag)
-    	```
+        ```
 - place your `<script>` elements at the bottom of your `svg` document. Alternatively, you can create a callback function at the top of your document that is only invoked when the rest of the document is ready:
 
 
@@ -458,8 +461,8 @@ On the first click I got the error and no chart, but on the second click the pag
 The same problem discussed on [Google Groups](https://groups.google.com/forum/#!topic/google-visualization-api/yzBtf7xl0dE).  
 google.charts.setOnLoadCallback(function(){load_draw_go(d,R,circleScale,halfOpen)});  	// draw graphs and plots on the right
 > By naming your callback function and giving it parameters, you are actually calling it at that time and only the result of that function call will be passed in to the setOnLoadCallback.  If you call your draw function before the library is loaded, then many things will be undefined, such as the DataTable constructor.  By just naming the callback function (e.g. just drawChart), you are passing in a reference to that function.  So if you want to pass parameters to your drawChart function, you need to wrap that call in another function declaration, like this:
->> google.charts.load('current', {packages: ['corechart', 'line']);
-   google.charts.setOnLoadCallback( function() { drawChart(loc) });
+>> google.charts.load('current', {packages: ['corechart', 'line']);  
+   google.charts.setOnLoadCallback( function() { drawChart(loc) });  
    function drawChart(loc) { ... }
 
 
@@ -468,7 +471,7 @@ google.charts.setOnLoadCallback(function(){load_draw_go(d,R,circleScale,halfOpen
 [***Back*** to subcontents ***RNA web demo***](#rna-web-demo)
 
 #### 01/02/2018 Tue
-- Meeting with Prof. Huang and Dezhong, discussed a little about the web demo, then asked me to read about R&E \\(n^6\\) and D&P \\(n^5\\), then run the corresponding software ? and NUPACK.
+- Meeting with Prof. Huang and Dezhong, discussed a little about the web demo, then asked me to read about R&E (`$n^6$`) and D&P (`$n^5$`), then run the corresponding software ? and NUPACK.
 - Prof. Huang felt the webpage may freeze when we slide to much. I explained with console log that each move on slide bar, beam value is updated then data file loaded and graphs/plots are rendered.
 - At home, I tried two methods to speed up the demo for frequent silde.
     - I tried to load data at the beginning, save it to a `global` variable (pairingList). Then the draw module and plot module can use the current pairingList to finish the job. Codes are updated and rearranged. But I found that the beam value is always the same as last click, not from current click. 
