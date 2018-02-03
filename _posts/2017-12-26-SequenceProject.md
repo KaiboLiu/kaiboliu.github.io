@@ -64,7 +64,7 @@ scp -r /Users/zhangyilin/0_pipi/LKB_OSU/Research/RNA/web_demo/rearranged_results
 #### 12/07/2017 Thu
 
 Layout:
-```
+```mermaid
 graph LR
 contrafold-->contrafold_linear
 vienna-->vienna_linear
