@@ -1104,6 +1104,6 @@
 				}
 
 /* Geo Location Heatmap from https://clustrmaps.com/ */
-clustrmapsDiv{
+div#clustrmapsDiv{
     width:500px;
 }
