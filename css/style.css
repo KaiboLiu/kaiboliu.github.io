@@ -1102,3 +1102,8 @@
 				#footer .copyright li a {
 					color: inherit;
 				}
+
+/* Geo Location Heatmap from https://clustrmaps.com/ */
+clustrmapsDiv{
+    width:500px;
+}
