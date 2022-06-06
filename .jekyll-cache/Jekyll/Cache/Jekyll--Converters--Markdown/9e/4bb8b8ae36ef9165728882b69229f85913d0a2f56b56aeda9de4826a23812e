@@ -1,0 +1,1354 @@
+I"�<h1 id="contents">CONTENTS</h1>
+<ul>
+  <li><a href="#2017-winter">2017 Winter</a>
+    <ul>
+      <li><a href="#cs-519-deep-learning">CS 519 Deep Learning (-&gt;)</a></li>
+      <li><a href="#cs-540-database-managerment">CS 540 Database Managerment (-&gt;)</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="2017-winter">2017 Winter</h2>
+
+<h2 id="cs-540-database-managerment">CS 540 Database Managerment</h2>
+<ul>
+  <li><a href="#class-note">class note</a></li>
+  <li><a href="#paper-review">paper review before class (-&gt;)</a></li>
+  <li><a href="#assignment-4">Assignment 4</a></li>
+  <li><a href="#assignment-5">Assignment 5</a></li>
+  <li><a href="#cs-540-project">Project</a></li>
+  <li><a href="#contents"><strong><em>Back to CONTENTS</em></strong></a></li>
+</ul>
+
+<h3 id="class-note">class note</h3>
+<h4 id="02042017-tue">02/04/2017 Tue</h4>
+
+<p>Data dependence
+Access path dependence
+How you can organize the data
+Applications would hard code access paths to data, so would rely on the continued existence of the used access paths.</p>
+
+<p>Levels of abstraction in DBMS
+Physical implementation
+storage structurem indexing, access method</p>
+
+<p>operation on relations: deriving relations
+Permutation: interchange the columns of an n-ary relation
+Projection: select columns and remove any duplication in the rows
+Join: selectively combining tuples in two relations, as a “class” of new relation
+Composition
+Restriction</p>
+
+<p>what is missing in the set of operators?: order by, group by
+Is it minimal?
+How is it different from current algebra</p>
+
+<p>redundancy: redundant if can be derived from others; foundation: what operations allowed in derivation
+consistency: data snapshot must satisfy some constraints</p>
+
+<p>the advantages of relational model: simplicity, mathemathcal</p>
+
+<p>does relational model provide data independence?
+ordering indep? index indep? acces path indep?
+index: some way to organize data, like binary tree.  index does not influence the query</p>
+
+<p>parrallel processing: relations in and out: pipeline:piping the output of one op into the next; partition: N op-clones, each processes 1/N input
+Graphical user interfaces: relations fits the spreadsheet(table) metaphor
+-&gt;table is easier than graphy to partition unless it’s a complex table</p>
+
+<p>1970: resistance even within IBM; too mathematical, no system
+First implementation, 1973</p>
+
+<p>relational data is time consuming.
+network/hierarchical models makes a come back.
+a great deal of graph data sets: web is a huge network database</p>
+
+<p><a href="#cs-540-database-managerment"><strong><em>Back</em></strong> to subcontents <strong><em>CS 540</em></strong></a></p>
+
+<h4 id="01302017-mon">01/30/2017 Mon</h4>
+<p>B+树总结
+通过以上介绍，大致将B树，B+树，B*树总结如下：</p>
+<ul>
+  <li>B树：有序数组+平衡多叉树；数据存在于非叶子节点上</li>
+  <li>B+树：有序数组链表+平衡多叉树；数据只存在于叶子上。</li>
+  <li>B*树：一棵丰满的B+树。</li>
+</ul>
+
+<p>走进搜索引擎的作者梁斌老师针对B树、B+树给出了他的意见：
+“B+树还有一个最大的好处，方便扫库，B树必须用中序遍历的方法按序扫库，而B+树直接从叶子结点挨个扫一遍就完了，B+树支持range-query非常方便，而B树不支持。这是数据库选用B+树的最主要原因。
+比如要查 5-10之间的，B+树一把到5这个标记，再一把到10，然后串起来就行了，B树就非常麻烦。B树的好处，就是成功查询特别有利，因为树的高度总体要比B+树矮。不成功的情况下，B树也比B+树稍稍占一点点便宜。   B树比如你的例子中查，17的话，一把就得到结果了。 有很多基于频率的搜索是选用B树，越频繁query的结点越往根上走，前提是需要对query做统计，而且要对key做一些变化。   另外B树也好B+树也好，根或者上面几层因为被反复query，所以这几块基本都在内存中，不会出现读磁盘IO，一般已启动的时候，就会主动换入内存。”</p>
+
+<p><a href="#cs-540-database-managerment"><strong><em>Back</em></strong> to subcontents <strong><em>CS 540</em></strong></a></p>
+
+<h4 id="lru替换">LRU替换</h4>
+<p>LRU是Least Recently Used 近期最少使用算法。 内存管理的一种页面置换算法，对于在内存中但又不用的数据块（内存块）叫做LRU，操作系统会根据哪些数据属于LRU而将其移出内存而腾出空间来加载另外的数据。
+实现方法是个问题，链表或者 大多是估计法。</p>
+
+<p><a href="#cs-540-database-managerment"><strong><em>Back</em></strong> to subcontents <strong><em>CS 540</em></strong></a><br />
+<a href="#contents"><strong><em>Back to CONTENTS</em></strong></a></p>
+
+<hr />
+
+<h3 id="paper-review">paper review</h3>
+<ul>
+  <li><a href="#0112">01.12_A Relational Model of Data for Large Shared Data Banks</a></li>
+  <li><a href="#0112-2">01.12_The Universal-Relation Data Model for Logical Inependence</a></li>
+  <li><a href="#0119">01.19_Operating System Support for Database Management</a></li>
+  <li><a href="#0126">01.26_Query Evaluation Techniques for Large Databases</a></li>
+  <li><a href="#0131">01.31_Access Path Selection in a Relational Database Management System</a></li>
+  <li><a href="#0207">02.07_Granularity of Locks and Degrees of Consistency in a Shared Data Base</a></li>
+  <li><a href="#0209">02.09_ARIES: A Transaction Recovery Method Supporting Fine-Granularity Locking and Partial Rollbacks Using Write-Ahead Logging</a></li>
+  <li><a href="#0228">02.28_The Gamma Database Machine Project</a></li>
+  <li><a href="#0228-2">02.28_MapReduce: Simplified Data Processing on Large Clusters</a></li>
+  <li><a href="#0302">03.02_Scalable SQL and NoSQL Data Stores</a></li>
+  <li><a href="#0307">03.07_Bigtable: A Distributed Storage System for Structured Data</a></li>
+  <li><a href="#0307-2">03.07_Dynamo: Amazon’s Highly Available Key-Value Store</a>_section4.4+4.5</li>
+  <li>[03.09_]</li>
+  <li><a href="#cs-540-database-managerment"><strong><em>Back</em></strong> to subcontents <strong><em>CS 540</em></strong></a></li>
+</ul>
+
+<h4 id="0112">01/12</h4>
+<p>review_Kaibo Liu_01.12_<strong>A Relational Model of Data for Large Shared Data Banks</strong></p>
+
+<p>What is the problem discussed in the paper?<br />
+This paper discussed data independencies in ralational data model for shared access. There should be minimal or no influence to users at terminal end or in the applications accessing this data when there are internal or external changes of representation of data. And also the problems for data inconsistencies.</p>
+
+<p>Why is it important?<br />
+From growth in data types and changes in data representation, independence and inconsistency will become troublesome even in nondeductive systems. The advantages of relational model are it deals with derivability, redundancy, and consistency of relations.</p>
+
+<p>What are the main ideas of the proposed solution for the problem?<br />
+All usual set operations can be applicable on relations and result may not be a relation. Permutation, Projection, Join, Composition, and Restriction are some operations specific for relations. The relational model is well explained with its properties such as: Each row is distinct, representing n-tuple in an n-ary relation ‘R’ with no particular order and each column has distinct order and well are defined with a label. Ordering of columns is needed as the order determines the relation in some tables, if the domain names are identical and to deal with time-varying relations. But if the relation is of higher order it is better to have unique domain names and the relations as domain-unordered.</p>
+
+<p>What are the final results and conclusion of the paper?<br />
+This paper defined operations on relations and 2 types of redundancy, and applied them to the problem of maintaining the data in a consistent state. Also many questions are raised and left unanswered, this paper had some impact for the time.</p>
+
+<p>Question: With too much too mathematical explanation, how can this paper tell a more specific way in system?</p>
+
+<p><a href="#cs-540-database-managerment"><strong><em>Back</em></strong> to subcontents <strong><em>CS 540</em></strong></a></p>
+
+<hr />
+
+<h4 id="0112-2">01.12-2</h4>
+<p>review_Kaibo Liu_01.12_<strong>The Universal-Relation Data Model for Logical Inependence</strong></p>
+
+<p><strong>What is the problem discussed in the paper?</strong>
+This paper discussed a problem of access path independency, which was not compeletely solved in the 1970 paper. A specific example to discribe this problem is, considering a database which has two relations ED(Employee, Department) and DM(Department, Manager), if we’re interested in the relationship between employees and managers through departments, we must specify the natural joint of ED and DM relations and project it onto EM. Although this problem may be overvomed by defining a view on EM, that approach ay lead to an unwanted proliferation of views.</p>
+
+<p><strong>Why is it important?</strong>
+A complete access-path independence frees users from concern with the logical structure of the database, and protects users from the errors that creep into queries when complicated access paths must be specified.</p>
+
+<p><strong>What are the main ideas of the proposed solution for the problem?</strong>
+This paper proposed a new model called Universal-Relation Data Model. TThe model is based on an assumption that there is a universal-relation scheme, a set of attributes about which queries may be posed. Further, attributes in this set are assumed to play only one role, and puns are not allowed. Thus, an attribure like name cannot stand for names of employees, customers, suppliers, and managers in the same universal-relation scheme. There is another basic assumprion that for all attribute sets X there’s a unique relationship on this set X that the user has in mind. This underlying assumprion is called relationship uniqueness. The connection and query processing consists two steps: binding and evaluation. The two phases are independent.</p>
+
+<p><strong>What are the final results and conclusion of the paper?</strong>
+The universal-relation model gives users a more succinct language for expressing queries, frees them from concern with the databases’s logical structure, and protects them from the errors that creep into queries when complicated access paths must be specified. The disadvantage of the universal-relation model is that certain logical naviaation be done automatically by the system may place some subtle constraints on the data structure and may make unusual access paths harder to specify.</p>
+
+<p><strong>Question</strong>:
+What’s the efficiency of the approach compared to previous methods?</p>
+
+<p><a href="#cs-540-database-managerment"><strong><em>Back</em></strong> to subcontents <strong><em>CS 540</em></strong></a></p>
+
+<hr />
+
+<h4 id="0119">01.19</h4>
+<p>review_Kaibo Liu_01.19_<strong>Operating System Support for Database Management</strong></p>
+
+<p>This paper goes over several functions that operating systems of that time already provided, and examines whether the provided services are appropriate for DBMS functions or not. The first of these is the buffer pool management, providing a main memory cache for the file system, which does not work well for databases because the OS does not know which blocks to prefetch into memory, while the DBMS does. Therefore, a DBMS buffer manager has to be created to run in user space, to circumvent the OS’s version. In the second part, file system is discussed. The UNIX file system that time takes the data as array. On the other hand database provides an abstraction where user’s keys map to records. Constructing database on top of OS filing system is not always efficient due to the following requirement. The file might scattered over the disk and lose the physical contiguity. Second problem is that there are three tree structures: file control block tree, directories tree, and DBMS such as INGRES adds another tree for keyed access via a multilevel directory structure. The authors note that the file hierarchy does nothing for a DBMS, and DB developers must create their own indexes over flat character arrays. The authors then move onto scheduling and process management, and he provides four ways to organize a multiuser database system. Because DBMS manage their own locks to maintain consistency, they must also handle their own scheduling to avoid deadlocks or any other issues. The performance and other cost of replicating this facilities leave quite a bit to be desired, but is the best current option. In this paper Stonebraker mainly discusses how can an operating system be more friendly to database application, and exclaim that the operating system design should be more sensitive to database needs. I think it’s an inevitable trade off between generality and specificity.</p>
+
+<p>As the author mentioned at the end of this paper, there are so-called real-time OS which provides minimal facilities which is closed to what the author suggests. And the author hopes that future OS will provide both sets of services in one environment. This is a good idea, but I am a little bit curious whether we need to separate conventional OS with a small efficient OS that provides desired services to DBMS. It would be great if we can achieve both in one environment, however, if it is not possible, what is the disadvantage of developing two different OS separately?</p>
+
+<p><a href="#cs-540-database-managerment"><strong><em>Back</em></strong> to subcontents <strong><em>CS 540</em></strong></a></p>
+
+<hr />
+
+<h4 id="0126">01.26</h4>
+<p>review_Kaibo Liu_01.26_<strong>Query Evaluation Techniques for Large Databases</strong>_Sections 5 and 7</p>
+
+<p>In Sections 5 and 7 of this paper,
+5.BINARY MATCHING OPERATIONS
+  5.1. Nested-Loops Join Algorithms
+  5.2 Merge-Join Algorithms
+  5.3 Hash Join Algorithms
+  5.4 Pointer-Based Joins
+  5.5 A Rough Performance Comparison
+7.DUALITY OF SORT- AND HASH-BASED QUERY PROCESSING ALGORITHMS</p>
+
+<p>In Section5, the authors go on to describe nested loops, removing duplicates as early as possible, and hashing. I thought the second was a nice improvement, and easy to implement via sorting or hashing. From the graphs, it looks like hybrid hashing is the best way to do aggregation, though of course it is highly dependent on how good the hash function is. Joins are discussed in the next section. There are many techniques, though the authors note that newer ones are sometimes unable to answer the question, “Does this new technique apply to joining three inputs without interrupting data flow between the join operations?” I would like to know more about this question; is it widely considered an important property of join techniques? What kinds of techniques fail this test that have been seriously examined by the database community? Nested loop join, merge-join, and hash-join algorithms are described; we talked about these in class. The heap-filter merge join sounds like a good way to save I/O operations over merge join and be more efficient that nested join. Again, it was emphasized that skew in the hash function messes things up for hash join.</p>
+
+<p>The paper reviews different operational aspects of a DBMS’s query execution engine. The most prominent aspects of the sections we reviewed are the treatment of sorting and hashing algorithms. Sorting - the algorithm described for sorting is essentially quicksort of datasets that fit in memory and merge for larger datasets. Sorting-based aggregation outperforms nested-loops and aggregating as early as possible is useful. Merge-join, the sorting based join algorithm is widely used since it’s rough cost can be estimated and it performs well enough. Can also be used to implement division between tables. Hashing - hybrid hashing writes only necessary data to disk saving I/O cost. Aggregation based on hybrid hash performs better than sorting-based algorithm with early aggregation. Although there is an overhead in computing the hash value, the search space is made smaller and so it outperforms merge-join. Combined with bit map, the hash method is efficient for processing division operation. The paper also briefly covers Indexing. The paper compares various index structures according to their support for ordering and sorted scans and their support for point data and range data.</p>
+
+<p><a href="#cs-540-database-managerment"><strong><em>Back</em></strong> to subcontents <strong><em>CS 540</em></strong></a></p>
+
+<hr />
+
+<h4 id="0131">01.31</h4>
+<p>review_Kaibo Liu_01.31_<strong>Access Path Selection in a Relational Database Management System</strong></p>
+
+<p>https://blog.acolyer.org/2016/01/04/access-path-selection/
+This paper introduces the idea of a query optimizer, built as part of System R, that plans the most efficient way to retrieve the data requested by a SQL query. As well as giving insight into how a query optimizer may be constructed, the paper also quietly introduced the important result that a declarative query language can be supported with no loss of performance compared to the more common procedural query language approaches of the day. Declarative query language also relieves programmer of the burden to choose an access plan. Difference between good and bad access plans can be several orders of magnitude. And there are three problems in choosing a good plan: what is the plan space? How to estimate cost? How to choose a plan? To find the optimal plan for join operations, a tree of possible solutions is constructed. There is a worked example in the paper of joining Employee, Job title, and Department tables that helps to make this process clearer. The cost of a join is computed based on the costs of scans on each of the relations (using the cost estimate formulas we saw earlier) and the cardinalities.</p>
+
+<p><strong>Question</strong>:</p>
+
+<p><a href="#cs-540-database-managerment"><strong><em>Back</em></strong> to subcontents <strong><em>CS 540</em></strong></a></p>
+
+<hr />
+
+<h4 id="0207">02.07</h4>
+<p>review_Kaibo Liu_02.07_<strong>Granularity of Locks and Degrees of Consistency in a Shared Data Base</strong></p>
+
+<p>This paper is divided in two sections: granularity of locks, and degrees of consistency. Each section answers questions on how lock choice in a database affects throughput and consistency.</p>
+
+<p>In the granularity section, the choice of lockable units is discussed. A lockable unit represents a section of logical data that is atomically locked during a transaction. Locking smaller units such as individual records improves concurrency for  “simple” transactions that access a small number of records. On the other hand, locking at a record level can reduce throughput for “complex” transactions that require access to many records — the overhead of acquiring and releasing locks overwhelms the computation. It follows that having different sizes of lockable units in the same system is required to handle multiple use cases. Two types of locks are presented: X or exclusive locks, and S or shared locks.</p>
+
+<p>The second section defines four different modes of labelled degrees 0 through 3.
+· A degree 0 transaction is the least restrictive type. It promises to not over-write data from other transactions. It requires having any transaction take a lock on any data it writes.</p>
+<ul>
+  <li>Degree 1(Read Uncommitted) consistency keeps the promise of Degree 1 (not to overwrite data) and also agrees not to commit any writes until the end of the transaction. In this case, you may require a longer lock that is held until the end of the transaction.</li>
+  <li>Degree 2 (Read Committed) consistency further restricts a transaction to only read values that have been committed (to contrast, a degree 1 transaction may read dirty values). In addition to acquiring locks for all data written during the transaction, a degree 2 transaction acquires locks for all data read during the transaction.</li>
+  <li>Degree 3 (Repeatable Read) consistency completely isolates a transaction from each other. It acquires long-lived locks on both data read and data written. Degree 3 provides the highest level of isolation described in the paper.</li>
+</ul>
+
+<p><strong>Question</strong>:</p>
+
+<p><a href="#cs-540-database-managerment"><strong><em>Back</em></strong> to subcontents <strong><em>CS 540</em></strong></a></p>
+
+<hr />
+
+<h4 id="0209">02.09</h4>
+<p>review_Kaibo Liu_02.09<em><strong>ARIES: A Transaction Recovery Method Supporting Fine-Granularity Locking and Partial Rollbacks Using Write-Ahead Logging</strong></em>&lt;=Section 6.3</p>
+
+<p>New algorithms for database recovery and rollbacks are described. The paper assumes that the database uses write-ahead logging (WAL), but it describes in fine detail how the various activities during the update, rollback, and recovery phases are to act so as to maximize concurrency and minimize both overhead and time. In their introduction, the authors also provide an excellent description of the current state of the art of logging, failures, and recovery methods. The paper is broken into 12 sections and has an extensive bibliography (101 citations). The sections are an introduction, goals, an overview of ARIES, a description of the major data structures, a discussion of the actions that are part of normal processing (including transaction failure), a description of restart processing (after system failure), a description of the impact of checkpoints during restart, the methods necessary for media recovery, top actions (independent transactions kicked off by running transactions such as file extension), recovery paradigms (mostly problems caused by them), properties of other WAL-based methods (including references to several commercial implementations), and a summary of the attributes of ARIES. As the proposed solution, the fundamental idea of database recovery is to log logical changes to the database to durable storage before applying those changes to the actual database. If this protocol is followed, then any failures can be recovered by using the change log itself. This simple idea is used throughout the paper to illustrate the recovery algorithms for transaction failure, crashes, and storage media failure.
+As part of the ARIES protocol, each log is assigned a log sequence number (LSN) uniquely identifying the log record. Further, each page in the database records the LSN that modified the page. ARIES also tracks any in-flight transactions to be able to fully restore the database to the point-in-time of the crash before doing full recovery.<br />
+To perform recovery, ARIES uses the log and the transaction table during three passes: analysis, redo, and undo. During the analysis pass, the log is scanned to extract the dirty pages and in-flight transactions from the point of failure, determining the starting point where redo is required, and the in-flight transactions that must be rolled back. During the redo pass, the database is restored to the state it was at the time of failure. Finally, during undo pass, any in-flight transactions that failed have their changes rolled back. Combining these three passes restores the database to a consistent state.</p>
+
+<p><a href="#cs-540-database-managerment"><strong><em>Back</em></strong> to subcontents <strong><em>CS 540</em></strong></a></p>
+
+<hr />
+
+<h4 id="0228">02.28</h4>
+<p>review_Kaibo Liu_02.28_<strong><em><a href="http://classes.engr.oregonstate.edu/eecs/winter2017/cs540/gamma.pdf">The Gamma Database Machine Project</a></em></strong></p>
+
+<ol>
+  <li>What is the problem discussed in the paper?</li>
+</ol>
+
+<p>The motivation behind Gamma was to support horizontally scalable database using commodity parts.</p>
+
+<ol>
+  <li>What are the main ideas of the proposed solution for the problem?</li>
+</ol>
+
+<p>The Gamma project uses a shared-nothing architecture to build a horizontally scalable database for the same reasons we see NoSQL vendors tackling the same problem today. Communication between nodes in the system is handled exclusively by passing messages between one another over the network.</p>
+
+<p>Gamma is divided into several processes, the Catalog Manager handles database schema and metadata information, the Query Manager is associated with each active Gamma user and is responsible for providing ad-hoc query support. Coordination of multi-node queries is handled through a Scheduler Process that handles the execution of individual Operator Processes on each node.</p>
+
+<p>Gamma maintains a split table mapping tuples to the node that the tuple resides on. Queries are then shipped to the node where the tuple resides for processing.</p>
+
+<p>Selection operators are parallelized over all nodes by initiating a selection on the set of nodes where the required tuples are held. If the selection query is based on the attribute responsible for building the split table, then a subset of nodes will be engaged to process the query. Otherwise, the selection operator is run on every node in the cluster.</p>
+
+<p>Join operators are executed using the Hybrid hash-join algorithm, where relations are first partitioned into N buckets and the first bucket is used to build an in-memory hash table. The remaining buckets are stored in temporary files. The join operation is run on the in-memory hash tables and, once complete, the remaining buckets are loaded into memory and joined on. In this way, a large join is broken up in to a series of smaller joins.</p>
+
+<p>Aggregate operators are executed by each node in the cluster, and the results combined into a final answer at a single node.</p>
+
+<ol>
+  <li>What are the final results and conclusion of the paper?</li>
+</ol>
+
+<p>Gamma uses two key ideas for enabling a scalable architecture. First, relations are partitioned across nodes in the cluster, allowing for parallel data scans without any specialized hardware. Second, Gamma popularized hash-based parallel algorithms for join and aggregate operators. The shared-nothing architecture continues to be the dominant form of scaling databases.</p>
+
+<p>Question:<br />
+A more thorough explanation of how each of the relational operators is executed within the cluster. The paper provides a short summary of the techniques but I would like to read a more detailed summary.</p>
+
+<p><a href="#cs-540-database-managerment"><strong><em>Back</em></strong> to subcontents <strong><em>CS 540</em></strong></a></p>
+
+<hr />
+
+<h4 id="0228-2">02.28-2</h4>
+<p>review_Kaibo Liu_02.28_<strong><em><a href="http://classes.engr.oregonstate.edu/eecs/winter2017/cs540/mapreduce-osdi04.pdf">MapReduce: Simplified Data Processing on Large Clusters</a></em></strong></p>
+
+<ol>
+  <li>
+    <p>What is the problem discussed in the paper?<br />
+The motivation of MapReduce is to provide an automatical way for parallel execution on a large cluster of commodity machines. Since small commodity PCs became popular, it was not a good idea to run applications with high resource requirment on a few super computers any more. But these small commodity PCs come with less capacity and weaker capability, so it is desirable to find a way to make things fault tolerant and make this large scale cluster easy to program with.</p>
+  </li>
+  <li>
+    <p>What are the main ideas of the proposed solution for the problem?<br />
+The paper presents MapReduce, a simple yet powerful programming interface which enables automatic parallelization and distribution of large scale computations. It also allows implementation on large scale of commodity PCs to achieve high performance. All the magic here is to provide just two user-defined functions – map and reduce, and MapReduce framework will take over the rest.</p>
+  </li>
+  <li>
+    <p>What are the final results and conclusion of the paper?<br />
+MapReduce is a general and easy-to-use programming paradigm for distributed computing, in particular for data-intensive applications. Developers only need to write their own map and reduce functions and they are done.<br />
+MapReduce is a flexible framework. There are no dependencies between different map tasks or reduce tasks, so it is easy to re-run failed tasks or even run speculative tasks at the same time without incurring much overhead.</p>
+  </li>
+</ol>
+
+<p>Definitely, MapReduce is the most popular distributed computing framework so far, but some applications may not fit in this architecture. Compared to Dryad, which models a job as an arbitrary task graphs, MapReduce seems to be a special case of Dryad, say it is just like bipartite graph which consists of just two stages of tasks – map and reduce. As the cluster scales up, the master could easily become the bottleneck and get overloaded. The functionality of master includes at least two parts: in charge of assigning the resources in the cluster to tasks and keeping track of the progress of tasks. For example, in Apache Hadoop implementation, the workers (TaskTrackers in Hadoop) need to periodically exchange resource and task information with the master (JobTracker in Hadoop) via heartbeat, and the number of heartbeats the master can process in a second is limited. So it is easy to imagine the workers will get a delayed response from the master in a large scale cluster.</p>
+
+<p>Question:</p>
+
+<p><a href="#cs-540-database-managerment"><strong><em>Back</em></strong> to subcontents <strong><em>CS 540</em></strong></a></p>
+
+<hr />
+<h4 id="0302">03.02</h4>
+<p>review_Kaibo Liu_03.02_<strong><em><a href="http://classes.engr.oregonstate.edu/eecs/winter2017/cs540/Datastores.pdf">Scalable SQL and NoSQL Data Stores</a></em></strong></p>
+
+<p>This paper examined a number of SQL and socalled “NoSQL” data stores designed to scale simple OLTP-style application loads over many servers. Originally motivated by Web 2.0 applications, these systems are designed to scale to thousands or millions of users doing updates as well as reads, in contrast to traditional DBMSs and data warehouses. We contrast the new systems on their data model, consistency mechanisms, storage mechanisms, durability guarantees, availability, query support, and other dimensions. These systems typically sacrifice some of these dimensions, e.g. database-wide transaction consistency, in order to achieve others, e.g. higher availability and scalability.</p>
+
+<ol>
+  <li>
+    <p>NoSQL Motivation
+Originally motivated by Web 2.0 applications. The goal is to scale simple OLTP-style workloads to thousands or millions of users, and users are doing both updates and reads</p>
+  </li>
+  <li>
+    <p>What is the Problem?
+Scaling a relational DBMS is hard. Since scaling queries with parallel DBMSs is hard, it’s much more difficult to scale transactions. Because we need to ensure ACID properties which is hard to do beyond a single machine.
+There are six key features:
+1) Scale horizontally “simple operations”
+– key lookups, reads and writes of one record or a small number of records, simple selections.
+2) Replicate/distribute data over many servers.
+3) Simple call level interface (contrast w/ SQL).
+4) Weaker concurrency model than ACID.
+5) Efficient use of distributed indexes and RAM.
+6) Flexible schema.</p>
+  </li>
+  <li>Terminology
+    <ul>
+      <li>Sharding : horizontal partitioning by some
+key, and storing records on different servers
+in order to improve performance</li>
+      <li>Horizontal scalability : distribute both data and load over many servers</li>
+      <li>Vertical scaling : when a dbms uses multiple cores and/or CPUs</li>
+    </ul>
+  </li>
+  <li>Different Types of NoSQL
+    <ul>
+      <li>Taxonomy based on data models: Key-value stores(e.g., Project Voldemort, Memcached),</li>
+      <li>Document stores(e.g., SimpleDB, CouchDB, MongoDB)</li>
+      <li>Extensible Record Stores(e.g., HBase, Cassandra, PNUTS)</li>
+    </ul>
+  </li>
+  <li>High-Level Differences between SQL and NoSQL: - SQL databases are primarily called as Relational Databases (RDBMS); whereas NoSQL database are primarily called as non-relational or distributed database.
+    <ul>
+      <li>SQL databases are table based databases whereas NoSQL databases are document based, key-value pairs, graph databases or wide-column stores. This means that SQL databases represent data in form of tables which consists of n number of rows of data whereas NoSQL databases are the collection of key-value pair, documents, graph databases or wide-column stores which do not have standard schema definitions which it needs to adhered to.</li>
+      <li>SQL databases have predefined schema whereas NoSQL databases have dynamic schema for unstructured data.</li>
+      <li>SQL databases are vertically scalable whereas the NoSQL databases are horizontally scalable. SQL databases are scaled by increasing the horse-power of the hardware. NoSQL databases are scaled by increasing the databases servers in the pool of resources to reduce the load.</li>
+      <li>SQL databases uses SQL ( structured query language ) for defining and manipulating the data, which is very powerful. In NoSQL database, queries are focused on collection of documents. Sometimes it is also called as UnQL (Unstructured Query Language). The syntax of using UnQL varies from database to database.</li>
+      <li>SQL database examples: MySql, Oracle, Sqlite, Postgres and MS-SQL. NoSQL database examples: MongoDB, BigTable, Redis, RavenDb, Cassandra, Hbase, Neo4j and CouchDb.
+For complex queries: SQL databases are good fit for the complex query intensive environment whereas NoSQL databases are not good fit for complex queries. On a high-level, NoSQL don’t have standard interfaces to perform complex queries, and the queries themselves in NoSQL are not as powerful as SQL query language.</li>
+      <li>For the type of data to be stored: SQL databases are not best fit for hierarchical data storage. But, NoSQL database fits better for the hierarchical data storage as it follows the key-value pair way of storing data similar to JSON data. NoSQL database are highly preferred for large data set (i.e for big data). Hbase is an example for this purpose.</li>
+      <li>For scalability: In most typical situations, SQL databases are vertically scalable. You can manage increasing load by increasing the CPU, RAM, SSD, etc, on a single server. On the other hand, NoSQL databases are horizontally scalable. You can just add few more servers easily in your NoSQL database infrastructure to handle the large traffic.</li>
+    </ul>
+  </li>
+</ol>
+
+<p>Question:</p>
+
+<p><a href="#cs-540-database-managerment"><strong><em>Back</em></strong> to subcontents <strong><em>CS 540</em></strong></a></p>
+
+<hr />
+
+<h4 id="0307">03.07</h4>
+<p>review_Kaibo Liu_03.07_<strong><em><a href="http://classes.engr.oregonstate.edu/eecs/winter2017/cs540/bigtable-osdi06.pdf">Bigtable: A Distributed Storage System for Structured Data</a></em></strong></p>
+
+<p>What is the problem addressed?<br />
+Bigtable is a distributed storage system for managing structured data that is designed to scale to a very large size: petabytes of data across thousands of commodity servers.</p>
+
+<p>Why important?<br />
+Many projects at Google store data in Bigtable, including web indexing, Google Earth, and Google Finance. These applications place very different demands on Bigtable, both in terms of data size (from URLs to web pages to satellite imagery) and latency requirements (from backend bulk processing to real-time data serving). Despite these varied demands, Bigtable has successfully provided a flexible, high-performance solution for all of these Google products. In this paper we describe the simple data model provided by Bigtable, which gives clients dynamic control over data layout and format, and we describe the design and implementation of Bigtable.</p>
+
+<p>Main technical contributions:<br />
+A Bigtable is a sparse, distributed, persistent multi- dimensional sorted map. The map is indexed by a row key, column key, and a timestamp. The Bigtable API provides functions for creating and deleting tables and column families. It also provides functions for changing cluster, table, and column family metadata, such as access control rights. The key contributions may be the decision of implementation. The Bigtable implementation has three major components: a library that is linked into every client, one master server, and many tablet servers.</p>
+
+<p>Tablet servers can be dynamically added (or removed) from a cluster to accommodate changes in workloads. The master is responsible for assigning tablets to tablet servers, detecting the addition and expiration of tablet servers, balancing tablet-server load, and garbage collection of files in GFS. In addition, it handles schema changes such as table and column family creations. Each tablet server manages a set of tablets. The tablet server handles read and write requests to the tablets that it has loaded, and also splits tablets that have grown too large. They use a three-level hierarchy analogous to a B+- tree to store tablet location information. The first level is a file stored in Chubby that contains the location of the root tablet which will never split to make sure there are three levels.</p>
+
+<p>Weaknesses or open questions:<br />
+I would like GFS better which presents implementation better. It would be good if the paper can pose the current challenges and how they overcome them would give reader more clear view about why they need to do the jobs all over again.</p>
+
+<p>Question:</p>
+
+<p><a href="#cs-540-database-managerment"><strong><em>Back</em></strong> to subcontents <strong><em>CS 540</em></strong></a></p>
+
+<hr />
+
+<h4 id="0307-2">03.07-2</h4>
+<p>review_Kaibo Liu_03.07_<strong><em><a href="http://classes.engr.oregonstate.edu/eecs/winter2017/cs540/amazon-dynamo-sosp2007.pdf">Dynamo: Amazon’s Highly Available Key-Value Store</a></em></strong>_section4.4+4.5</p>
+
+<p>What is the problem addressed?<br />
+Design and Implementation of a tunable Distributed key value store to suit the heterogeneous applications on Amazon’s platform. Design considerations: The focus is on highly availability and fault tolerance. Eventual consistency adopted.</p>
+
+<p>Summary of the paper:<br />
+The system uses consistent hashing among virtual nodes(to support uniform load distribution) to partition the key values. The data is replicated among N nodes in a preference list. Objects are versioned and conflicts are resolved by the user. Causality between different versions captured using vector clocks. Sloppy quorum used to write/read from first W/R nodes where W+R &gt; N. Hinted handoff is used to ensure good distribution in the presence of transient failures.</p>
+
+<p>Permanent failures are handled using Merkle trees. Anti entropy gossip based schemes used to announce addition/removal of nodes in the system. A cache is added to balance performance vs durability. Three strategies are discussed to ensure uniform load distribution in the presence of few popular keys.</p>
+
+<p>Main technical contributions:</p>
+<ol>
+  <li>Integration a slew of techniques such as consistent hashing, replication, merkle trees, anti entropy algorithms, sloppy quorum, object versioning in a production environment</li>
+  <li>A system with tunable parameters –R,W,N to adopt to the needs of heterogeneous applications</li>
+  <li>A hands on account of how to balance between conflicting needs – performance and durability, background vs foreground tasks</li>
+  <li>A partition aware client library to route requests to the coordinator directly</li>
+  <li>Has shown techniques that can Scales to Amazon’s environment</li>
+</ol>
+
+<p>Relevance to distributed systems:</p>
+<ul>
+  <li>Having been deployed and run in a challenging and varied application environment such as Amazon, it serves as a model for an eventually consistent data store</li>
+  <li>The ability to tune parameters is incorporated to suit variety of applications</li>
+  <li>Techniques to tolerate transient and permanent faults are implemented.</li>
+  <li>Addresses scalability challenges.</li>
+</ul>
+
+<p>Question:</p>
+
+<p><a href="#cs-540-database-managerment"><strong><em>Back</em></strong> to subcontents <strong><em>CS 540</em></strong></a></p>
+
+<hr />
+
+<p>review_Kaibo Liu_<strong>03.09_The PageRank Citation Ranking: Bringing Order to the Web</strong></p>
+
+<ol>
+  <li>
+    <p>what problem does page rank solve?<br />
+The World Wide Web creates many new challenges for information retrieval. It is very large and heterogeneous.Hence, it becomes difficult to find out the most relevant pages on the top of the result page of search engine. Page rank is a method for rating the importance of web pages by using the link structure of the web. It finds its application in estimating web traffic, back link prediction, user navigation and many information retrieval task.</p>
+  </li>
+  <li>
+    <p>Technicalities:<br />
+2.1 Algorithm:
+Link structure of Web Page:Every page has some number of forward links (out edges) and back links (in edges) .Forward links can be known at that time when the network graph is downloaded but backward links cannot be estimated.A page rank algorithm states that a page is important if important link refers to it. It is an algorithm which assigns a numerical weight to the page to represent the importance of the page.It forms a probability distribution over web pages, so that the sum of all the page ranks is one. Also, a page rank value for a page u is dependent on the PageRank values for each page v contained in the set containing all pages linking to page u, divided by the number of links from page v.The PageRank theory states that an imaginary surfer who is randomly clicking on links will eventually stop clicking.A vector of pages that the surfer algorithm jumps to also gets added to this equation.At each step, the probability that the person will continue is a damping factor.The damping factor is subtracted from 1 and this term is then added to the product of the damping factor and the sum of the incoming PageRank scores.<br />
+This score is calculated each time it crawls the Web and rebuilds its index.<br />
+If a page has no links to other pages, it becomes a sink and therefore terminates the random surfing process. If the random surfer arrives at a sink page, it picks another URL at random and continues surfing again.The PageRank values are the entries of the dominant eigenvector of the modified adjacency matrix. This makes PageRank a particularly elegant metric.<br />
+The algorithm uses convergence property assuming that the Web is an expander-like graph.It explains the theory of random walk is rapidly-mixing if it quickly converges to a limiting distribution on the set of nodes in the graph.A graph has a good expansion factor if and only if the largest eigenvalue is sufficiently larger than the second-largest eigenvalue.</p>
+  </li>
+</ol>
+
+<p>2.2 Issues of Dangling Links:
+Links that point to any page with no outgoing links affect the model since it is not clear where their weight should be distributed. A solution to this is to remove them before page rank calculation and added back afterwards.The algorithm sorts the link structure by ID and makes an initial assignment of ranks and start iteration.</p>
+
+<p>2.3 Experimental Evaluations:
+The authors also experiments to give out results stating that the distribution of web pages that the random surfer periodically jumps to is an important component of the page rank algorithm.Having this parameter uniform all over web pages results in many related links with high ranks while a personal page rank consist of a single page.</p>
+
+<ol>
+  <li>Weakness:
+New pages may be assigned less page rank and they take much time to be get listed and gain high ranks.Search results are based on the literal things but not on meaning.Using this algorithm, it might be easy to manipulate the search results if an organization has time to increase the ranking of their website.</li>
+</ol>
+
+<p>Question:</p>
+
+<p><a href="#cs-540-database-managerment"><strong><em>Back</em></strong> to subcontents <strong><em>CS 540</em></strong></a></p>
+
+<hr />
+
+<p>review_Kaibo Liu_03.09_Efficient IR-Style Keyword Search over Relational Databases</p>
+
+<p>Question:</p>
+
+<p>https://web.eecs.umich.edu/~mozafari/fall2015/eecs584/reviews/summaries/</p>
+
+<p><a href="#cs-540-database-managerment"><strong><em>Back</em></strong> to subcontents <strong><em>CS 540</em></strong></a><br />
+<a href="#contents"><strong><em>Back to CONTENTS</em></strong></a></p>
+
+<hr />
+
+<h3 id="assignment-4">Assignment 4</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gantt
+dateFormat DD
+section T1
+R(X): 01, 2d
+R(Y): 09, 2d
+section T2
+R(Y): 03, 2d
+R(X): 07, 2d
+section T3
+W(X): 05, 2d
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gantt
+dateFormat DD
+section T1
+R(X): 01, 1d
+R(Y): 02, 1d
+W(X): 03, 1d
+W(X): 06, 1d
+section T2
+R(Y): 04, 1d
+R(Y): 07, 1d
+section T3
+W(Y): 05, 1d
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gantt
+dateFormat DD
+section T1
+W(X): 01, 1d
+W(X): 03, 1d
+Commit: 05, 1d
+section T2
+R(X): 02, 1d
+Commit: 04, 1d
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gantt
+dateFormat DD
+section T1
+R(X): 01, 1d
+W(X): 03, 1d
+Commit: 05, 1d
+section T2
+W(X): 02, 1d
+Commit: 06, 1d
+section T3
+R(X): 04, 1d
+Commit: 07, 1d
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>graph TD
+DB--&gt;R1
+DB--&gt;R2
+R1--&gt;t1
+R1--&gt;t2
+R2--&gt;t3
+R2--&gt;t4
+R2--&gt;t5
+</code></pre></div></div>
+
+<p><a href="#cs-540-database-managerment"><strong><em>Back</em></strong> to subcontents <strong><em>CS 540</em></strong></a><br />
+<a href="#contents"><strong><em>Back to CONTENTS</em></strong></a></p>
+
+<hr />
+
+<h3 id="assignment-5">Assignment 5</h3>
+<h4 id="02252017-sat">02/25/2017 Sat</h4>
+<h4 id="setting-up-hadoop-environment">Setting Up Hadoop Environment</h4>
+<ol>
+  <li>log in to server <code class="language-plaintext highlighter-rouge">ssh liukaib@hadoop-master.engr.oregonstate.edu</code>.</li>
+  <li>add the following to ~/.cshrc
+    <pre><code class="language-csh">setenv JAVA_HOME "/usr/lib/jvm/java-1.8.0"
+setenv PATH "$JAVA_HOME/bin:$PATH"
+setenv CLASSPATH ".:$JAVA_HOME/jre/lib:$JAVA_HOME/lib:$JAVA_HOME/lib/tools.jar"
+setenv HADOOP_HOME /opt/hadoop/hadoop
+setenv HADOOP_COMMON_HOME $HADOOP_HOME
+setenv HADOOP_HDFS_HOME $HADOOP_HOME
+setenv HADOOP_MAPRED_HOME $HADOOP_HOME
+setenv HADOOP_YARN_HOME $HADOOP_HOME
+setenv HADOOP_OPTS "-Djava.library.path=$HADOOP_HOME/lib/native"
+setenv HADOOP_COMMON_LIB_NATIVE_DIR $HADOOP_HOME/lib/native
+setenv PATH $HADOOP_HOME/sbin:$HADOOP_HOME/bin:$PATH
+setenv HADOOP_CLASSPATH "${JAVA_HOME}/lib/tools.jar"
+</code></pre>
+    <h3 id="dont-forget-source-cshrc">don’t forget <code class="language-plaintext highlighter-rouge">source ~/.cshrc</code></h3>
+    <p>But, the shell in server is bash (use <code class="language-plaintext highlighter-rouge">echo $0</code> to display current shell). When I use <code class="language-plaintext highlighter-rouge">source ~/.cshrc</code>, there is a syntax error with <code class="language-plaintext highlighter-rouge">set path</code> even I switch shell to csh with <code class="language-plaintext highlighter-rouge">exec /bin/csh</code>. I didn’t know how to deal with it. Then I put all the variables into <code class="language-plaintext highlighter-rouge">~/.bashrc</code>. However, <code class="language-plaintext highlighter-rouge">setenv</code> is not supported in bash so I can’t source it in bash.
+The final solution is, to change <code class="language-plaintext highlighter-rouge">setenv</code> into <code class="language-plaintext highlighter-rouge">export $var</code> as bash format:
+In <code class="language-plaintext highlighter-rouge">~/.bashrc</code> (or the first of <code class="language-plaintext highlighter-rouge">~/.bash_profile</code>, <code class="language-plaintext highlighter-rouge">~/.bash_login</code>, and <code class="language-plaintext highlighter-rouge">~/.profile</code> that exists), source this script (saved as something like <code class="language-plaintext highlighter-rouge">~/sourcecsh</code>) using <code class="language-plaintext highlighter-rouge">. ~/sourcecsh</code>:</p>
+    <div class="language-zsh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<span class="c"># This should be sourced rather than executed</span>
+<span class="k">while </span><span class="nb">read </span>cmd var val
+<span class="k">do
+ if</span> <span class="o">[[</span> <span class="nv">$cmd</span> <span class="o">==</span> <span class="s2">"setenv"</span> <span class="o">]]</span>
+ <span class="k">then
+     </span><span class="nb">eval</span> <span class="s2">"export </span><span class="nv">$var</span><span class="s2">=</span><span class="nv">$val</span><span class="s2">"</span>
+ <span class="k">fi
+done</span> &lt; ~/.cshrc
+</code></pre></div>    </div>
+  </li>
+  <li>unzip the assignment package downloaded in home path with <code class="language-plaintext highlighter-rouge">wget [url]</code></li>
+  <li>manipulate files in hadoop server with special commands.</li>
+</ol>
+
+<p><a href="#cs-540-database-managerment"><strong><em>Back</em></strong> to subcontents <strong><em>CS 540</em></strong></a></p>
+
+<h4 id="02252017-sat-1">02/25/2017 Sat</h4>
+<h4 id="hadoop-implementation">Hadoop implementation</h4>
+<p>Working with HDFS
+You have a folder on HDFS server at /user/cs540/<your onid="" user="" name="">. Note that files on HDFS can be manipulated only using the special commands that are given below. Throughout the assignment, you should just use this directory when you need to work with HDFS. You can upload files or write output of your jobs to your directory. Note that this directory is not being backed up. Following is a list of commands that you can use to interact with HDFS:  
+Here, <HDFS path=""> is `/user/cs540/liukaib`</HDFS></your></p>
+<ul>
+  <li>View list of files and folders: <br />
+<code class="language-plaintext highlighter-rouge">hdfs dfs -ls &lt;HDFS path&gt;</code></li>
+  <li>Upload a file to HDFS:<br />
+<code class="language-plaintext highlighter-rouge">hdfs dfs -put &lt;file on engr account&gt; &lt;HDFS path&gt;</code></li>
+  <li>Download a file from HDFS:<br />
+<code class="language-plaintext highlighter-rouge">hdfs dfs -get &lt;HDFS path&gt;/&lt;file_name&gt;</code></li>
+  <li>View file on HDFS:<br />
+<code class="language-plaintext highlighter-rouge">hdfs dfs -cat &lt;HDFS path&gt;/&lt;file_name&gt;</code></li>
+  <li>Make a new directory:<br />
+<code class="language-plaintext highlighter-rouge">hdfs dfs -mkdir &lt;HDFS path&gt;/&lt;folder_name&gt;</code></li>
+  <li>Remove a file: <br />
+<code class="language-plaintext highlighter-rouge">hdfs dfs -rm &lt;HDFS path&gt;/&lt;file_name&gt;</code></li>
+  <li>Remove a directory:<br />
+<code class="language-plaintext highlighter-rouge">hdfs dfs -rm -r &lt;HDFS path&gt;/&lt;folder_name&gt;</code></li>
+</ul>
+
+<h4 id="compiling-and-running">Compiling and Running</h4>
+<p>Once you have finished your implementation you can run the following commands to compile your code and create a jar file:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hadoop com.sun.tools.javac.Main PageCount.java
+jar cf pc.jar PageCount<span class="k">*</span>.class
+</code></pre></div></div>
+<p>Then upload the input file input.csv to your HDFS folder:<br />
+<code class="language-plaintext highlighter-rouge">hdfs dfs -put input.csv &lt;HDFS path&gt;/</code></p>
+
+<p>Next you you can run the application:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hadoop jar pc.jar PageCount &lt;HDFS path&gt;/input.csv &lt;HDFS path&gt;/output
+</code></pre></div></div>
+<p>Note that the output directory <strong>should not exist</strong> before running the above command. Otherwise you will get an error. After the job is finished you can view the output file:<br />
+<code class="language-plaintext highlighter-rouge">hdfs dfs -cat &lt;HDFS path&gt;/output/part-r-00000</code></p>
+
+<p>Depending on the number of reducers you may get more than one output files. Use the <code class="language-plaintext highlighter-rouge">list</code> command mentioned in the previous section to go through different output files.</p>
+<ul>
+  <li>You can put your code in a directory under your engineering account’s home folder. This way, after logging in to the Hadoop server, you can access your code in your engineering home folder and you can edit and compile the code there. However, the input file should be uploaded to the HDFS using the given commands.</li>
+  <li>After running your job you can view its status using a web interface. To do this, login to Hadoop server. If you are a mac user, you need to add -X to <code class="language-plaintext highlighter-rouge">ssh</code> command to enable X11 services. After you logged in, type <code class="language-plaintext highlighter-rouge">firefox</code> in the terminal. This should open a firefox windonw. Then go to <code class="language-plaintext highlighter-rouge">\http://hadoop-master.engr.oregonstate.edu:8088/</code> in the firefox.<br />
+You should be able to see information on your hadoop jobs.</li>
+</ul>
+
+<p><a href="#cs-540-database-managerment"><strong><em>Back</em></strong> to subcontents <strong><em>CS 540</em></strong></a><br />
+<a href="#contents"><strong><em>Back to CONTENTS</em></strong></a></p>
+
+<hr />
+
+<h3 id="cs-540-project">CS 540 Project</h3>
+<h4 id="architecture">Architecture</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sequenceDiagram
+    opt input
+        Note left of User: user has something
+        User-&gt;&gt;System: Keywords
+        Note right of System: SELECT * FROM DB WHERE keywords
+        System--&gt;&gt;System: Predict in network
+        System--&gt;&gt;User: Return (top k enterties)
+        User-&gt;&gt;System: Choose/Click from k enteries
+        System--&gt;&gt;System: Train with new data
+    end
+
+    opt no input
+        Note left of User: user has no clue
+        User-&gt;&gt;System: Void keyword
+        Note right of System: project database
+        System--&gt;&gt;System: Predict in network
+        System--&gt;&gt;User: Return (top k enterties)
+    end
+</code></pre></div></div>
+<p>sequenceDiagram
+Note left of User: user has something
+User-»System: Keywords
+Note right of System: SELECT keywords in database -&gt; project
+System–»System: Predict in network
+System–»User: Return (top k enterties)
+User-»System: Choose/Click from k enteries
+System–»System: Train with new data
+Note left of User: user has no clue
+User-»System: Void keyword
+    Note right of System: project database
+System–»System: Predict in network
+System–»User: Return (top k enterties)
+)</p>
+
+<p><a href="#cs-540-database-managerment"><strong><em>Back</em></strong> to subcontents <strong><em>CS 540</em></strong></a><br />
+<a href="#contents"><strong><em>Back to CONTENTS</em></strong></a></p>
+
+<hr />
+
+<h2 id="cs-519-deep-learning">CS 519 Deep Learning</h2>
+<ul>
+  <li><a href="#02042017-sat">Assignment 2</a></li>
+  <li><a href="#assignment3">Assignment 3</a></li>
+  <li><a href="#cs-519-project">Project</a></li>
+  <li><a href="#contents"><strong><em>Back to CONTENTS</em></strong></a></li>
+</ul>
+
+<h4 id="02042017-sat">02/04/2017 Sat</h4>
+<p>Assignment 2 of CS519</p>
+
+<p>cPickle.load(open(“cifar_2class_py2.p”,”rb”))取出的dict数组有4个成员
+<code class="language-plaintext highlighter-rouge">dict["train_data"], dict["train_labels"], dict["test_data"], dict["test_labels]</code>。
+通过<code class="language-plaintext highlighter-rouge">print type(variable_name)</code>发现，每一个成员都是一个numpy的二维数组，其中_data每行为一幅图，行数为sample数，_labels为对应图的标签airplane-0/ship-1。可以reshape后看图片。<br />
+运行发现没有matplotlib，于是安装。</p>
+
+<p><a href="#cs-519-deep-learning"><strong><em>Back</em></strong> to subcontents <strong><em>CS 519</em></strong></a></p>
+
+<h4 id="02052017-sun">02/05/2017 Sun</h4>
+<p>Assignment 2 of CS519</p>
+
+<p>无数次试错输出CIFAR-10图形。通过查阅得知data的每行数据（一幅图）中，3072个数据的前1024个数据为该32××32图像的red通道，而随后的1024个数据为green通道，最后的1024个数据为blue通道。</p>
+
+<p>所以reshape时要先分成3份，再32份（行h）和32份（列w），再然后转置.T或者.transpose(1,2,0)，表示分成的3份要放到最后一个轴，形成(32X32X3)，经过这样变换，我们可以很方便的获取想要的图像和图像中对应像素的值。</p>
+
+<p>输出时，用<code class="language-plaintext highlighter-rouge">plt(import matplotlib.pyplot as plt)</code>的<code class="language-plaintext highlighter-rouge">imshow</code>，但是图像很模糊有马赛克。虽然分辨率本身很低但是和网上CIFAR的样图还是有差距，于是查到<code class="language-plaintext highlighter-rouge">plt.imshow</code>有个参数<code class="language-plaintext highlighter-rouge">interpolation</code>，置<code class="language-plaintext highlighter-rouge">'nearest'</code>和<code class="language-plaintext highlighter-rouge">'none'</code>时都是不差值直接按原像素显示，<code class="language-plaintext highlighter-rouge">'spline36'</code>、<code class="language-plaintext highlighter-rouge">'sinc'</code>等都会根据不同差值算法来模糊。最后选了个还不错的用来visualization。</p>
+
+<p><a href="#cs-519-deep-learning"><strong><em>Back</em></strong> to subcontents <strong><em>CS 519</em></strong></a></p>
+
+<h4 id="02062017-mon">02/06/2017 Mon</h4>
+<p>Assignment 2 of CS519</p>
+
+<p>Batch Training: The gradients calculated at each training example are added together to determine the change in the weights and biases. For a discussion of batch training with the backpropagation algorithm see page 12-7 of [HDB96].</p>
+
+<p>A compromise between computing the true gradient and the gradient at a single example, is to compute the gradient against more than one training example (called a “mini-batch”) at each step. This can perform significantly better than true stochastic gradient descent because <code class="language-plaintext highlighter-rouge">the code can make use of vectorization libraries rather than computing each step separately</code>. It may also <code class="language-plaintext highlighter-rouge">result in smoother convergence, as the gradient computed at each step uses more training examples</code>.</p>
+
+<p>b=10 #mini-batch size, get b examples, x(i),y(i)…x(i+b-1),y(i+b-1)
+wj=wj-a\sigma△wj/b</p>
+
+<p>Summing the gradients due to individual samples you get a much smoother gradient. The larger the batch the smoother the resulting gradient used in updating the weight.</p>
+
+<p>Dividing the sum by the batch size and taking the average gradient has the effect of:</p>
+<ol>
+  <li>The magnitude of the weight does not grow out of proportion. Adding L2 regularization to the weight update penalizes large weight values. This often leads to improved generalization performance. Taking the average, especially if the gradients happen to point in the same direction, keep the weights from getting too large.</li>
+  <li>The magnitude of the gradient is independent of the batch size. This allows comparison of weights from other experiments using different batch sizes.</li>
+  <li>Countering the effect of the batch size with the learning rate can be numerically equivalent but you end up with a learning rate that is implementation specific. It makes it difficult to communicate your results and experimental setup if people cannot relate to the scale of parameters you’re using and they’ll have trouble reproducing your experiment.</li>
+</ol>
+
+<p>Averaging enables clearer comparability and keeping gradient magnitudes independent of batch size. Choosing a batch size is sometimes constrained by the computational resources you have and you want to mitigate the effect of this when evaluating your model.</p>
+
+<p><a href="http://stats.stackexchange.com/questions/70101/neural-networks-weight-change-momentum-and-weight-decay">Neural Networks: weight change momentum and weight decay</a></p>
+
+<ul>
+  <li>one <strong>epoch</strong> = one forward pass and one backward pass of all the training examples</li>
+  <li><strong>batch size</strong> = the number of training examples in one forward/backward pass. The higher the batch size, the more memory space you’ll need.</li>
+  <li>number of <strong>iterations</strong> = number of passes, each pass using [batch size] number of examples. To be clear, one pass = one forward pass + one backward pass (we do not count the forward pass and backward pass as two different passes).</li>
+</ul>
+
+<p>1 epoch=ierations*batch size</p>
+
+<p><a href="#cs-519-deep-learning"><strong><em>Back</em></strong> to subcontents <strong><em>CS 519</em></strong></a></p>
+
+<h4 id="02102017-tue">02/10/2017 Tue</h4>
+<p>Assignment 2 of CS519
+Architecture</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>graph LR
+id1((x:d*batch))--&gt;id2((z1:m*batch))
+id2((z1:m*batch))--&gt;id3((z2:m*batch))
+id3((z2:m*batch))--&gt;id4((z3:1*batch))
+id4((z3:1*batch))--&gt;id5((p,e:1*batch))
+</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>graph LR
+id1(W:d*m)--&gt;id0((hidden layer))
+id2(b:m*1)--&gt;id0((hidden layer))
+id0((hidden layer))--&gt;id3(w:m*1)
+id0((hidden layer))--&gt;id4(c:1*1)
+
+</code></pre></div></div>
+
+<p><a href="#cs-519-deep-learning"><strong><em>Back</em></strong> to subcontents <strong><em>CS 519</em></strong></a></p>
+
+<p><a href="#contents"><strong><em>Back to CONTENTS</em></strong></a></p>
+
+<hr />
+
+<h3 id="assignment3">Assignment3</h3>
+<h4 id="02252017-sat-2">02/25/2017 Sat</h4>
+<p><code class="language-plaintext highlighter-rouge">vim ~/.theanorc</code>, add:</p>
+<div class="language-zsh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>global]
+floatX <span class="o">=</span> float32
+device <span class="o">=</span> gpu0
+</code></pre></div></div>
+<p>Delete the device line if you want to use cpu only. (json has no mask/commend symbol)</p>
+
+<p><code class="language-plaintext highlighter-rouge">vim ~/.bashrc</code>, add CUDA path:</p>
+<div class="language-zsh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:/usr/local/eecsapps/cuda/cuda-7.5.18/bin
+<span class="nb">export </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span>/usr/local/eecsapps/cuda/cuda-7.5.18/lib64
+</code></pre></div></div>
+<p>Above path is on pelican.eecs.oregonstate.edu, the CUDA root is <code class="language-plaintext highlighter-rouge">/usr/local/eecsapps/cuda/cuda-7.5.18</code>.<br />
+For TitanX server, CUDA root is <code class="language-plaintext highlighter-rouge">/usr/local/cuda-8.0/</code>
+<code class="language-plaintext highlighter-rouge">vim ~/.keras/keras.json</code> is to <strong>switch backend</strong>, commend out <code class="language-plaintext highlighter-rouge">"image_dim_ordering": "tf",</code></p>
+
+<p>In TitanX server, there are encoding issues loading data, no matter python2 or python3. I add CUDA path (found with <code class="language-plaintext highlighter-rouge">which nvcc</code>) to .bashrc, then default python2 is able to use GPU in keras as well.(seems useless because python2 can use GPU without this path as well)</p>
+<ul>
+  <li>Use theano as backend, display <code class="language-plaintext highlighter-rouge">Using gpu device 0: TITAN X (Pascal) (CNMeM is disabled, cuDNN 5110)</code>, error is <code class="language-plaintext highlighter-rouge">ValueError: negative dimensions are not allowed</code>(line 61, model.add(Dense(512)))</li>
+  <li>Use tensorflow as backend, display <code class="language-plaintext highlighter-rouge">opened CUDA library libcublas.so.8.0 locally</code>, error is <code class="language-plaintext highlighter-rouge">ValueError: Negative dimension size caused by subtracting 3 from 1 for 'Conv2D_1' (op: 'Conv2D') with input shapes: [?,1,16,32], [3,3,32,32].</code> (line 48, model.add(Convolution2D(32, 3, 3)))</li>
+</ul>
+
+<p>However, in pelican server, everything seems correct, but runtime for an epoch is ~500s, neither &gt;2000s nor &lt;50s. Wired…</p>
+
+<h1 id="fuck-i-didnt-use-source-after-modifying-bashrc">FUCK!! I didn’t use <code class="language-plaintext highlighter-rouge">source</code> after modifying ~/.bashrc</h1>
+
+<p>After correct configuration in pelican, runtime for an epoch is 15s (12~13s if no processes occupied by other users).</p>
+
+<p><a href="#cs-519-deep-learning"><strong><em>Back</em></strong> to subcontents <strong><em>CS 519</em></strong></a></p>
+
+<h4 id="02272017-mon">02/27/2017 Mon</h4>
+<p>With previous error in TitanX, Zheng and I noticed the warning when running the .py with theano backend:<br />
+<code class="language-plaintext highlighter-rouge">UserWarning: Your cuDNN version is more recent than the one Theano officially supports. If you see any problems, try updating Theano or downgrading cuDNN to version 5.</code></p>
+
+<p>So I tried to <strong>disable cuDNN</strong> for abandoning the acceleration:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">THEANO_FLAGS</span><span class="o">=</span><span class="nv">optimizer_excluding</span><span class="o">=</span>cudnn python cifar10_cnn.py
+</code></pre></div></div>
+<p>No improvement…</p>
+
+<p>According to tensorflow error information tensorflow backend: <code class="language-plaintext highlighter-rouge">ValueError: Negative dimension size caused by subtracting 3 from 1 for 'Conv2D_1' (op: 'Conv2D') with input shapes: [?,1,16,32], [3,3,32,32]</code>. Try to display dimension of layer in both TitanX server and pelican server, edit following in py code:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">model</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">AveragePooling2D</span><span class="p">(</span><span class="n">pool_size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="n">img_channels</span><span class="p">,</span> <span class="n">img_rows</span><span class="p">,</span> <span class="n">img_cols</span><span class="p">)))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">model</span><span class="p">.</span><span class="n">layers</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">].</span><span class="n">output_shape</span><span class="p">)</span>
+<span class="n">model</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">Convolution2D</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">border_mode</span><span class="o">=</span><span class="s">'same'</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">model</span><span class="p">.</span><span class="n">layers</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">].</span><span class="n">output_shape</span><span class="p">)</span>
+</code></pre></div></div>
+<p>[Out]:</p>
+
+<p>|Layer|TitanX server|Pelican server|
+|:-:|:-:|:-:|
+|keras.__version__|1.2.2|0.3.2|
+|model.add(AveragePooling2D())|(None, 1, 16, 32)|(None, 3, 16, 16)|
+|model.add(Convolution2D())|(None, 1, 16, 32)|(None, 32, 16, 16)|
+|MaxPooling2D Input shape(‘th’ order)|(samples, channels, rows, cols)|(samples, channels, rows, cols)|
+|MaxPooling2D Input shape(‘tf’ order)|(samples, rows, cols, channels)|(samples, channels, rows, cols)|
+So, the <strong><code class="language-plaintext highlighter-rouge">reason</code></strong> is, keras in TitanX is too recent (version <code class="language-plaintext highlighter-rouge">1.2.2</code>) for Assignment’s code, which is only compatible to older version(like <code class="language-plaintext highlighter-rouge">0.3.2</code> in pelican), and the output dimension of AveragePooling2D function is different between the two versions.</p>
+
+<ul>
+  <li>version check: in python, <code class="language-plaintext highlighter-rouge">import keras</code> and then <code class="language-plaintext highlighter-rouge">keras.__version__</code>
+    <h4 id="solution">Solution:</h4>
+    <p>install a older version of keras</p>
+    <div class="language-zsh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip uninstall keras
+pip <span class="nb">install </span><span class="nv">keras</span><span class="o">==</span>0.3.2
+</code></pre></div>    </div>
+    <p>everything goes well:</p>
+  </li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">GPU</th>
+      <th style="text-align: center">Titan X</th>
+      <th style="text-align: center">~</th>
+      <th style="text-align: center">GTX 980 Ti</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">data augmentation</td>
+      <td style="text-align: center">Not using</td>
+      <td style="text-align: center">Using real-time</td>
+      <td style="text-align: center">Not using</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">time/epoch</td>
+      <td style="text-align: center">7-8s</td>
+      <td style="text-align: center">10-11s</td>
+      <td style="text-align: center">12-13s</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><a href="#cs-519-deep-learning"><strong><em>Back</em></strong> to subcontents <strong><em>CS 519</em></strong></a></p>
+
+<h3 id="another-find-with-the-help-of-lawrance">another find with the help of Lawrance:</h3>
+<p>03/02/2017 Thu</p>
+<blockquote>
+  <p>MaxPooling2D  Input shape<br />
+4D tensor with shape: (samples, channels, rows, cols) if dim_ordering=’th’<br />
+or <br />
+4D tensor with shape: (samples, rows, cols, channels) if dim_ordering=’tf’.</p>
+</blockquote>
+
+<p>So, I believe keras has change the order of arguments in 4D shape from (samples, channels, rows, cols)/v-0.3.2 to (samples, rows, cols, channels)/v-1.2.2 if <code class="language-plaintext highlighter-rouge">dim_ordering='tf'</code>.(In older version, they are compatible with ‘tf’).</p>
+
+<p>So, for the keras version 1.2.2, I need to switch <code class="language-plaintext highlighter-rouge">dim_ordering</code> according to the backend.</p>
+
+<h4 id="02282017-tue">02/28/2017 Tue</h4>
+<p>In the assignment, we need to save and load a model.</p>
+
+<p>However, the version in pelican and only works for Fuxin’s code is 0.3.2. Meanwhile this version doesn’t support the newer function in version 1.2.2</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">keras.models</span> <span class="kn">import</span> <span class="n">load_model</span>
+<span class="n">model</span><span class="p">.</span><span class="n">save</span><span class="p">(</span><span class="s">'my_model.h5'</span><span class="p">)</span>  <span class="c1"># creates a HDF5 file 'my_model.h5'
+### model.save() to save a Keras model into a single HDF5 file which will contain:
+### - the architecture of the model, allowing to re-create the model
+### - the weights of the model
+### - the training configuration (loss, optimizer)
+### - the state of the optimizer, allowing to resume training exactly where you left off.
+</span><span class="k">del</span> <span class="n">model</span>  <span class="c1"># deletes the existing model
+</span><span class="n">model</span> <span class="o">=</span> <span class="n">load_model</span><span class="p">(</span><span class="s">'my_model.h5'</span><span class="p">)</span>
+</code></pre></div></div>
+<p>So I cannot use <code class="language-plaintext highlighter-rouge">load_model</code> for now. I searched some methods to save/load <strong>architecture</strong> of model(<strong>JSON</strong>) and <strong>weights</strong>(<strong>HDF5</strong>) seperaterly.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># serialize model to JSON
+</span><span class="n">json_model</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="n">to_json</span><span class="p">()</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">Dir</span><span class="o">+</span><span class="s">'model.json'</span><span class="p">,</span> <span class="s">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">json_file</span><span class="p">:</span>
+<span class="c1">#    json.dump(json_model,json_file)
+</span>    <span class="n">json_file</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">json_model</span><span class="p">)</span>
+<span class="c1"># serialize weights to HDF5
+</span><span class="n">model</span><span class="p">.</span><span class="n">save_weights</span><span class="p">(</span><span class="n">Dir</span><span class="o">+</span><span class="s">'model.h5'</span><span class="p">)</span>  <span class="c1"># creates a HDF5 file for weights 'model.h5'
+</span><span class="k">print</span><span class="p">(</span><span class="s">"Saved model to disk"</span><span class="p">)</span>
+
+<span class="c1"># later...
+</span>
+<span class="kn">from</span> <span class="nn">keras.models</span> <span class="kn">import</span> <span class="n">model_from_json</span>
+<span class="n">json_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">Dir</span><span class="o">+</span><span class="s">'model.json'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span>
+<span class="n">json_model</span> <span class="o">=</span> <span class="n">json_file</span><span class="p">.</span><span class="n">read</span><span class="p">()</span>
+<span class="n">json_file</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">model_from_json</span><span class="p">(</span><span class="n">json_model</span><span class="p">)</span>
+
+<span class="c1"># load weights into new model
+</span><span class="n">model</span><span class="p">.</span><span class="n">load_weights</span><span class="p">(</span><span class="n">Dir</span><span class="o">+</span><span class="s">'model.json'</span><span class="p">)</span>  <span class="c1"># loads a HDF5 file '*model.h5' for weights
+</span><span class="k">print</span><span class="p">(</span><span class="s">"Loaded model from disk"</span><span class="p">)</span>
+
+</code></pre></div></div>
+<p>When writing json into file, if I use <code class="language-plaintext highlighter-rouge">json.dump(json_model,json_file)</code> instead of <code class="language-plaintext highlighter-rouge">json_file.write(json_model)</code>, saving will be OK, but later when I need to load the json file, there is an error <code class="language-plaintext highlighter-rouge">AttributeError: 'unicode' object has no attribute 'get'</code> in <code class="language-plaintext highlighter-rouge">model_from_json(json_model)</code></p>
+
+<p>There is another confusion in loading model with the online code:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">train</span><span class="p">():</span>
+   <span class="n">model</span> <span class="o">=</span> <span class="n">create_model</span><span class="p">()</span>
+   <span class="n">sgd</span> <span class="o">=</span> <span class="n">SGD</span><span class="p">(</span><span class="n">lr</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">decay</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">nesterov</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+   <span class="n">model</span><span class="p">.</span><span class="nb">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s">'binary_crossentropy'</span><span class="p">,</span> <span class="n">optimizer</span><span class="o">=</span><span class="n">sgd</span><span class="p">)</span>
+
+   <span class="n">checkpointer</span> <span class="o">=</span> <span class="n">ModelCheckpoint</span><span class="p">(</span><span class="n">filepath</span><span class="o">=</span><span class="s">"/tmp/weights.hdf5"</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">save_best_only</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+   <span class="n">model</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">nb_epoch</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">show_accuracy</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">validation_split</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">checkpointer</span><span class="p">])</span>
+
+<span class="k">def</span> <span class="nf">load_trained_model</span><span class="p">(</span><span class="n">weights_path</span><span class="p">):</span>
+   <span class="n">model</span> <span class="o">=</span> <span class="n">create_model</span><span class="p">()</span>
+   <span class="n">model</span><span class="p">.</span><span class="n">load_weights</span><span class="p">(</span><span class="n">weights_path</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h4 id="2">2</h4>
+<p>Add/remove/insert a layer:</p>
+
+<p>After loading the model and weights to a new model, compiling first or adding/removing/inserting a layer first is a problem.</p>
+
+<p>In the experiment of question 2), I found that <code class="language-plaintext highlighter-rouge">model.compile</code>(with <code class="language-plaintext highlighter-rouge">SDG</code>) after inserting will get an error.
+<code class="language-plaintext highlighter-rouge">ValueError: GpuElemwise. Input dimension mis-match. Input 3 (indices start at 0) has shape[1] == 10, but the output's size on that axis is 512.</code>
+So I put <code class="language-plaintext highlighter-rouge">model.compile</code>(with <code class="language-plaintext highlighter-rouge">SDG</code>) first, then insert a layer(pop,add,add)</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sgd</span> <span class="o">=</span> <span class="n">SGD</span><span class="p">(</span><span class="n">lr</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">decay</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">nesterov</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">model</span><span class="p">.</span><span class="nb">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s">'categorical_crossentropy'</span><span class="p">,</span> <span class="n">optimizer</span><span class="o">=</span><span class="n">sgd</span><span class="p">)</span>
+<span class="n">layer1</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="n">pop</span><span class="p">()</span>
+<span class="n">model</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">512</span><span class="p">))</span>
+<span class="n">model</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">layer1</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">--------------------------------------------------------------------------------</span>
+<span class="n">Initial</span> <span class="nb">input</span> <span class="n">shape</span><span class="p">:</span> <span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">32</span><span class="p">)</span>
+<span class="o">--------------------------------------------------------------------------------</span>
+<span class="n">Layer</span> <span class="p">(</span><span class="n">name</span><span class="p">)</span>                  <span class="n">Output</span> <span class="n">Shape</span>                  <span class="n">Param</span> <span class="c1">#
+</span><span class="o">--------------------------------------------------------------------------------</span>
+<span class="n">AveragePooling2D</span> <span class="p">(</span><span class="n">averagepooli</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>             <span class="mi">0</span>
+<span class="n">Convolution2D</span> <span class="p">(</span><span class="n">convolution2d</span><span class="p">)</span> <span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>            <span class="mi">896</span>
+<span class="n">Activation</span> <span class="p">(</span><span class="n">activation</span><span class="p">)</span>       <span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>            <span class="mi">0</span>
+<span class="n">Convolution2D</span> <span class="p">(</span><span class="n">convolution2d</span><span class="p">)</span> <span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">14</span><span class="p">)</span>            <span class="mi">9248</span>
+<span class="n">Activation</span> <span class="p">(</span><span class="n">activation</span><span class="p">)</span>       <span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">14</span><span class="p">)</span>            <span class="mi">0</span>
+<span class="n">MaxPooling2D</span> <span class="p">(</span><span class="n">maxpooling2d</span><span class="p">)</span>   <span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>              <span class="mi">0</span>
+<span class="n">Dropout</span> <span class="p">(</span><span class="n">dropout</span><span class="p">)</span>             <span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>              <span class="mi">0</span>
+<span class="n">Convolution2D</span> <span class="p">(</span><span class="n">convolution2d</span><span class="p">)</span> <span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>              <span class="mi">18496</span>
+<span class="n">Activation</span> <span class="p">(</span><span class="n">activation</span><span class="p">)</span>       <span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>              <span class="mi">0</span>
+<span class="n">Convolution2D</span> <span class="p">(</span><span class="n">convolution2d</span><span class="p">)</span> <span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>              <span class="mi">36928</span>
+<span class="n">Activation</span> <span class="p">(</span><span class="n">activation</span><span class="p">)</span>       <span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>              <span class="mi">0</span>
+<span class="n">MaxPooling2D</span> <span class="p">(</span><span class="n">maxpooling2d</span><span class="p">)</span>   <span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>              <span class="mi">0</span>
+<span class="n">Dropout</span> <span class="p">(</span><span class="n">dropout</span><span class="p">)</span>             <span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>              <span class="mi">0</span>
+<span class="n">Flatten</span> <span class="p">(</span><span class="n">flatten</span><span class="p">)</span>             <span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="mi">256</span><span class="p">)</span>                   <span class="mi">0</span>
+<span class="n">Dense</span> <span class="p">(</span><span class="n">dense</span><span class="p">)</span>                 <span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="mi">512</span><span class="p">)</span>                   <span class="mi">131584</span>
+<span class="n">Activation</span> <span class="p">(</span><span class="n">activation</span><span class="p">)</span>       <span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="mi">512</span><span class="p">)</span>                   <span class="mi">0</span>
+<span class="n">Dense</span> <span class="p">(</span><span class="n">dense</span><span class="p">)</span>                 <span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>                    <span class="mi">5130</span>
+<span class="n">Dense</span> <span class="p">(</span><span class="n">dense</span><span class="p">)</span>                 <span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="mi">512</span><span class="p">)</span>                   <span class="mi">5632</span>
+<span class="n">Activation</span> <span class="p">(</span><span class="n">activation</span><span class="p">)</span>       <span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="mi">512</span><span class="p">)</span>                   <span class="mi">0</span>
+<span class="o">--------------------------------------------------------------------------------</span>
+<span class="n">Total</span> <span class="n">params</span><span class="p">:</span> <span class="mi">207914</span>
+<span class="o">--------------------------------------------------------------------------------</span>
+</code></pre></div></div>
+<h4 id="3">3</h4>
+<p>Model display<br />
+the following instruction seems good as figure. But is not supported in keras 0.3.2 with plot import</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">keras.utils</span> <span class="kn">import</span> <span class="n">np_utils</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">to_file</span><span class="o">=</span><span class="n">saveDir</span><span class="o">+</span><span class="s">'%s_model_loaded.png'</span> <span class="o">%</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">quesNo</span><span class="p">)))</span>
+</code></pre></div></div>
+<p>just use <code class="language-plaintext highlighter-rouge">model.summary()</code> for print the architecture.</p>
+
+<h4 id="03022017-thu">03/02/2017 Thu</h4>
+<p>see <a href="#another-find-with-the-help-of-lawrance">another find</a>, I upgrade the keras to the most current version 1.2.2, fix the <code class="language-plaintext highlighter-rouge">dim_ordering='th'</code> in <code class="language-plaintext highlighter-rouge">~/.keras/keras.json</code>, and use the new <code class="language-plaintext highlighter-rouge">load_model</code> instead of seperating weight and structure.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">model</span><span class="p">.</span><span class="n">save_weights</span><span class="p">(</span><span class="s">'model_1.h5'</span><span class="p">)</span>
+<span class="n">model1</span><span class="p">.</span><span class="n">load_weights</span><span class="p">(</span><span class="s">'model_1.h5'</span><span class="p">)</span> <span class="c1"># ok
+</span><span class="n">model</span><span class="p">.</span><span class="n">save</span><span class="p">(</span><span class="s">'model_2.h5'</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">keras.models</span> <span class="kn">import</span> <span class="n">load_model</span>
+<span class="n">model2</span> <span class="o">=</span> <span class="n">load_model</span><span class="p">(</span><span class="s">'model_1.h5'</span><span class="p">)</span> <span class="c1"># error, 'model_1.h5' only have weights, load_model will not find a matched all-model with this name
+</span><span class="n">model2</span> <span class="o">=</span> <span class="n">load_model</span><span class="p">(</span><span class="s">'model_2.h5'</span><span class="p">)</span> <span class="c1"># ok
+</span></code></pre></div></div>
+<p>But, keras 1.2.2 has another problem:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>UserWarning: The "show_accuracy" argument is deprecated, instead you should pass the "accuracy" metric to the model at compile time:
+`model.compile(optimizer, loss, metrics=["accuracy"])`
+</code></pre></div></div>
+<p>or the result will only has <code class="language-plaintext highlighter-rouge">loss</code> rather than <code class="language-plaintext highlighter-rouge">acc</code>. So I add the <code class="language-plaintext highlighter-rouge">metrics=["accuracy"]</code> as the last argument of model.compile.</p>
+
+<h4 id="problems-in-modeladd">problems in <code class="language-plaintext highlighter-rouge">model.add()</code></h4>
+<p>There are two ways to save trained model,as posted before(<a href="#02282017-tue">02/28/2017 Tue</a> and <a href="#03022017-thu">03/02/2017 Thu </a>):<br />
+One is to save/load <strong>architecture</strong> of model(<strong>JSON</strong>) and <strong>weights</strong>(<strong>HDF5</strong>) seperaterly.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">model</span><span class="p">.</span><span class="n">to_json</span><span class="p">()</span>
+<span class="n">model</span><span class="p">.</span><span class="n">save_weights</span><span class="p">(</span><span class="s">'m.h5'</span><span class="p">)</span>
+<span class="n">model</span><span class="p">.</span><span class="n">load_weights</span><span class="p">(</span><span class="s">'m.h5'</span><span class="p">)</span>
+</code></pre></div></div>
+<p>The other is to seve/load the whole model using <code class="language-plaintext highlighter-rouge">model.save('m.h5')</code> and <code class="language-plaintext highlighter-rouge">load_model('m.h5')</code></p>
+
+<p>After loading, we can do pop to remove the last layer of the model.<br />
+<strong>But</strong><br />
+<code class="language-plaintext highlighter-rouge">l0 = model.layers.pop()</code> only pop the layer node, not the connection. <br />
+mode1:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>graph LR
+
+id3(input)-.-&gt;L1
+L1--&gt;L2
+L2--&gt;L3
+L3--&gt;L4
+L4-.-&gt;id4(L4.output)
+
+id1(input)-.-&gt;id0((model1))
+id0((model1))-.-&gt;id2(L4.output)
+
+style id1 fill:#ccf,stroke:#f66,stroke-width:2px,stroke-dasharray: 5, 5;
+style id0 fill:#f9f,stroke:#333,stroke-width:4px;
+style id2 fill:#ccf,stroke:#f66,stroke-width:2px,stroke-dasharray: 5, 5;
+style id3 fill:#ccf,stroke:#f66,stroke-width:2px,stroke-dasharray: 5, 5;
+style id4 fill:#ccf,stroke:#f66,stroke-width:2px,stroke-dasharray: 5, 5;
+</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">model2 = Sequential(model1)</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>graph LR
+id3(input)-.-&gt;L1
+L1--&gt;L2
+L2--&gt;L3
+L3--&gt;L4
+L1--&gt;L2
+L2--&gt;L3
+L3--&gt;L4
+L4-.-&gt;id4(L4.output)
+id1(input)-.-&gt;id0((model2))
+id0((model2))-.-&gt;id2(L4.output)
+
+style id1 fill:#ccf,stroke:#f66,stroke-width:2px,stroke-dasharray: 5, 5;
+style id0 fill:#f9f,stroke:#333,stroke-width:4px;
+style id2 fill:#ccf,stroke:#f66,stroke-width:2px,stroke-dasharray: 5, 5;
+style id3 fill:#ccf,stroke:#f66,stroke-width:2px,stroke-dasharray: 5, 5;
+style id4 fill:#ccf,stroke:#f66,stroke-width:2px,stroke-dasharray: 5, 5;
+</code></pre></div></div>
+<p>layers and model output are not consistent in one operation pop. <code class="language-plaintext highlighter-rouge">model1.layers.pop()</code> only pop the layer node, not the connection.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>graph LR
+
+id3(input)-.-&gt;L1
+L1--&gt;L2
+L2--&gt;L3
+L3-.-&gt;id4(L4.output)
+
+id1(input)-.-&gt;id0((model1))
+id0((model1))-.-&gt;id2(L4.output)
+
+style id1 fill:#ccf,stroke:#f66,stroke-width:2px,stroke-dasharray: 5, 5;
+style id0 fill:#f9f,stroke:#333,stroke-width:4px;
+style id2 fill:#ccf,stroke:#f66,stroke-width:2px,stroke-dasharray: 5, 5;
+style id3 fill:#ccf,stroke:#f66,stroke-width:2px,stroke-dasharray: 5, 5;
+style id4 fill:#ccf,stroke:#f66,stroke-width:2px,stroke-dasharray: 5, 5;
+</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">model1.add(l5)</code></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>graph LR
+
+id3(input)-.-&gt;L1
+L1--&gt;L2
+L2--&gt;L3
+L3--&gt;L5
+L3-.-&gt;id4(L4.output)
+
+id1(input)-.-&gt;id0((model1))
+id0((model1))-.-&gt;id2(L4.output)
+
+style id1 fill:#ccf,stroke:#f66,stroke-width:2px,stroke-dasharray: 5, 5;
+style id0 fill:#f9f,stroke:#333,stroke-width:4px;
+style id2 fill:#ccf,stroke:#f66,stroke-width:2px,stroke-dasharray: 5, 5;
+style id3 fill:#ccf,stroke:#f66,stroke-width:2px,stroke-dasharray: 5, 5;
+style id4 fill:#ccf,stroke:#f66,stroke-width:2px,stroke-dasharray: 5, 5;
+</code></pre></div></div>
+<p>So, we need to do like this:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>model1.layers.pop()
+model1.outputs = [model.layers[-1].output]
+model1.layers[-1].outbound_nodes = []
+</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>graph LR
+
+id3(input)-.-&gt;L1
+L1--&gt;L2
+L2--&gt;L3
+L3-.-&gt;id4(L3.output)
+
+id1(input)-.-&gt;id0((model1))
+id0((model1))-.-&gt;id2(L3.output)
+
+style id1 fill:#ccf,stroke:#f66,stroke-width:2px,stroke-dasharray: 5, 5;
+style id0 fill:#f9f,stroke:#333,stroke-width:4px;
+style id2 fill:#ccf,stroke:#f66,stroke-width:2px,stroke-dasharray: 5, 5;
+style id3 fill:#ccf,stroke:#f66,stroke-width:2px,stroke-dasharray: 5, 5;
+style id4 fill:#ccf,stroke:#f66,stroke-width:2px,stroke-dasharray: 5, 5;
+</code></pre></div></div>
+<p>And, there is no need to use <code class="language-plaintext highlighter-rouge">l0</code> anymore.</p>
+
+<h4 id="name-set-in-modeladd">name set in <code class="language-plaintext highlighter-rouge">model.add()</code></h4>
+<p>In keras 1.2.2, if you load a model and add some layer, you need to give it a <strong>new</strong> name to avoid duplicate name because the loaded one may have been named as dense_1, and once you use .add(dense(512)), it will give ‘dense_1’ again. The right way should be <code class="language-plaintext highlighter-rouge">.add(dense(512,name="dense_new"))</code></p>
+
+<h4 id="adam-para-in-keras-122">Adam para in keras 1.2.2</h4>
+<p>In keras 0.3.3, I used <code class="language-plaintext highlighter-rouge">adam = Adam(lr=0.001, beta_1=0.9, beta_2=0.999, epsilon=1e-08, decay=0.01)</code> as optimizer in compile and everything looks good. <br />
+However, in keras 1.2.2, this will make loss <code class="language-plaintext highlighter-rouge">nan</code> and get bad result, since parameter is decayed soon.<br />
+So, after I fix dacay to 1e-6, it turned out right. <code class="language-plaintext highlighter-rouge">adam = Adam(lr=0.001, beta_1=0.9, beta_2=0.999, epsilon=1e-08, decay=1e-6)</code></p>
+
+<h4 id="local-norm-before-each-acvitation">Local norm before each acvitation</h4>
+<p>Keras now supports the <code class="language-plaintext highlighter-rouge">bias=False</code> option, so we can save some computation by writing like</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">model</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="bp">False</span><span class="p">))</span>
+<span class="n">model</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">BatchNormalization</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="n">bn_axis</span><span class="p">))</span>
+<span class="n">model</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">Activation</span><span class="p">(</span><span class="s">'tanh'</span><span class="p">))</span>
+</code></pre></div></div>
+<p>|quesNo|layer|optimizer|other|err|val_err|
+|:-:|:-:|:-:|:-:|:-:|:-:|
+|3|as # 1|Adam(decay=1e-6)|7s|||
+|<del>4</del>|as #3|Adam(decay=0)|7s|||
+|<del>4.1</del>|4+ add FC512+ReLU, before FC 10|Adam|7s|||
+|4.2|4+ add dropout,after both FC 512|Adam|7s|0.307|0.298|
+|<strong>4.3</strong>|4.2+ReLu-&gt;sig in both FC 512|Adam|7s|-|-|
+|<del>4.4</del>|4.3+32-&gt;64 in 1st conv+512-&gt;128 in 1st FC|Adam|7s|0.294|0.285|
+|4.5|#4.4+data augmentation|Adam|7s|||
+|4.6|4.2+ 512-&gt;256 in 2nd FC, before FC 10|Adam|7s|0.294|0.281|
+|<strong>4.7</strong>|4.3+ 512-&gt;256 in 2nd FC, before FC 10|Adam|7s|0.267|0.266|
+|4.8’|4.7+add conv(128) as a 3rd|Adam|error|after 4 pooling, image 32-&gt;2, cannot conv|-|
+|<strong>4.9</strong>|4.7+local norm before each activ|Adam|52s|0.213|0.243|
+|4.11|4.7+remove AveragePooling2D, add conv(128) as a 3rd|Adam|26s|rise|rise|
+|<strong>4.12</strong>|4.9+remove AveragePooling2D, add conv(128) as a 3rd|Adam|170s|0.073|0.152|
+|<strong>4.13</strong>|#4.11+data augmentation|Adam|170s|0.107|0.144|
+|4.14|conv(48-&gt;96-&gt;192)+FC(512-&gt;256-&gt;10)+data aug|Adam|28s|0.225|0.216|
+|4.15|as # 4.14|default Adam|28s|0.225|0.216|</p>
+
+<p>4.11&lt;–&gt;4.14 diff is the # of feature filters in conv</p>
+
+<p>Question 4: load from 3_model, use data augmentation, to prevent overfitting in training data</p>
+
+<p>Adam decay=0.01 will make acc drop to constant, should be 1e-6, and simply, make it a default adam.</p>
+
+<h4 id="03062017-mon">03/06/2017 Mon</h4>
+<p>complete the running, start to write report.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>graph LR
+
+id3(input)-.-&gt;L1
+L1--&gt;L2
+L2--&gt;L3
+L3-.-&gt;id4(L3.output)
+
+id1(input)-.-&gt;id0((model1))
+id0((model1))-.-&gt;id2(L3.output)
+
+style id1 fill:#ccf,stroke:#f66,stroke-width:2px,stroke-dasharray: 5, 5;
+style id0 fill:#f9f,stroke:#333,stroke-width:4px;
+style id2 fill:#ccf,stroke:#f66,stroke-width:2px,stroke-dasharray: 5, 5;
+style id3 fill:#ccf,stroke:#f66,stroke-width:2px,stroke-dasharray: 5, 5;
+style id4 fill:#ccf,stroke:#f66,stroke-width:2px,stroke-dasharray: 5, 5;
+</code></pre></div></div>
+<p>#1</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>graph TB
+    subgraph Fully-connected block
+        e1(Flatten) --&gt; e2("Dense(512,ReLu)")
+        e2 --&gt; e3(Dropout)
+        e3 --&gt; e6("Dense(10,Softmax)")
+    end
+    subgraph Conv block 2: 64
+        c1("Conv2D(64,ReLu)") --&gt; c2("Conv2D(64,ReLu)")
+        c2 --&gt; c3(MaxPooling2D)
+        c3 --&gt; c4(Dropout)
+    end
+
+    subgraph Conv block 1: 32
+        b1("Conv2D(32,ReLu)") --&gt; b2("Conv2D(32,ReLu)")
+        b2 --&gt; b3(MaxPooling2D)
+        b3 --&gt; b4(Dropout)
+    end
+    subgraph Pooling
+        a(AveragePooling2D)
+    end
+    %%a --&gt; b1
+    %%b4 --&gt;c1
+    %%c4 --&gt; e1
+    %% classDef green fill:#9f6,stroke:#333,stroke-width:2px;;
+    %% classDef orange fill:#f48c42,stroke:#f66,stroke-width:2px,stroke-dasharray: 5, 5;
+    classDef del fill:#a4a8a7,stroke:#f66,stroke-width:3px,stroke-dasharray: 5, 5;
+    class A,b1,b2,b3 green
+    class e3 del
+</code></pre></div></div>
+<p>#2</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>graph TB
+    subgraph Fully-connected block
+        e1(Flatten) --&gt; e2("Dense(512,ReLu)")
+        e2 --&gt; e4("Dense(512,ReLu)")
+        e4 --&gt; e6("Dense(10,Softmax)")
+    end
+    subgraph Conv block 2: 64
+        c1("Conv2D(64,ReLu)") --&gt; c2("Conv2D(64,ReLu)")
+        c2 --&gt; c3(MaxPooling2D)
+        c3 --&gt; c4(Dropout)
+    end
+
+    subgraph Conv block 1: 32
+        b1("Conv2D(32,ReLu)") --&gt; b2("Conv2D(32,ReLu)")
+        b2 --&gt; b3(MaxPooling2D)
+        b3 --&gt; b4(Dropout)
+    end
+    subgraph Pooling
+        a(AveragePooling2D)
+    end
+    %%a --&gt; b1
+    %%b4 --&gt;c1
+    %%c4 --&gt; e1
+    classDef green fill:#9f6,stroke:#333,stroke-width:2px;;
+    %% classDef orange fill:#f48c42,stroke:#f66,stroke-width:2px,stroke-dasharray: 5, 5;
+    classDef del fill:#a4a8a7,stroke:#f66,stroke-width:3px,stroke-dasharray: 5, 5;
+    class e4 green
+</code></pre></div></div>
+<p>#4.2</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>graph TB
+    subgraph Fully-connected block
+        e1(Flatten) --&gt; e2("Dense(512,ReLu)")
+        e2 --&gt; e3(Dropout)
+        e3 --&gt; e4("Dense(512,ReLu)")
+        e4 --&gt; e5(Dropout)
+        e5 --&gt; e6("Dense(10,Softmax)")
+    end
+    subgraph Conv block 2: 64
+        c1("Conv2D(64,ReLu)") --&gt; c2("Conv2D(64,ReLu)")
+        c2 --&gt; c3(MaxPooling2D)
+        c3 --&gt; c4(Dropout)
+    end
+
+    subgraph Conv block 1: 32
+        b1("Conv2D(32,ReLu)") --&gt; b2("Conv2D(32,ReLu)")
+        b2 --&gt; b3(MaxPooling2D)
+        b3 --&gt; b4(Dropout)
+    end
+    subgraph Pooling
+        a(AveragePooling2D)
+    end
+    %%a --&gt; b1
+    %%b4 --&gt;c1
+    %%c4 --&gt; e1
+    classDef green fill:#9f6,stroke:#333,stroke-width:2px;;
+    %% classDef orange fill:#f48c42,stroke:#f66,stroke-width:2px,stroke-dasharray: 5, 5;
+    classDef del fill:#a4a8a7,stroke:#f66,stroke-width:3px,stroke-dasharray: 5, 5;
+    class e3,e5 green
+</code></pre></div></div>
+<p>#4.3</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>graph TB
+    subgraph Fully-connected block
+        e1(Flatten) --&gt; e2("Dense(512,Sigmoid)")
+        e2 --&gt; e3(Dropout)
+        e3 --&gt; e4("Dense(512,Sigmoid)")
+        e4 --&gt; e5(Dropout)
+        e5 --&gt; e6("Dense(10,Softmax)")
+    end
+    subgraph Conv block 2: 64
+        c1("Conv2D(64,ReLu)") --&gt; c2("Conv2D(64,ReLu)")
+        c2 --&gt; c3(MaxPooling2D)
+        c3 --&gt; c4(Dropout)
+    end
+
+    subgraph Conv block 1: 32
+        b1("Conv2D(32,ReLu)") --&gt; b2("Conv2D(32,ReLu)")
+        b2 --&gt; b3(MaxPooling2D)
+        b3 --&gt; b4(Dropout)
+    end
+    subgraph Pooling
+        a(AveragePooling2D)
+    end
+    %%a --&gt; b1
+    %%b4 --&gt;c1
+    %%c4 --&gt; e1
+    classDef green fill:#9f6,stroke:#333,stroke-width:2px;;
+    %% classDef orange fill:#f48c42,stroke:#f66,stroke-width:2px,stroke-dasharray: 5, 5;
+    classDef del fill:#a4a8a7,stroke:#f66,stroke-width:3px,stroke-dasharray: 5, 5;
+    class e2,e3,e4,e5 green
+</code></pre></div></div>
+<p>#4.7</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>graph TB
+    subgraph Fully-connected block
+        e1(Flatten) --&gt; e2("Dense(512,Sigmoid)")
+        e2 --&gt; e3(Dropout)
+        e3 --&gt; e4("Dense(256,Sigmoid)")
+        e4 --&gt; e5(Dropout)
+        e5 --&gt; e6("Dense(10,Softmax)")
+    end
+    subgraph Conv block 2: 64
+        c1("Conv2D(64,ReLu)") --&gt; c2("Conv2D(64,ReLu)")
+        c2 --&gt; c3(MaxPooling2D)
+        c3 --&gt; c4(Dropout)
+    end
+
+    subgraph Conv block 1: 32
+        b1("Conv2D(32,ReLu)") --&gt; b2("Conv2D(32,ReLu)")
+        b2 --&gt; b3(MaxPooling2D)
+        b3 --&gt; b4(Dropout)
+    end
+    subgraph Pooling
+        a(AveragePooling2D)
+    end
+    %%a --&gt; b1
+    %%b4 --&gt;c1
+    %%c4 --&gt; e1
+    classDef green fill:#9f6,stroke:#333,stroke-width:2px;;
+    %% classDef orange fill:#f48c42,stroke:#f66,stroke-width:2px,stroke-dasharray: 5, 5;
+    classDef del fill:#a4a8a7,stroke:#f66,stroke-width:3px,stroke-dasharray: 5, 5;
+    class e4 green
+</code></pre></div></div>
+<p>#4.9</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>graph TB
+    subgraph Fully-connected block
+        e1(Flatten) --&gt; e2("Dense(512)"&lt;br&gt;Local Norm&lt;br&gt;Act:Sigmoid)
+        e2 --&gt; e3(Dropout)
+        e3 --&gt; e4("Dense(256)"&lt;br&gt;Local Norm&lt;br&gt;Act:Sigmoid)
+        e4 --&gt; e5(Dropout)
+        e5 --&gt; e6("Dense(10,Softmax)")
+    end
+    subgraph Conv block 2: 64
+        c1("Conv2D(64)"&lt;br&gt;Local Norm&lt;br&gt;Act:ReLu) --&gt; c2("Conv2D(64)"&lt;br&gt;Local Norm&lt;br&gt;Act:ReLu)
+        c2 --&gt; c3(MaxPooling2D)
+        c3 --&gt; c4(Dropout)
+    end
+
+    subgraph Conv block 1: 32
+        b1("Conv2D(32)"&lt;br&gt;Local Norm&lt;br&gt;Act:ReLu) --&gt; b2("Conv2D(32)"&lt;br&gt;Local Norm&lt;br&gt;Act:ReLu)
+        b2 --&gt; b3(MaxPooling2D)
+        b3 --&gt; b4(Dropout)
+    end
+    subgraph Pooling
+        a(AveragePooling2D)
+    end
+    %%a --&gt; b1
+    %%b4 --&gt;c1
+    %%c4 --&gt; e1
+    classDef green fill:#9f6,stroke:#333,stroke-width:2px;;
+    %% classDef orange fill:#f48c42,stroke:#f66,stroke-width:2px,stroke-dasharray: 5, 5;
+    classDef del fill:#a4a8a7,stroke:#f66,stroke-width:3px,stroke-dasharray: 5, 5;
+    class e2,e4,c1,c2,b1,b2 green
+</code></pre></div></div>
+<p>#4.12</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>graph TB
+    subgraph Fully-connected block
+        e1(Flatten) --&gt; e2("Dense(512)"&lt;br&gt;Local Norm&lt;br&gt;Act:Sigmoid)
+        e2 --&gt; e3(Dropout)
+        e3 --&gt; e4("Dense(256)"&lt;br&gt;Local Norm&lt;br&gt;Act:Sigmoid)
+        e4 --&gt; e5(Dropout)
+        e5 --&gt; e6("Dense(10,Softmax)")
+    end
+    subgraph Conv block 3: 128
+        d1("Conv2D(128)"&lt;br&gt;Local Norm&lt;br&gt;Act:ReLu) --&gt; d2("Conv2D(128)"&lt;br&gt;Local Norm&lt;br&gt;Act:ReLu)
+        d2 --&gt; d3(MaxPooling2D)
+        d3 --&gt; d4(Dropout)
+    end
+    subgraph Conv block 2: 64
+        c1("Conv2D(64)"&lt;br&gt;Local Norm&lt;br&gt;Act:ReLu) --&gt; c2("Conv2D(64)"&lt;br&gt;Local Norm&lt;br&gt;Act:ReLu)
+        c2 --&gt; c3(MaxPooling2D)
+        c3 --&gt; c4(Dropout)
+    end
+
+    subgraph Conv block 1: 32
+        b1("Conv2D(32)"&lt;br&gt;Local Norm&lt;br&gt;Act:ReLu) --&gt; b2("Conv2D(32)"&lt;br&gt;Local Norm&lt;br&gt;Act:ReLu)
+        b2 --&gt; b3(MaxPooling2D)
+        b3 --&gt; b4(Dropout)
+    end
+    %%a --&gt; b1
+    %%b4 --&gt;c1
+    %%c4 --&gt; e1
+    classDef green fill:#9f6,stroke:#333,stroke-width:2px;;
+    %% classDef orange fill:#f48c42,stroke:#f66,stroke-width:2px,stroke-dasharray: 5, 5;
+    classDef del fill:#a4a8a7,stroke:#f66,stroke-width:3px,stroke-dasharray: 5, 5;
+    class d1,d2,d3,d4 green
+</code></pre></div></div>
+<p><a href="#cs-519-deep-learning"><strong><em>Back</em></strong> to subcontents <strong><em>CS 519</em></strong></a><br />
+<a href="#contents"><strong><em>Back to CONTENTS</em></strong></a></p>
+
+<hr />
+
+<h4 id="cs-519-project">CS 519 Project</h4>
+
+<p><a href="#cs-519-deep-learning"><strong><em>Back</em></strong> to subcontents <strong><em>CS 519</em></strong></a><br />
+<a href="#contents"><strong><em>Back to CONTENTS</em></strong></a></p>
+
+<hr />
+:ET

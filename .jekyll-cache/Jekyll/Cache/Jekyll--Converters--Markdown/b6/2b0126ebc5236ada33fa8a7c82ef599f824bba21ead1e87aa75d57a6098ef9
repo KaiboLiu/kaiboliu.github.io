@@ -1,0 +1,418 @@
+I"�<h1 id="contents">CONTENTS</h1>
+<ul>
+  <li><a href="#format-indention-space">Format &amp; Indention &amp; Space</a>
+    <ul>
+      <li><a href="#space-line">Space line</a></li>
+    </ul>
+  </li>
+  <li><a href="#input-and-include">input and include</a></li>
+  <li><a href="#equation-in-latex">Equation in Latex</a>
+    <ul>
+      <li><a href="#equation">Equation</a></li>
+      <li><a href="#math-symbol">Math symbol</a></li>
+      <li><a href="#open-brace-for-list">Open race for list</a></li>
+      <li><a href="#align-for-in-equation">Align for = in equation</a></li>
+    </ul>
+  </li>
+  <li><a href="#figures">Figures</a></li>
+  <li><a href="#tables">Tables</a></li>
+  <li><a href="#mini-page-for-two-column-contents">Mini page for two column</a></li>
+  <li><a href="#comment">Comment</a></li>
+  <li><a href="#pseudocode-in-latex">Pseudo code in Latex</a>
+    <ul>
+      <li><a href="#1-algorithm-and-algorithmic">algorithm and algorithmic</a></li>
+      <li><a href="#2-lstlisting">lstlisting</a></li>
+    </ul>
+  </li>
+  <li><a href="#reference">Reference</a></li>
+</ul>
+
+<h2 id="format--indention--space">Format &amp; Indention &amp; Space</h2>
+<h3 id="space-line">Space line</h3>
+<p><code class="language-plaintext highlighter-rouge">\hspace{1cm}</code> is used to insert blank / horizental spaces in line, but void at the leftmost of a line.<br />
+If we want a force insertion of spaces at the beginning of a line, we can use <code class="language-plaintext highlighter-rouge">hspace*{1cm}</code>.</p>
+
+<p><a href="#contents"><strong><em>Back to CONTENTS</em></strong></a></p>
+
+<hr />
+<h2 id="equation-in-latex">Equation in Latex</h2>
+<h3 id="equation">Equation</h3>
+<ul>
+  <li>如果是段内公式，前后要加上<code class="language-plaintext highlighter-rouge">$</code>或<code class="language-plaintext highlighter-rouge">\(</code>和<code class="language-plaintext highlighter-rouge">\)</code>；</li>
+  <li>如果公式独占一行且自动添加序号，则用<code class="language-plaintext highlighter-rouge">\begin{equation}</code>和 <code class="language-plaintext highlighter-rouge">\end{equation}</code>；</li>
+  <li>如果公式独占一行但不想编号，则用一对$$，或者<code class="language-plaintext highlighter-rouge">\begin{equation*}</code> 和 <code class="language-plaintext highlighter-rouge">\end{equation*}</code>；</li>
+</ul>
+
+<h3 id="math-symbol">Math Symbol</h3>
+<h4 id="实数域整数域等符号">实数域、整数域等符号：</h4>
+<div class="language-tex highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">\usepackage</span><span class="p">{</span>amssymb<span class="p">}</span>  
+<span class="p">$</span><span class="nb">x </span><span class="nv">\in</span><span class="nb"> </span><span class="nv">\mathbb</span><span class="p">{</span><span class="nb">R</span><span class="p">}^</span><span class="m">2</span><span class="p">$</span>
+</code></pre></div></div>
+<p>效果：<code class="language-plaintext highlighter-rouge">$x \in \mathbb{R}^2$</code> , <code class="language-plaintext highlighter-rouge">$\mathbb{W}$</code></p>
+<h4 id="矩阵符号不同于粗体">矩阵符号，不同于粗体：</h4>
+<div class="language-tex highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">\usepackage</span><span class="p">{</span>bm<span class="p">}</span>
+<span class="p">$</span><span class="nv">\bm</span><span class="p">{</span><span class="nb">W</span><span class="p">}$</span>
+</code></pre></div></div>
+
+<h3 id="open-brace-for-list">open brace for list</h3>
+<p>example:<br />
+<img src="https://d2dq6e731uoz0t.cloudfront.net/724ab0942696d900750893c75ce67332/as/Screen+Shot+2017-02-10+at+9.15.19+PM.png" alt="" /><br />
+\(\left\{
+\begin{aligned}
+&amp;x=R\cos\theta \\
+&amp;y = R\sin\theta
+\end{aligned}
+\right.\)</p>
+
+<p>code:</p>
+<div class="language-tex highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">$$</span><span class="nb">
+</span><span class="nv">\left\{</span><span class="nb">
+</span><span class="nv">\begin</span><span class="p">{</span><span class="nb">aligned</span><span class="p">}</span><span class="nb">
+</span><span class="p">&amp;</span><span class="nb">x</span><span class="o">=</span><span class="nb">R</span><span class="nv">\cos\theta</span><span class="nb"> </span><span class="nv">\\</span><span class="nb">
+</span><span class="p">&amp;</span><span class="nb">y </span><span class="o">=</span><span class="nb"> R</span><span class="nv">\sin\theta</span><span class="nb">
+</span><span class="nv">\end</span><span class="p">{</span><span class="nb">aligned</span><span class="p">}</span><span class="nb">
+</span><span class="nv">\right</span><span class="nb">.
+</span><span class="p">$$</span>
+</code></pre></div></div>
+
+<h3 id="align-for--in-equation">align for = in equation</h3>
+<p>example:<br />
+<img src="https://d2dq6e731uoz0t.cloudfront.net/f288fb9ec134725ecab46a0e42afd971/as/Screen+Shot+2017-02-10+at+9.15.28+PM.png" alt="" /><br />
+\(\begin{aligned}
+x&amp;=R\cos\theta \\
+&amp;= R\sin\theta
+\end{aligned}\)</p>
+
+<p>code:</p>
+<div class="language-tex highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">$$</span><span class="nb">
+</span><span class="nv">\begin</span><span class="p">{</span><span class="nb">aligned</span><span class="p">}</span><span class="nb">
+x</span><span class="p">&amp;</span><span class="o">=</span><span class="nb">R</span><span class="nv">\cos\theta</span><span class="nb"> </span><span class="nv">\\</span><span class="nb">
+</span><span class="p">&amp;</span><span class="o">=</span><span class="nb"> R</span><span class="nv">\sin\theta</span><span class="nb">
+</span><span class="nv">\end</span><span class="p">{</span><span class="nb">aligned</span><span class="p">}</span><span class="nb">
+</span><span class="p">$$</span>
+</code></pre></div></div>
+<p>or equivelently</p>
+<div class="language-tex highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">\begin{equation*}</span>
+<span class="nt">\begin{split}</span>
+x<span class="p">&amp;</span>=R<span class="k">\cos\theta</span> <span class="k">\\</span>
+<span class="p">&amp;</span>= R<span class="k">\sin\theta</span>
+<span class="nt">\end{split}</span>
+<span class="nt">\end{equation*}</span>
+</code></pre></div></div>
+<p><a href="#contents"><strong><em>Back to CONTENTS</em></strong></a></p>
+
+<hr />
+
+<h2 id="figures">figures</h2>
+<h3 id="figure-insertion">figure insertion</h3>
+<div class="language-tex highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">\begin{figure}</span>[!ht]
+<span class="k">\centering</span>
+<span class="k">\includegraphics</span><span class="na">[scale=0.7]</span><span class="p">{</span>figures/Part1<span class="p">_</span>accuracy<span class="p">_</span>vs<span class="p">_</span>k<span class="p">_</span>0-120<span class="p">}</span>
+<span class="k">\caption</span><span class="p">{</span>figname<span class="p">$</span><span class="nb">i</span><span class="p">$}</span>   <span class="c">% caption shown below figure</span>
+<span class="k">\label</span><span class="p">{</span>accpart1<span class="p">}</span>       <span class="c">% for reference</span>
+<span class="nt">\end{figure}</span>
+</code></pre></div></div>
+<h3 id="two-figures-in-one-line">two figures in one line</h3>
+<div class="language-tex highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">\begin{figure}</span>[!ht]
+<span class="nt">\begin{minipage}</span>[t]<span class="p">{</span>0.5<span class="k">\linewidth</span><span class="p">}</span>
+<span class="k">\centering</span>
+<span class="k">\includegraphics</span><span class="na">[scale=0.55]</span><span class="p">{</span>path/img1<span class="p">}</span>
+<span class="k">\caption</span><span class="p">{</span><span class="k">\footnotesize</span><span class="p">{</span>figname<span class="p">}}</span>   <span class="c">% caption shown below figure</span>
+<span class="k">\label</span><span class="p">{</span>label1<span class="p">}</span>                      <span class="c">% for reference</span>
+<span class="nt">\end{minipage}</span>
+<span class="nt">\begin{minipage}</span>[t]<span class="p">{</span>0.5<span class="k">\linewidth</span><span class="p">}</span>
+<span class="k">\centering</span>
+<span class="k">\includegraphics</span><span class="na">[scale=0.55]</span><span class="p">{</span>path/img2.png<span class="p">}</span>
+<span class="k">\caption</span><span class="p">{</span>figname2<span class="p">}</span>                <span class="c">% caption shown below figure</span>
+<span class="k">\label</span><span class="p">{</span>label2<span class="p">}</span>                      <span class="c">% for reference</span>
+<span class="nt">\end{minipage}</span>
+<span class="nt">\end{figure}</span>
+</code></pre></div></div>
+<p><a href="#contents"><strong><em>Back to CONTENTS</em></strong></a></p>
+
+<hr />
+
+<h2 id="tables">tables</h2>
+<p>example:<br />
+<img src="https://d2dq6e731uoz0t.cloudfront.net/734e076a0b4a2b1506232c81aa926eac/as/Screen+Shot+2017-02-10+at+9.03.38+PM.png" alt="" /><br />
+code:</p>
+<div class="language-tex highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">\begin{center}</span>
+<span class="nt">\begin{tabular}</span><span class="p">{</span>|r|c|c|<span class="p">}</span><span class="k">\hline</span>
+<span class="k">\multicolumn</span><span class="p">{</span>1<span class="p">}{</span>|c|<span class="p">}{</span>predicted<span class="p">}</span> <span class="p">&amp;</span> <span class="k">\multicolumn</span><span class="p">{</span>2<span class="p">}{</span>c|<span class="p">}{</span>true label <span class="p">$</span><span class="nb">y</span><span class="p">$}</span><span class="k">\\</span> <span class="k">\cline</span><span class="p">{</span>2-3<span class="p">}</span>
+<span class="k">\multicolumn</span><span class="p">{</span>1<span class="p">}{</span>|c|<span class="p">}{</span>label <span class="p">$</span><span class="nv">\hat</span><span class="p">{</span><span class="nb">y</span><span class="p">}$}</span> <span class="p">&amp;</span> <span class="k">\ \ \ </span>0<span class="k">\ \ \ \   </span><span class="p">&amp;</span> 1 <span class="k">\\</span> <span class="k">\hline</span>
+0     <span class="p">&amp;</span> 0 <span class="p">&amp;</span> 10  <span class="k">\\</span> <span class="k">\hline</span>
+1     <span class="p">&amp;</span> 5 <span class="p">&amp;</span>  0  <span class="k">\\</span> <span class="k">\hline</span>
+<span class="nt">\end{tabular}</span>
+<span class="nt">\end{center}</span>
+</code></pre></div></div>
+<p>In the codes above, <br />
+<code class="language-plaintext highlighter-rouge">\hline</code> add horizontal line in full width<br />
+<code class="language-plaintext highlighter-rouge">\cline{2-3}</code> add horizontal line <code class="language-plaintext highlighter-rouge">-</code> for column 2-3<br />
+<code class="language-plaintext highlighter-rouge">\multicolumn{2}{c|}</code> merge two corresponding columns together as one, then add a vertical line <code class="language-plaintext highlighter-rouge">|</code><br />
+<code class="language-plaintext highlighter-rouge">\\</code> start a new line in table</p>
+
+<h3 id="colors-in-table">colors in table</h3>
+<p>example:<br />
+<img src="https://d2dq6e731uoz0t.cloudfront.net/f477be5969fdb8bd0f3d5c8acb55cc5d/as/Screen+Shot+2017-05-30+at+4.54.17+AM.png" alt="" /></p>
+
+<p>code:</p>
+<div class="language-tex highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">\usepackage</span><span class="p">{</span>colortbl<span class="p">}</span>
+<span class="k">\definecolor</span><span class="p">{</span>mycyan<span class="p">}{</span>cmyk<span class="p">}{</span>.3,0,0,0<span class="p">}</span>
+
+<span class="nt">\begin{tabular}</span>
+<span class="p">{</span>|&gt;<span class="p">{</span><span class="k">\columncolor</span><span class="p">{</span>mycyan<span class="p">}</span><span class="k">\sf</span> <span class="p">}</span>c|c|c|c|c|@<span class="p">{}}</span>
+<span class="k">\hline</span>
+Byte Address <span class="p">&amp;</span> 1 <span class="p">&amp;</span> 348 <span class="p">&amp;</span> 756 <span class="p">&amp;</span> 9870 <span class="k">\\</span> <span class="k">\hline</span>
+Block Address <span class="p">&amp;</span> 0 <span class="p">&amp;</span> 2 <span class="p">&amp;</span> 5 <span class="p">&amp;</span> 77 <span class="k">\\</span> <span class="k">\hline</span>
+Block ID in cache <span class="p">&amp;</span> 0 <span class="p">&amp;</span> 2 <span class="p">&amp;</span> 5 <span class="p">&amp;</span> 13 <span class="k">\\</span> <span class="k">\hline</span>
+Hit/Miss <span class="p">&amp;</span> M <span class="p">&amp;</span> <span class="k">\textcolor</span><span class="p">{</span>red<span class="p">}{</span>H<span class="p">}</span> <span class="p">&amp;</span> M <span class="p">&amp;</span> M <span class="k">\\</span> <span class="k">\hline</span>
+Replace? (Y/N) <span class="p">&amp;</span> N <span class="p">&amp;</span> <span class="k">\textcolor</span><span class="p">{</span>red<span class="p">}{</span>Y<span class="p">}</span> <span class="p">&amp;</span> N <span class="p">&amp;</span> <span class="k">\textcolor</span><span class="p">{</span>red<span class="p">}{</span>Y<span class="p">}</span><span class="k">\\</span> <span class="k">\hline</span>
+<span class="nt">\end{tabular}</span>
+</code></pre></div></div>
+<p>In the codes above,
+add <code class="language-plaintext highlighter-rouge">&gt;{\columncolor{mycyan}\sf }</code> before <code class="language-plaintext highlighter-rouge">c</code> in <code class="language-plaintext highlighter-rouge">{|c|l|r|}</code> part to color the first column, <code class="language-plaintext highlighter-rouge">\sf</code> is used to change font in this column.<br />
+Moreover, add <code class="language-plaintext highlighter-rouge">\rowcolor{mycyan}</code> before content of a row can color background of the whole row as the designed.</p>
+
+<p><a href="#contents"><strong><em>Back to CONTENTS</em></strong></a></p>
+
+<hr />
+
+<h2 id="mini-page-for-two-column-contents">mini page for two column contents</h2>
+<p>setting width of minipage can put two horizontally in one line</p>
+<div class="language-tex highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">\begin{minipage}</span><span class="p">{</span>.4<span class="k">\textwidth</span><span class="p">}</span>
+<span class="p">$$</span><span class="nb">
+equation
+</span><span class="p">$$</span>
+<span class="nt">\end{minipage}</span>  <span class="c">% This must go next to `\end{minipage}`</span>
+
+or              <span class="c">% words between two mini pages</span>
+
+<span class="nt">\begin{minipage}</span><span class="p">{</span>.4<span class="k">\textwidth</span><span class="p">}</span>
+<span class="k">\figure</span> or something
+<span class="nt">\end{minipage}</span>
+</code></pre></div></div>
+<p><a href="#contents"><strong><em>Back to CONTENTS</em></strong></a></p>
+
+<hr />
+
+<h2 id="comment">Comment</h2>
+<p>加带颜色带边框文中注释：
+侧边注释：<code class="language-plaintext highlighter-rouge">\todo{Here's a comment in the margin!}</code>；<br />
+文中注释：as shown in the example on the right. You can also add inline comments:
+<code class="language-plaintext highlighter-rouge">\todo[inline, color=green!40]{This is an inline comment.}</code></p>
+
+<p><a href="#contents"><strong><em>Back to CONTENTS</em></strong></a></p>
+
+<hr />
+
+<h2 id="pseudo-code-in-latex">Pseudo code in Latex</h2>
+<p>algorithmicx is mostly used for pseudocode, if you want to include snippets of Python then maybe the package listings is a better choice (it comes with syntax highlighting for many languages, including Python). – Marijn Nov 11 ‘15 at 16:46</p>
+<h3 id="1algorithm-and-algorithmic">1、algorithm and algorithmic</h3>
+<p>用algorithm和algorithmic，带行号和分隔线<br />
+If {$i &gt; \textit{stringlen}$} 中，If和then之间部分要加{}；<br />
+斜体用$$，单词/变量名要紧凑就用\textit{}，紧凑且不斜体就用\text{}<br />
+\State 用来另起一行并且固定格式<br />
+\IF {},  \ELSIF {},  \ELS, \ENDIF都大写省得麻烦</p>
+<ul>
+  <li>\IF {“condition”}  “text”   \ENDIF</li>
+  <li>\IF  {“condition”}   “text”   \ELSE   “text”    \ENDIF</li>
+  <li>\IF  {“condition”}    “text”   \ELSIF   “text”     \ELSIF  “text”    \ELSE  “text”  \ENDIF</li>
+  <li>\FOR {“condition”}  “text” \ENDFOR</li>
+  <li>\FORALL {“condition”}  “text”  \ENDFOR</li>
+  <li>\WHILE {“condition”}  “text”  \ENDWHILE</li>
+  <li>\REPEAT “text”  \UNTIL {“condition”}</li>
+  <li>\LOOP “text”  \ENDLOOP</li>
+</ul>
+
+<p>example:<br />
+<img src="https://d2dq6e731uoz0t.cloudfront.net/0efa59d460e607fd63215ff14100d67b/as/psudocode_latex_1.png" alt="psudocode_latex_1" /><br />
+code:</p>
+<div class="language-tex highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">\documentclass</span><span class="p">{</span>article<span class="p">}</span>
+<span class="k">\usepackage</span><span class="p">{</span>amsmath<span class="p">}</span>
+<span class="k">\usepackage</span><span class="p">{</span>algorithm<span class="p">}</span>
+<span class="k">\usepackage</span><span class="na">[noend]</span><span class="p">{</span>algpseudocode<span class="p">}</span>
+
+<span class="k">\makeatletter</span>
+<span class="k">\def\BState</span><span class="p">{</span><span class="k">\State\hskip</span>-<span class="k">\ALG</span>@thistlm<span class="p">}</span>
+<span class="k">\makeatother</span>
+
+<span class="nt">\begin{document}</span>
+<span class="nt">\begin{algorithm}</span>               <span class="c">%算法的开始</span>
+<span class="k">\caption</span><span class="p">{</span>Binary Tree Reconstruction<span class="p">}</span><span class="k">\label</span><span class="p">{</span>euclid<span class="p">}</span>	<span class="c">%算法的标题</span>
+<span class="nt">\begin{algorithmic}</span>[1]          <span class="c">%不知[1]是干嘛的？[1]表示显示行号</span>
+<span class="k">\Procedure</span><span class="p">{</span>Node(preorder[1..n],inorder[1..n])<span class="p">}{}</span>
+<span class="k">\If</span> <span class="p">{$</span><span class="nb">n </span><span class="o">=</span><span class="nb"> </span><span class="m">0</span><span class="p">$}</span> <span class="k">\Return</span> false
+<span class="k">\ElsIf</span> <span class="p">{$</span><span class="nb">n </span><span class="o">=</span><span class="nb"> </span><span class="m">1</span><span class="p">$}</span> <span class="k">\Return</span> <span class="p">$</span><span class="nb">preorder</span><span class="o">[</span><span class="m">1</span><span class="o">]</span><span class="p">$</span>
+<span class="k">\Else</span>
+<span class="k">\State</span><span class="p">{$</span><span class="nb">p </span><span class="nv">\gets</span><span class="nb"> </span><span class="nv">\text</span><span class="p">{</span><span class="nb">Position of </span><span class="p">}</span><span class="nb"> </span><span class="nv">\textit</span><span class="p">{</span><span class="nb">preorder</span><span class="p">}</span><span class="o">[</span><span class="m">1</span><span class="o">]</span><span class="nb"> </span><span class="nv">\text</span><span class="p">{</span><span class="nb"> in </span><span class="p">}</span><span class="nb"> </span><span class="nv">\textit</span><span class="p">{</span><span class="nb">inorder</span><span class="p">}</span><span class="o">[</span><span class="m">1</span><span class="nb">..n</span><span class="o">]</span><span class="p">$}</span>
+<span class="k">\If</span> <span class="p">{$</span><span class="nb">p &gt; </span><span class="m">1</span><span class="p">$}</span>
+<span class="k">\State</span> <span class="p">$</span><span class="nb">preorder</span><span class="o">[</span><span class="m">1</span><span class="o">]</span><span class="nb">.left  </span><span class="nv">\gets</span><span class="nb"> </span><span class="nv">\textit</span><span class="p">{</span><span class="nb">Node</span><span class="p">}</span><span class="o">(</span><span class="nb">preorder</span><span class="o">[</span><span class="m">2</span><span class="nb">..p</span><span class="o">]</span><span class="nb">,inorder</span><span class="o">[</span><span class="m">1</span><span class="nb">..p</span><span class="o">-</span><span class="m">1</span><span class="o">])</span><span class="p">$</span>
+<span class="k">\EndIf</span>
+<span class="k">\If</span> <span class="p">{$</span><span class="nb">p &lt; n</span><span class="p">$}</span>
+<span class="k">\State</span> <span class="p">$</span><span class="nb">preorder</span><span class="o">[</span><span class="m">1</span><span class="o">]</span><span class="nb">.right  </span><span class="nv">\gets</span><span class="nb"> </span><span class="nv">\textit</span><span class="p">{</span><span class="nb">Node</span><span class="p">}</span><span class="o">(</span><span class="nb">preorder</span><span class="o">[</span><span class="nb">p</span><span class="o">+</span><span class="m">1</span><span class="nb">..n</span><span class="o">]</span><span class="nb">,inorder</span><span class="o">[</span><span class="nb">p</span><span class="o">+</span><span class="m">1</span><span class="nb">..n</span><span class="o">])</span><span class="p">$</span>
+<span class="k">\EndIf</span>
+<span class="k">\State</span> <span class="k">\Return</span> <span class="p">$</span><span class="nb">preorder</span><span class="o">[</span><span class="m">1</span><span class="o">]</span><span class="p">$</span>
+<span class="k">\EndIf</span>
+<span class="k">\EndProcedure</span>
+<span class="nt">\end{algorithmic}</span>
+<span class="nt">\end{document}</span> 
+</code></pre></div></div>
+<h3 id="2lstlisting">2、lstlisting</h3>
+<p>用lstlisting，保持所有原来字符和格式，没法用\；可以带上颜色，用前20行声明定义，<br />
+example:<br />
+<img src="https://d2dq6e731uoz0t.cloudfront.net/0981abdd05e68e63ac2cecdcc4d8649c/as/psudocode_latex_2.png" alt="psudocode_latex_2.png" />
+code:</p>
+<div class="language-tex highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">\usepackage</span><span class="p">{</span>listings<span class="p">}</span>
+<span class="k">\usepackage</span><span class="p">{</span>color<span class="p">}</span>
+
+<span class="k">\definecolor</span><span class="p">{</span>dkgreen<span class="p">}{</span>rgb<span class="p">}{</span>0,0.6,0<span class="p">}</span>
+<span class="k">\definecolor</span><span class="p">{</span>gray<span class="p">}{</span>rgb<span class="p">}{</span>0.5,0.5,0.5<span class="p">}</span>
+<span class="k">\definecolor</span><span class="p">{</span>mauve<span class="p">}{</span>rgb<span class="p">}{</span>0.58,0,0.82<span class="p">}</span>
+
+<span class="k">\lstset</span><span class="p">{</span>frame=tb,
+  language=Java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle=<span class="p">{</span><span class="k">\small\ttfamily</span><span class="p">}</span>,
+  numbers=none,
+  numberstyle=<span class="k">\tiny\color</span><span class="p">{</span>gray<span class="p">}</span>,
+  keywordstyle=<span class="k">\color</span><span class="p">{</span>blue<span class="p">}</span>,
+  commentstyle=<span class="k">\color</span><span class="p">{</span>dkgreen<span class="p">}</span>,
+  stringstyle=<span class="k">\color</span><span class="p">{</span>mauve<span class="p">}</span>,
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+<span class="p">}</span>
+
+<span class="nt">\begin{lstlisting}</span>
+// to reconstruct an arbitrary binary tree with preorder <span class="k">\&amp;</span> inorder node sequences.
+// assume the node sequence is identified with node, not only value, so no two nodes are identical.
+Node(preorder[1..n],inorder[1..n])
+    if n == 0 return NULL
+    else if n == 1 return preorder[1]
+    else p <span class="k">\leftarrow</span> Position of preorder[1] in inorder
+        preorder[1].left  = Node(preorder[2..p],inorder[1..p-1])
+        preorder[1].right <span class="k">\leftarrow</span> Node(preorder[p+1..n],inorder[p+1..n])
+        return preorder[1]
+public class Hello extends JApplet <span class="p">{</span>
+    public void paintComponent(Graphics g) <span class="p">{</span>
+        g.drawString("Hello, world!", 65, 95);
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="nt">\end{lstlisting}</span>
+</code></pre></div></div>
+
+<p><a href="#contents"><strong><em>Back to CONTENTS</em></strong></a></p>
+
+<hr />
+<h2 id="reference">Reference</h2>
+<ol>
+  <li>用<code class="language-plaintext highlighter-rouge">thebibliography</code>生成文献列表，用<code class="language-plaintext highlighter-rouge">\cite{}</code>在文中引用，但是编号是由列表顺序决定而不是文中出现顺序决定。。。</li>
+  <li>If you really need a bibliography sorted by citation order you have two choices:
+    <ol>
+      <li>write the entries in <code class="language-plaintext highlighter-rouge">thebibliography</code> in citation order</li>
+      <li>use a <code class="language-plaintext highlighter-rouge">.bib</code> file, <code class="language-plaintext highlighter-rouge">\bibliographystyle{unsrt}</code> and <code class="language-plaintext highlighter-rouge">BibTeX</code>. See the section below.</li>
+    </ol>
+  </li>
+</ol>
+
+<h3 id="bibtex制作参考文献">BIBTeX制作参考文献</h3>
+
+<p>BibTeX是一种格式和一个程序，用于协调LaTeX的参考文献处理。 BibTeX使用数据库的的方式来管理参考文献. BibTeX 文件的后缀名为<code class="language-plaintext highlighter-rouge">.bib</code>.</p>
+<div class="language-tex highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">% example of .bib</span>
+@article<span class="p">{</span>name1,
+    author = <span class="p">{</span>作者, 多个作者用 and 连接<span class="p">}</span>,
+    title = <span class="p">{</span>标题<span class="p">}</span>,
+    journal = <span class="p">{</span>期刊名<span class="p">}</span>,
+    volume = <span class="p">{</span>卷20<span class="p">}</span>,
+    number = <span class="p">{</span>页码<span class="p">}</span>,
+    year = <span class="p">{</span>年份<span class="p">}</span>,
+    abstract = <span class="p">{</span>摘要, 这个主要是引用的时候自己参考的, 这一行不是必须的<span class="p">}</span>
+    <span class="p">}</span>
+
+@book<span class="p">{</span>name2,
+    author ="作者",
+    year="年份2008",
+    title="书名",
+    publisher ="出版社名称"
+    <span class="p">}</span>
+</code></pre></div></div>
+<p>说明:</p>
+<ul>
+  <li>第一行<code class="language-plaintext highlighter-rouge">@article</code>告诉BibTeX这是一个文章类型的参考文献，还有其它格式, 例如 article, book, booklet, conference, inbook, incollection, inproceedings，manual, misc, mastersthesis, phdthesis, proceedings, techreport, unpublished 等等.</li>
+  <li>接下来的”name1”，就是你在正文中应用这个条目的名称.</li>
+</ul>
+
+<h4 id="在latex中使用bibtex">在LaTeX中使用BibTeX</h4>
+<p>为了在LaTeX中使用BibTeX数据库,你必须先做下面三件事情:
+1) 设置参考文献的类型 (bibliography style). 标准的为 plain:</p>
+<div class="language-tex highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">%如果文档类是article之类的, 用\renewcommand\refname{参考文献}</span>
+<span class="c">%如果文档类是book之类的, 用\renewcommand\bibname{参考文献}`</span>
+<span class="k">\renewcommand\bibname</span><span class="p">{</span>参考文献<span class="p">}</span>
+<span class="k">\bibliographystyle</span><span class="p">{</span>plain<span class="p">}</span>
+</code></pre></div></div>
+<p>将上面的命令放在 LaTeX 文档的 \begin{document}后边. 其它的类型包括
+    - unsrt – 基本上跟plain类型一样，除了参考文献的条目的编号是按照引用的顺序，而不是按照作者的字母顺序.
+    - alpha – 类似于 plain 类型，当参考文献的条目的编号基于作者名字和出版年份的顺序.
+    - abbrv – 缩写格式 .
+2) 标记引用 (Make citations). 当你在文档中想使用引用时, 插入 LaTeX 命令<br />
+<code class="language-plaintext highlighter-rouge">\cite{引用文章名称}</code><br />
+“引用文章名称”就是前边定义@article后面的名称.
+3) 告诉LaTeX生成参考文献列表，在 LaTeX 的结束前输入<br />
+<code class="language-plaintext highlighter-rouge">\bibliography{bibfile}</code><br />
+这里bibfile 就是你的 BibTeX 数据库文件 bibfile.bib .</p>
+
+<h4 id="运行-bibtex">运行 BibTeX</h4>
+<p>分为下面四步：</p>
+<ul>
+  <li>用LaTeX编译你的<code class="language-plaintext highlighter-rouge">.tex</code>文件 , 这时生成一个 <code class="language-plaintext highlighter-rouge">.aux</code>的文件, 这告诉 BibTeX 将使用那些应用；</li>
+  <li>用BibTeX 编译<code class="language-plaintext highlighter-rouge">.bib</code>文件；</li>
+  <li>再次用LaTeX编译你的<code class="language-plaintext highlighter-rouge">.tex</code>文件，这个时候在文档中已经包含了参考文献，但此时引用的编号可能不正确；</li>
+  <li>最后用 LaTeX编译你的<code class="language-plaintext highlighter-rouge">.tex</code>文件，如果一切顺利的话, 这是所有东西都已正常了.</li>
+</ul>
+
+<p><a href="#contents"><strong><em>Back to CONTENTS</em></strong></a></p>
+
+<hr />
+
+<h2 id="input-and-include">input and include</h2>
+<p>http://blog.csdn.net/lishoubox/article/details/6783726<br />
+处理较大的文件，一个有效的方法是把它分成几个部分，然后分别导入，</p>
+<div class="language-tex highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">\input</span><span class="p">{</span>filename1<span class="p">}</span>
+<span class="k">\input</span><span class="p">{</span>filename2<span class="p">}</span>
+</code></pre></div></div>
+<p>另一个常用的导入命令是</p>
+<div class="language-tex highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">\include</span><span class="p">{</span>filename1<span class="p">}</span>  
+<span class="k">\include</span><span class="p">{</span>filename2<span class="p">}</span>
+</code></pre></div></div>
+<p>区别在于：</p>
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">\include</code>时总是开始新的一页，<code class="language-plaintext highlighter-rouge">\input</code>连续不分页。所以<code class="language-plaintext highlighter-rouge">\include</code>适合 book 类按 chapter 分割。</li>
+  <li><code class="language-plaintext highlighter-rouge">\include</code>命令，不能递归调用，<code class="language-plaintext highlighter-rouge">\input</code>命令可以。</li>
+</ol>
+
+<p>http://www.eefocus.com/giema/blog/11-07/228074_8df8b.html</p>
+<ol>
+  <li>include  和includeonly的联系<br />
+今天学习latex发现include includeonly两个不知道有什么联系，经过一番baidu之后发现两个是有联系的。  includeonly放在导言区，用来指定正文区中include的哪一部分（或者全部）参与当前编译，对于大型文档的中间调试非常有用，不用修改正文区，只改includeonly的列表就可以实现分步调试了。</li>
+  <li>include 和input的区别<br />
+<code class="language-plaintext highlighter-rouge">\input</code>命令的缺点是，通过<code class="language-plaintext highlighter-rouge">\input</code>命令合并起来的文章(不管那部分) 每经过一次修改，所有的文件都要被重新读入和处理。若用<code class="language-plaintext highlighter-rouge">\input</code>命令仅加载那个特定的文件，那么所有的页码、章节、插图和公式等的自动编号都从1开始，这会使交叉引用产生混乱。更好的办法是采用<code class="language-plaintext highlighter-rouge">\include</code>命令。</li>
+</ol>
+
+<p>http://blog.csdn.net/yelbosh/article/details/8631845<br />
+input命令可以改为include，区别在于，input可以放在导言区和正文区，包含的内容不另起一页；而include只能放在正文区，包含的内容另起一页。另外CJK中还有CJKinput和CJKinclude命令。</p>
+
+<p>http://bbs.ctex.org/forum.php?mod=viewthread&amp;tid=24600<br />
+<code class="language-plaintext highlighter-rouge">\include</code>反正要多处理一些东西，比如看看有没有<code class="language-plaintext highlighter-rouge">\includeonly</code>之类的，或者在<code class="language-plaintext highlighter-rouge">\include</code>执行时处理一个<code class="language-plaintext highlighter-rouge">\cleardoublepage</code>之类的</p>
+
+<p>http://tex.stackexchange.com/questions/246/when-should-i-use-input-vs-include</p>
+
+<p>\input{filename} imports the commands from filename into the target file; it’s equivalent to typing all the commands from filename right into the current file where the \input line is.
+\include{filename} essentially does a \clearpage before and after\input{filename}, together with some magic to switch to another .aux file, and omit the inclusion at all if you have an \includeonly without the filename in the argument. This is primarily useful when you have a big project on a slow computer; changing one of the include targets won’t force you to regenerate the outputs of all the rest \include gets you the speed bonus, but it also can’t be nested, can’t appear in the preamble, and forces page breaks around the included text.</p>
+
+<p><a href="#contents"><strong><em>Back to CONTENTS</em></strong></a></p>
+
+<hr />
+:ET

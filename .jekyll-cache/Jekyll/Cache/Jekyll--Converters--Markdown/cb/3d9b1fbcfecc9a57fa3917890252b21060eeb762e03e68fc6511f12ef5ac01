@@ -1,0 +1,48 @@
+I"�
+<p><img src="https://i1.wp.com/www.additudemag.com/wp-content/uploads/2016/11/School.3Rs.Math_tricks_the_right_way_to_teach_kids_with_ADHD.QA_learning_expert.5758.math_problems_homework.ts_470493341-1.jpg?w=1024&amp;crop=0%2C0px%2C100%2C600px&amp;ssl=1" alt="sample" title="Math" /></p>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+
+<h2 id="content">Content</h2>
+<ul>
+  <li><a href="#probability">Probability</a></li>
+  <li><a href="#other">To be continued</a></li>
+</ul>
+
+<h2 id="probability">Probability</h2>
+
+<h3 id="description">Description</h3>
+<p>There are N passengers boarding on an airplane one by one, with their tickets indicating their seats.<br />
+However, the first passenger lost his ticket, he decide to randomly choose a seat(could be his own, or one of the others’). Every following passenger will take their own seat if not taken, otherwise randomly choose one from the vacancies.<br />
+What’s the probability that the last(Nth) passenger got his own seat?</p>
+
+<h3 id="analysis">Analysis</h3>
+<p>It’s easy to infer the answer for N=1 and N=2, which are 1 and \(\frac{1}{2}\). <br />
+However, the general answer is not \(\frac{1}{N}\). Because it’s obvious that the \(1^{st}\) passenger will take his own seat at the odd of \(\frac{1}{N}\), leaving all the rest passengers get their own seats. So the answer should be lager than that because it is still possible for the \(N^{th}\) to get his own seat if the \(1^{st}\) takes other’s.<br />
+Let’s denote the answer as \(P(N)\) and the probability that randomly choose from n others’ seats leaveing the \(N^{th}\) getting his own as \(Q(n)\).<br />
+For the \(1^{st}\):</p>
+<ol>
+  <li>if takes seat 1 at \(\frac{1}{N}\), then the rest are all set, the last can definately get his own seat.</li>
+  <li>if takes seat 2 at \(\frac{1}{N}\), then the \(2^{nd}\) will choose seat 1 at \(\frac{1}{N-1}\), and choose others at \(Q(n-2)\).</li>
+  <li>if takes seat i at \(\frac{1}{N}\), then the \(i^{th}\) will choose seat 1 at \(\frac{1}{N -i+1}\), and choose others at \(Q(n-i)\).</li>
+</ol>
+
+<p>\(P(N)=\frac{1}{N}+\frac{N-1}{N}Q(n-1)\)<br />
+\(P(N)=\frac{1}{N}+\frac{1}{N}(\frac{1}{N-1}+Q(n-2))+\frac{1}{N}(\frac{1}{N-2}+Q(n-3))\cdots+\frac{1}{N}(\frac{1}{2}+Q(1))\)<br />
+\(Q(1)=0\)</p>
+
+<h3 id="result">Result</h3>
+<p>We derivative the chain rule of \(Q(i)\):<br />
+\(Q(n)=Q(n-1)+\frac{1}{n^2}\\  
+Q(1)=0\)</p>
+
+<p>Then we can get:<br />
+\(Q(n)=\Sigma_{i=2}^{n}\frac{1}{i^2}\\  
+P(N)=\frac{1}{N}(1+(N-1)\Sigma_{i=2}^{N-1}\frac{1}{i^2})\)</p>
+
+<p><a href="#content"><strong><em>Back</em></strong> to <strong><em>CONTENT</em></strong></a></p>
+
+<h2 id="other">Other</h2>
+
+<p><a href="#content"><strong><em>Back</em></strong> to <strong><em>CONTENT</em></strong></a></p>
+:ET

@@ -1,0 +1,252 @@
+I"�<p><img src="/images/Vimium.png" /></p>
+<h1 id="vimium">Vimium</h1>
+<p>Vimium: a really cool extension for Chrome, make it possible to control chrome with shortcuts like vim.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://github.com/philc/vimium  
+</code></pre></div></div>
+
+<ol>
+  <li><a href="#1-navigating-the-current-page">Navigating the current page</a></li>
+  <li><a href="#2-search-mode-like-vim">Search mode (like Vim)</a></li>
+  <li><a href="#3-navigating-your-history">Navigating your history</a></li>
+  <li><a href="#4-manipulating-tabs">Manipulating tabs</a></li>
+  <li><a href="#5-navigating-with-urls">Navigating with URLs</a></li>
+</ol>
+
+<h2 id="1-navigating-the-current-page">1. Navigating the current page</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Key</th>
+      <th style="text-align: left">Operation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">？</td>
+      <td style="text-align: left">show help dialog for keys</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">j</td>
+      <td style="text-align: left">Scroll down</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">k</td>
+      <td style="text-align: left">Scroll up</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">h</td>
+      <td style="text-align: left">Scroll left</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">l</td>
+      <td style="text-align: left">Scroll right</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">gg</td>
+      <td style="text-align: left">Scroll to the top of the page</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">G</td>
+      <td style="text-align: left">Scroll to the bottom of the page</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">zH</td>
+      <td style="text-align: left">Scroll all the way to the left</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">zL</td>
+      <td style="text-align: left">Scroll all the way to the right</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">d</td>
+      <td style="text-align: left">Scroll a page down</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">u</td>
+      <td style="text-align: left">Scroll a page up</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">r</td>
+      <td style="text-align: left">Reload the page</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">gs</td>
+      <td style="text-align: left">View page source</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">f</td>
+      <td style="text-align: left">Open a link in the current tab</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">F</td>
+      <td style="text-align: left">Open a link in a new tab</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">yy</td>
+      <td style="text-align: left">Copy the current URL to the clipboard</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">yf</td>
+      <td style="text-align: left">Copy a link URL to the clipboard</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">i</td>
+      <td style="text-align: left">Enter insert mode</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">gi</td>
+      <td style="text-align: left">Focus the first (or n-th) text box on the page</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a-f></a-f></td>
+      <td style="text-align: left">Open multiple links in a new tab</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">[[</td>
+      <td style="text-align: left">Follow the link labeled previous or &lt;</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">]]</td>
+      <td style="text-align: left">Follow the link labeled next or &gt;</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">gf</td>
+      <td style="text-align: left">Cycle forward to the next frame on the page</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="2-search-mode-like-vim">2. Search mode (like Vim)</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Key</th>
+      <th style="text-align: left">Operation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">/</td>
+      <td style="text-align: left">Enter “find” mode</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">n/N</td>
+      <td style="text-align: left">Jump forward/back to search occurrences(after “/”)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">v</td>
+      <td style="text-align: left">enter visual mode; use p/P to paste-and-go, use y to yank</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">V</td>
+      <td style="text-align: left">enter visual line mode</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="3-navigating-your-history">3. Navigating your history</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Key</th>
+      <th style="text-align: left">Operation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">H</td>
+      <td style="text-align: left">go back in history</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">L</td>
+      <td style="text-align: left">go forward in history</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="4-manipulating-tabs">4. Manipulating tabs</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Key</th>
+      <th style="text-align: left">Operation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">K，gt</td>
+      <td style="text-align: left">go one tab right</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">J，gT</td>
+      <td style="text-align: left">go one tab left</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">t</td>
+      <td style="text-align: left">create tab</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">x</td>
+      <td style="text-align: left">close current tab</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">X</td>
+      <td style="text-align: left">restore closed tab (i.e. unwind the ‘x’ command)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="5-navigating-with-urls">5. Navigating with URLs</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Key</th>
+      <th style="text-align: left">Operation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">&lt;c+l&gt;</td>
+      <td style="text-align: left">Edit the current URL</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">o</td>
+      <td style="text-align: left">Open URL, bookmark, or history entry</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">O</td>
+      <td style="text-align: left">Open URL, bookmark, history entry in a new tab</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">b</td>
+      <td style="text-align: left">Open bookmark</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">B</td>
+      <td style="text-align: left">Open bookmark in a new tab</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">gu</td>
+      <td style="text-align: left">go up one level in the URL hierarchy</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">gU</td>
+      <td style="text-align: left">go up to root of the URL hierarchy</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">ge</td>
+      <td style="text-align: left">edit the current URL</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">gE</td>
+      <td style="text-align: left">edit the current URL and open in a new tab</td>
+    </tr>
+  </tbody>
+</table>
+:ET

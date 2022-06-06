@@ -1,0 +1,804 @@
+I"��<h1 id="contents">CONTENTS</h1>
+<ul>
+  <li><a href="#2017-fall">2017 Fall</a>
+    <ul>
+      <li><a href="#rna-web-demo">RNA web demo (-&gt;)</a></li>
+      <li><a href="#pseudoknot">Pseudoknot (-&gt;)</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="2017-fall">2017 Fall</h2>
+
+<h2 id="rna-web-demo">RNA web demo</h2>
+<ul>
+  <li><a href="#12052017-tue">12/05/2017 - Task Initiallization</a></li>
+  <li><a href="#12062017-wed">12/06/2017 - Getting Familiar</a></li>
+  <li><a href="#12072017-thu">12/07/2017 - Layout</a></li>
+  <li><a href="#12082017-fri">12/08/2017 - Arc draw in canvas</a></li>
+  <li><a href="#12102017-sun">12/10/2017 - Rearrange Data by Seq</a></li>
+  <li><a href="#12112017-mon">12/11/2017 - Learn JavaScript to draw</a></li>
+  <li><a href="#12122017-tue">12/12/2017 - jQuery night</a></li>
+  <li><a href="#12132017-wed">12/13/2017 - File Reading Problem</a></li>
+  <li><a href="#12142017-thu">12/14/2017 - Staged Success</a></li>
+  <li><a href="#12262017-tue">12/26/2017 - Fully Functioned</a></li>
+  <li><a href="#12282017-thu">12/28/2017 - P/R/F and other optimizations</a></li>
+  <li><a href="#12292017-fri">12/29/2017 - Plot in html</a></li>
+  <li><a href="#12302017-sat">12/30/2017 - Fulfill many tough requests</a></li>
+  <li><a href="#12312017-sun">12/31/2017 - My own updates in format</a></li>
+  <li><a href="#01012018-mon">01/01/2018 - Problem shooting and ssh-key research</a></li>
+  <li><a href="#01022018-tue">01/02/2018 - Trial of less file loading &amp; Enable re-draw by chart click</a></li>
+  <li><a href="#01172018-wed">01/17/2018 - Interactive web demo with flask</a></li>
+  <li><a href="#01182018-thu">01/18/2018 - File upload to server &amp; stylish page</a></li>
+</ul>
+
+<p><a href="#contents"><strong><em>Back to CONTENTS</em></strong></a></p>
+
+<h2 id="pseudoknot">Pseudoknot</h2>
+<ul>
+  <li><a href="#01022018-tue">01/02/2018 - Task Initiallization</a></li>
+</ul>
+
+<p><a href="#contents"><strong><em>Back to CONTENTS</em></strong></a></p>
+
+<h4 id="12052017-tue">12/05/2017 Tue</h4>
+<p>Meeting with Prof. Huang and Dezhong, on the project of RNA sequence pairing.
+RNA paring for pseudoknot-free mode is perfectly improved in linear solution. Next step is to optimize different types of crossing, from <code class="language-plaintext highlighter-rouge">$O(n^3)$</code> to <code class="language-plaintext highlighter-rouge">$O(n^6)$</code>, to linear.<br />
+The group also needs a web demo for visual illustration, especially for beam tunning. So I took the task for web development. Everything needs to study from the very beginning.</p>
+
+<p><a href="#rna-web-demo"><strong><em>Back</em></strong> to subcontents <strong><em>RNA web demo</em></strong></a></p>
+
+<h4 id="12062017-wed">12/06/2017 Wed</h4>
+<p>Check <code class="language-plaintext highlighter-rouge">RNA_visual</code> at Dezhong’s file on ironcreek: <code class="language-plaintext highlighter-rouge">ssh liukaib@ironcreek.eecs.oregonstate.edu
+</code>. Then copy them to my local:</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scp <span class="nt">-r</span> liukaib@ironcreek.eecs.oregonstate.edu:/scratch/dengde/RNA_visual /Users/zhangyilin/0_pipi/LKB_OSU/Research/RNA
+</code></pre></div></div>
+<p>Borrow the source code from Vienna RNAfold WebServer. I need to modify many contents then deploy html file to my own webpage on engr:</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># at OSU</span>
+scp /Users/zhangyilin/0_pipi/LKB_OSU/Research/RNA/web_demo/RNA_pair_web.html liukaib@flop.engr.oregonstate.edu:/nfs/stak/users/liukaib/public_html
+<span class="c"># out of OSU</span>
+scp <span class="nt">-r</span> /Users/zhangyilin/0_pipi/LKB_OSU/Research/RNA/web_demo/rearranged_results/ liukaib@flop.engr.oregonstate.edu:/nfs/stak/users/liukaib/public_html
+</code></pre></div></div>
+<p><a href="#rna-web-demo"><strong><em>Back</em></strong> to subcontents <strong><em>RNA web demo</em></strong></a></p>
+
+<h4 id="12072017-thu">12/07/2017 Thu</h4>
+
+<p>Layout:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>graph LR
+contrafold--&gt;contrafold_linear
+vienna--&gt;vienna_linear
+</code></pre></div></div>
+
+<p><a href="#rna-web-demo"><strong><em>Back</em></strong> to subcontents <strong><em>RNA web demo</em></strong></a></p>
+
+<h4 id="12082017-fri">12/08/2017 Fri</h4>
+<ul>
+  <li>Use <code class="language-plaintext highlighter-rouge">canvas</code> in html5 to draw arcs for the pairing demostration.
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1">//get canvas object</span>
+  <span class="kd">var</span> <span class="nx">canvas</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">myCanvas</span><span class="dl">"</span><span class="p">);</span>
+  <span class="c1">//check if current explorer support Canvas object, to avoid sytax error in some html5-unfriendly explorers.</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">getContext</span><span class="p">)</span>
+  <span class="p">{</span>  
+      <span class="c1">//get corresponding CanvasRenderingContext2D object(pen)</span>
+      <span class="kd">var</span> <span class="nx">ctx</span> <span class="o">=</span> <span class="nx">canvas</span><span class="p">.</span><span class="nx">getContext</span><span class="p">(</span><span class="dl">"</span><span class="s2">2d</span><span class="dl">"</span><span class="p">);</span>  
+
+      <span class="nx">ctx</span><span class="p">.</span><span class="nx">beginPath</span><span class="p">();</span>                    <span class="c1">//starting drawing a path</span>
+      <span class="nx">ctx</span><span class="p">.</span><span class="nx">moveTo</span><span class="p">(</span><span class="nx">p1</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">p1</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>     <span class="c1">//assign the start position of drawing</span>
+        
+      <span class="c1">//draw an arc of radius r, tangent with 2 sides consisted by p1 to (x0,y0) and (x0,y0) to p2.</span>
+      <span class="nx">ctx</span><span class="p">.</span><span class="nx">arcTo</span><span class="p">(</span><span class="nx">x0</span><span class="p">,</span> <span class="nx">y0</span><span class="p">,</span> <span class="nx">p2</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">p2</span><span class="p">.</span><span class="nx">y</span><span class="p">,</span> <span class="nx">r</span><span class="p">);</span>    
+        
+      <span class="c1">//or, draw a line from p1 to p2</span>
+      <span class="nx">ctx</span><span class="p">.</span><span class="nx">lineTo</span><span class="p">(</span><span class="nx">p2</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span><span class="nx">p2</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+        
+      <span class="nx">ctx</span><span class="p">.</span><span class="nx">strokeStyle</span> <span class="o">=</span> <span class="nx">color</span><span class="p">;</span>            <span class="c1">//set arc to a color assigned by a string color</span>
+      <span class="nx">ctx</span><span class="p">.</span><span class="nx">stroke</span><span class="p">();</span>
+  <span class="p">};</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Here is the example:
+  <img src="https://kaiboliu.github.io/images/web%20demo/arcs_trial.png" alt="image for arc trial with canvas arc function" title="arc trial with canvas arc function" /></li>
+</ul>
+
+<p><a href="#rna-web-demo"><strong><em>Back</em></strong> to subcontents <strong><em>RNA web demo</em></strong></a></p>
+
+<h4 id="12102017-sun">12/10/2017 Sun</h4>
+<p>In Dezhong’s <code class="language-plaintext highlighter-rouge">README</code>, data are listed like this:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Original data (sequences):
+Mathewsdata.16s.seq
+Mathewsdata.23s.seq
+
+Gold:
+Mathewsdata.16s.ref
+Mathewsdata.23s.ref
+
+Contrafold result:
+Mathewsdata.16s.contrafoldres
+Mathewsdata.23s.contrafoldres
+
+Vienna result:
+Mathewsdata.16s.viennares
+Mathewsdata.23s.viennares
+
+Linear Parser result using Contrafold model:
+linearcontrafold/run_16s/*
+linearcontrafold/run_23s/*
+
+Linear Parser result using Vienna model:
+linearvienna/run_16s/*
+linearvienna/run_23s/*
+</code></pre></div></div>
+
+<p>Finishing <code class="language-plaintext highlighter-rouge">rearrange_by_seq.py</code>, rearrangement of pairing, put all the results of a single sequence (#4 of 16s, for example) into a data file, named <code class="language-plaintext highlighter-rouge">combine_16s.seq04</code>.<br />
+There are always 1656 lines(seq*2 + ref*2 + cf*2 + vn*2 + linearcf*206*4 + lineavnf*206*4) in each data file if category of beams is 206 (1,2,..200,300,..,800).</p>
+
+<p>The structure of the file is:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>seq * 2 lines           -----&gt;  L1
+ref * 2 lines           -----&gt;  L3
+cf  * 2 lines           -----&gt;  L5
+vn  * 2 lines           -----&gt;  L7
+linearcf.beam001 * 4 lines  -----&gt;  L11 (with 2 lines of information above)
+lineavnf.beam001 * 4 lines  -----&gt;  L16 (with 2 lines of information above)
+linearcf.beam002 * 4 lines
+lineavnf.beam002 * 4 lines
+...
+linearcf.beam00i * 4 lines  -----&gt;  L(8*i+3) (with 2 lines of information above), if i &gt; 200, L[(i/100+198)*8+3]
+lineavnf.beam00i * 4 lines  -----&gt;  L(8*i+7) (with 2 lines of information above), if i &gt; 200, L[(i/100+198)*8+7]
+</code></pre></div></div>
+<p>通宵</p>
+
+<p><a href="#rna-web-demo"><strong><em>Back</em></strong> to subcontents <strong><em>RNA web demo</em></strong></a></p>
+
+<h4 id="12112017-mon">12/11/2017 Mon</h4>
+<p>Think about methods to make javascript to read data files like <code class="language-plaintext highlighter-rouge">combine_16s.seq04</code> to draw graph.<br />
+半通宵</p>
+
+<p><a href="#rna-web-demo"><strong><em>Back</em></strong> to subcontents <strong><em>RNA web demo</em></strong></a></p>
+
+<h4 id="12122017-tue">12/12/2017 Tue</h4>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">jQuery</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span> <span class="nx">url</span> <span class="p">[,</span> <span class="nx">data</span> <span class="p">]</span> <span class="p">[,</span> <span class="nx">success</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">textStatus</span><span class="p">,</span> <span class="nx">jqXHR</span><span class="p">)</span> <span class="p">]</span> <span class="p">[,</span> <span class="nx">dataType</span> <span class="p">]</span> <span class="p">)</span>
+</code></pre></div></div>
+<p>描述: 使用一个HTTP GET请求从服务器加载数据。<br />
+It’s an abbreviation of ajax, equalent to:</p>
+<pre><code class="language-javescript">$.ajax({
+  url: url,
+  data: data,
+  success: success,
+  dataType: dataType
+});
+</code></pre>
+<p>Usage:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jQuery.get('http://localhost/foo.txt', function(data) {
+    var myvar = data;
+});
+</code></pre></div></div>
+<p>ps: <code class="language-plaintext highlighter-rouge">jQuery.get()=$.get()</code></p>
+
+<h5 id="html">HTML:</h5>
+<p>element: a pair of tags and all those between it</p>
+<ul>
+  <li>has closing tag: <code class="language-plaintext highlighter-rouge">&lt;h1&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;button&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;a&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;div&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;body&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;html&gt;</code></li>
+  <li>closing tag is optional: <code class="language-plaintext highlighter-rouge">&lt;p&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;option&gt;</code>;</li>
+  <li>no closing tag: <code class="language-plaintext highlighter-rouge">&lt;br&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;img&gt;</code></li>
+</ul>
+
+<p>attribute: in the openning tag(<code class="language-plaintext highlighter-rouge">class</code>, <code class="language-plaintext highlighter-rouge">id</code>, <code class="language-plaintext highlighter-rouge">style</code>, <code class="language-plaintext highlighter-rouge">title</code>, <code class="language-plaintext highlighter-rouge">lang</code>)</p>
+
+<p>class 属性可以多用 class=” “ （引号里面可以填入多个class属性）<br />
+id 属性只能单独设置 id=” “（只能填写一个，多个无效）</p>
+
+<h5 id="jquery-selector">jQuery selector:</h5>
+<p>element selector <code class="language-plaintext highlighter-rouge">$("p")</code><br />
+id selector <code class="language-plaintext highlighter-rouge">$(#id)</code><br />
+class selector <code class="language-plaintext highlighter-rouge">$(.class)</code></p>
+
+<p><a href="#rna-web-demo"><strong><em>Back</em></strong> to subcontents <strong><em>RNA web demo</em></strong></a></p>
+
+<h4 id="12132017-wed">12/13/2017 Wed</h4>
+<p>Solved an interested problem:
+When I use <code class="language-plaintext highlighter-rouge">$.get()</code>, the URL should be an open access domain, otherwise there will be an error <code class="language-plaintext highlighter-rouge">No 'Access-Control-Allow-Origin' header is present on the requested resource. Origin 'null' is therefore not allowed access.</code>.<br />
+The browser usually allows a request in the same origin for security reasons. <code class="language-plaintext highlighter-rouge">CORS</code> is designed for cross-domain request. Or simply without <code class="language-plaintext highlighter-rouge">CORS</code>:</p>
+<ul>
+  <li>If I want to <code class="language-plaintext highlighter-rouge">$.get()</code> a file on server, the html file should also be run on the server.</li>
+  <li>If I want to <code class="language-plaintext highlighter-rouge">$.get()</code> a file on github, I can run html both locally or on server.</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$(document).ready(function(){
+   // jQuery...
+});
+</code></pre></div></div>
+<p>is equivalent to</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$(function(){
+   // jQuery...
+});
+</code></pre></div></div>
+<p><a href="#rna-web-demo"><strong><em>Back</em></strong> to subcontents <strong><em>RNA web demo</em></strong></a></p>
+
+<h4 id="12142017-thu">12/14/2017 Thu</h4>
+<p>Use <code class="language-plaintext highlighter-rouge">json.dump(a:b)</code> in python and <code class="language-plaintext highlighter-rouge">$.getJSON(URL,function(data){...})</code> in js, to make file data reable for html.</p>
+
+<p>But I cannot pass variables out in this getJSON.<br />
+This happens because that callback function (function(data) {…}) runs later when the response comes back…because it’s an asynchronous function. Instead use the value once you have it set, like this:
+…</p>
+
+<p>After finishing all the configuration, I can draw 4 beautiful graphs for a default data file(a specific sequence) on the webpage.<br />
+Transfer <code class="language-plaintext highlighter-rouge">html</code>, <code class="language-plaintext highlighter-rouge">js</code>, <code class="language-plaintext highlighter-rouge">arc_pairing_json.py</code>, <code class="language-plaintext highlighter-rouge">rearrange_by_seq.py</code>, and data file <code class="language-plaintext highlighter-rouge">pairing_for_js</code> to server:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scp /Users/zhangyilin/0_pipi/LKB_OSU/Research/RNA/web_demo/arc_pairing_json.py liukaib@flop.engr.oregonstate.edu:/nfs/stak/users/liukaib/public_html/
+scp /Users/zhangyilin/0_pipi/LKB_OSU/Research/RNA/web_demo/demo_myScript.js liukaib@flop.engr.oregonstate.edu:/nfs/stak/users/liukaib/public_html/
+scp /Users/zhangyilin/0_pipi/LKB_OSU/Research/RNA/web_demo/demo_json+canvas.html liukaib@flop.engr.oregonstate.edu:/nfs/stak/users/liukaib/public_html/
+scp -r /Users/zhangyilin/0_pipi/LKB_OSU/Research/RNA/web_demo/pairing_for_js/ liukaib@flop.engr.oregonstate.edu:/nfs/stak/users/liukaib/public_html/
+scp /Users/zhangyilin/0_pipi/LKB_OSU/Research/RNA/web_demo/rearrange_by_seq.py liukaib@flop.engr.oregonstate.edu:/nfs/stak/users/liukaib/public_html/
+</code></pre></div></div>
+
+<p>My demo is available on <code class="language-plaintext highlighter-rouge">http://web.engr.oregonstate.edu/~liukaib/demo_json+canvas.html</code>. I sent an email to my boss for my update.<br />
+凌晨7点睡。</p>
+
+<p><a href="#rna-web-demo"><strong><em>Back</em></strong> to subcontents <strong><em>RNA web demo</em></strong></a></p>
+
+<h4 id="12262017-tue">12/26/2017 Tue</h4>
+<p>Start working at midnight.
+Add the functionality of slide bar value call back, then extract seq series and seq number from seletion.<br />
+Learn the usage of <code class="language-plaintext highlighter-rouge">&lt;span&gt;</code>, interesting.<br />
+The final demo can be found at <a href="http://web.engr.oregonstate.edu/~liukaib/demo_json+canvas.html">my OSU homepage</a>.</p>
+
+<p>Finish the work at 5:50am.</p>
+
+<p><a href="#rna-web-demo"><strong><em>Back</em></strong> to subcontents <strong><em>RNA web demo</em></strong></a></p>
+
+<h4 id="12282017-thu">12/28/2017 Thu</h4>
+<p>As boss asked, I need to:</p>
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Change the max value on slide bar(from 206 to 800) and triple the length of the bar.
+    <ul>
+      <li>I add hash marks and labels on the bar, however, currently, no browser fully supports these features. Firefox doesn’t support hash marks and labels at all, for example, while Chrome supports the hash marks but doesn’t support labels. <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/range">Source</a></li>
+    </ul>
+  </li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Add sequence names to corresponding dropdown manu items.
+    <ul>
+      <li>Dezhong updated an <code class="language-plaintext highlighter-rouge">Mathews.clean.txt</code> on his RNA_visual directory. There are 3867 sequences(11571 lines) in the file. I need to match all the 27 (22 in 16s and 5 in 23s) by searching sequence string. Results are <a href="#sequence-names">attached later</a>.</li>
+    </ul>
+  </li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Add PPV (precision), Sensitivity (recall), F-score, and number of (predicted) pairs for each plot under subtiles.
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">$P=\frac{\#\ of\ correctly\ predicted pairs}{\#\ of\ predicted\ pairs}$</code></li>
+      <li><code class="language-plaintext highlighter-rouge">$R=\frac{\#\ of\ correctly\ predicted\ pairs}{\#\ of\ gold\ pairs}$</code></li>
+      <li><code class="language-plaintext highlighter-rouge">$F=\frac{2PR}{P+R}$</code></li>
+      <li>At first I calculate these 3 parameters from the number of my 3 tpye of pairs(<code class="language-plaintext highlighter-rouge">wrong</code>, <code class="language-plaintext highlighter-rouge">hit</code>, <code class="language-plaintext highlighter-rouge">missing</code>). Actually the number <code class="language-plaintext highlighter-rouge">$hit+missing\neq \#\ of\ ref\ pairs$</code>, because there is a slip in pairing(use <code class="language-plaintext highlighter-rouge">agree</code> as equivalence).
+        <ul>
+          <li>For example, <code class="language-plaintext highlighter-rouge">(1,30)</code> in result and <code class="language-plaintext highlighter-rouge">(1,29),(2,30)</code> in ref, finally <code class="language-plaintext highlighter-rouge">(1,30)</code> will be counted as blue(hit) while no grey pair.</li>
+          <li>So I need to pass more para into json format data file for js, detailed in <a href="#json-file-for-js">JSON file layout</a>.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Update <code class="language-plaintext highlighter-rouge">agree</code> function from Dezhong’s fix in my <code class="language-plaintext highlighter-rouge">arc_pairing.py</code> for correct blue pair statistics, after 1.5h voice call. We both had a bug in counting correct-predicted pairs. Now we get the same corresponsive P/R/F result with Dezhong.</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Update algorithm names and performance names, I need to fix text position in canvas, which is time consuming:
+    <ul>
+      <li>P/R/F -&gt; PPV/Sensitivity (F)</li>
+      <li>CONTRAfold -&gt; CONTRAfold MFE</li>
+      <li>Vienna -&gt; Vienna RNAfold</li>
+      <li>Linear CONTRAfold -&gt; LinearFold-C</li>
+      <li>Linear Vienna -&gt; LinearFold-V</li>
+    </ul>
+  </li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Future task: scalable vector graph(SVG)</li>
+</ul>
+
+<h5 id="domain-page">domain page</h5>
+<p>I figured out that if I want to load a default <code class="language-plaintext highlighter-rouge">.html</code> file on my domain instead of using an url ending with <code class="language-plaintext highlighter-rouge">.html</code>, I just need to rename the page file to <code class="language-plaintext highlighter-rouge">index.html</code>.</p>
+
+<h5 id="sequence-names">Sequence names</h5>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>16s-seq01: 1490 archiveII/16s_Z.mays.ct
+16s-seq02: 1552 archiveII/16s_B.subtilis.ct
+16s-seq03: 1542 archiveII/16s_E.coli.ct
+16s-seq04: 1474 archiveII/16s_H.volcanii.ct
+16s-seq05: 1995 archiveII/16s_D.melanogaster.ct
+16s-seq06: 1793 archiveII/16s_T.gondii.ct
+16s-seq07: 954 archiveII/16s_H.sapiens.mito.ct
+16s-seq08: 1537 archiveII/16s_B.burgdorferi.ct
+16s-seq09: 1564 archiveII/16s_A.pyrophilus.ct
+16s-seq10: 1525 archiveII/16s_P.staleyi.ct
+16s-seq11: 1552 archiveII/16s_C.psittaci.ct
+16s-seq12: 950 archiveII/16s_C.elegans.ct
+16s-seq13: 1804 archiveII/16s_F.ananassa.ct
+16s-seq14: 1562 archiveII/16s_T.maritima.ct
+16s-seq15: 1474 archiveII/16s_C.reinhardtii.chloro.ct
+16s-seq16: 1974 archiveII/16s_M.polymorpha.ct
+16s-seq17: 1492 archiveII/16s_A.fulgidus.ct
+16s-seq18: 1870 archiveII/16s_H.sapiens.ct
+16s-seq19: 1800 archiveII/16s_S.cerevisiae.ct
+16s-seq20: 1497 archiveII/16s_P.occultum.ct
+16s-seq21: 1200 archiveII/16s_C.reinhardtii.mito.ct
+16s-seq22: 1452 archiveII/16s_G.intestinalis.ct
+23s-seq01: 2968 archiveII/23s_H.pylori.ct
+23s-seq02: 2915 archiveII/23s_T.thermophilus.ct
+23s-seq03: 2927 archiveII/23s_B.subtilis.ct
+23s-seq04: 2923 archiveII/23s_S.aureus.ct
+23s-seq05: 2904 archiveII/23s_E.coli.ct
+</code></pre></div></div>
+<h5 id="json-file-for-js">JSON file for js</h5>
+<p><code class="language-plaintext highlighter-rouge">combine_pairing_16s.seq04</code></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{"result":[N,seq,                                                           -----&gt;index: 0-1
+        [P,R,F],cf_missing, cf_hit, cf_wrong,                                   -----&gt;index: 2-5
+        [P,R,F],vn_missing, vn_hit, vn_wrong,                                   -----&gt;index: 6-9
+        [P,R,F],linearcf_b01_missing, linearcf_b01_hit, linearcf_b01_wrong,     -----&gt;index: 10-13
+        [P,R,F],linearvn_b01_missing, linearvn_b01_hit, linearvn_b01_wrong,     -----&gt;index: 14-17
+        [P,R,F],linearcf_b02_missing, linearcf_b02_hit, linearcf_b02_wrong,     -----&gt;index: 18-21 (8*i+2~8*i+5,i is the beam number)
+        [P,R,F],linearvn_b02_missing, linearvn_b02_hit, linearvn_b02_wrong,     -----&gt;index: 22-25 (8*i+6~8*i+9,i is the beam number)
+        ...
+        [P,R,F],linearcf_b800_missing, linearcf_b800_hit, linearcf_b800_wrong,  -----&gt;index: 1238-1241 [(i/100+198)*6+2~(i/100+198)*6+5,i is the beam number which is &gt; 200]
+        [P,R,F],linearvn_b800_missing, linearvn_b800_hit, linearvn_b800_wrong,  -----&gt;index: 1242-1245 [(i/100+198)*6+6~(i/100+198)*6+9,i is the beam number which is &gt; 200]
+         ]}
+The new pairing data files will listed by seq number(16s * 22, and 23s *5), 27 files in total.
+</code></pre></div></div>
+<h5 id="structure-of-js-drawing">Structure of js drawing</h5>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">.</span><span class="nx">getJSON</span><span class="p">(</span><span class="nx">seqFile</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span><span class="nx">status</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">drawFrame</span><span class="p">();</span>
+        <span class="nx">drawCircle</span><span class="p">();</span> <span class="c1">// open circle;</span>
+        <span class="nx">drawCircleMarks</span><span class="p">();</span><span class="c1">// scale adjustable in para 'range'</span>
+    <span class="nx">fillCircles</span><span class="p">();</span>
+        <span class="nx">fillCircle</span><span class="p">();</span>
+            <span class="nx">drawArc</span><span class="p">()</span> <span class="k">in</span> <span class="k">for</span> <span class="nx">loop</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><a href="#rna-web-demo"><strong><em>Back</em></strong> to subcontents <strong><em>RNA web demo</em></strong></a></p>
+
+<h4 id="12292017-fri">12/29/2017 Fri</h4>
+<h5 id="new-requst">New Requst:</h5>
+<p>“one more <strong><em>easy</em></strong> thing you could do on your current version is:</p>
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />add one plot (for both contrafold row and vienna row) where the y axis shows P, R, F and the x axis is the beam size.</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />add another plot (for both contrafold row and vienna row) where the x axis is P and y axis is R.</li>
+</ul>
+
+<p>These two tasks can be described as <code class="language-plaintext highlighter-rouge">P/R/F-beam plot</code> and <code class="language-plaintext highlighter-rouge">R-P plot</code>. I have no clue about ploting in HTML. Research shows avaiable methods are below:</p>
+<ul>
+  <li>:sleeping: CanvasJS.Chart, ‘trial’ watermark in free version
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;script src="https://canvasjs.com/assets/script/canvasjs.min.js"&gt;&lt;/script&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>:ok_hand: google.charts, powerful and open source
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"&gt;&lt;/script&gt;
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h5 id="ways-to-convert-a-number-to-a-string-in-javascript">Ways to convert a number to a string in JavaScript</h5>
+
+<ol>
+  <li>a = String(n)</li>
+  <li>a = n.toString()</li>
+  <li>a = ““+n, so combining num with string is easy <code class="language-plaintext highlighter-rouge">new_str = 'hello world' + num</code></li>
+</ol>
+
+<h5 id="svg-drawing">SVG drawing</h5>
+<p>Research a lot for <strong>SVG</strong> draw with javascript.</p>
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />How to draw an arc in SVG like <code class="language-plaintext highlighter-rouge">.arcTo()</code> in canvas?
+    <ul>
+      <li>use <path> to draw arc, such as `<path d="M80 80 A 45 45, 0, 0, 0, 125 125 L 125 80 Z" fill="green"></path>`
+</path>        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  M = moveto                   // necessary
+  L = lineto                   // necessary
+  Q = quadratic Belzier curve  // not used
+  A = elliptical Arc           // good!
+</code></pre></div>        </div>
+      </li>
+      <li>Spent much time and learned, A is better than Q, and <code class="language-plaintext highlighter-rouge">A</code> is very similar with <code class="language-plaintext highlighter-rouge">canvas.arcTo()</code>:
+        <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nx">d</span><span class="o">=</span><span class="dl">"</span><span class="s2">M x1 y1 A rx ry, x-axis-rotation, large-arc-flag,sweep-flag, x2 y2</span><span class="dl">"</span>
+  <span class="c1">// arc is a part of an eclipse with rx,ry and rotated, starts from (x1,y1) and ends at (x2,y2), small arc if large-arc-flag== 0, colokwise arc if sweep-flag == 1</span>
+  <span class="nx">canvas</span><span class="p">.</span><span class="nx">moveTo</span><span class="p">(</span><span class="nx">xa</span><span class="p">,</span><span class="nx">ya</span><span class="p">);</span>
+  <span class="nx">canvas</span><span class="p">.</span><span class="nx">arcTo</span><span class="p">(</span><span class="nx">cx</span><span class="p">,</span><span class="nx">cy</span><span class="p">,</span><span class="nx">xb</span><span class="p">,</span><span class="nx">yb</span><span class="p">,</span><span class="nx">r</span><span class="p">);</span>
+  <span class="c1">// arc is tangent with (xa,ya)-(cx,cy) and (cx,cy)-(xb,yb) and radius r, may not start from (xa,ya) and may not end at (xb,yb).</span>
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />How to manipulate data for a <code class="language-plaintext highlighter-rouge">&lt;path&gt;</code> element from script? <a href="https://stackoverflow.com/questions/8053487/scripting-path-data-in-svg-reading-and-modifying">Solution Source</a>
+    <ul>
+      <li>use <code class="language-plaintext highlighter-rouge">path.setAttribute()</code> or use <code class="language-plaintext highlighter-rouge">SVG DOM</code></li>
+      <li>set the whole path with <code class="language-plaintext highlighter-rouge">path.setAttribute('d','M150,0 L150,100 200,300 Z')</code></li>
+      <li>set partial value like <code class="language-plaintext highlighter-rouge">path.pathSegList.getItem(2).y = -10</code></li>
+      <li>generate a path with <code class="language-plaintext highlighter-rouge">SVGPathElement</code>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  var _l = 10;
+  var pathEl = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  pathEl.setAttribute('d','M'+_l+' 100 Q 100  300 '+_l+' 500' );
+    
+  ISVGPathSegArcAbs retVal = object.createSVGPathSegArcAbs(in float x, in float y, in float r1, in float r2, in float angle, in boolean largeArcFlag, in boolean sweepFlag)
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+  <li class="task-list-item">place your <code class="language-plaintext highlighter-rouge">&lt;script&gt;</code> elements at the bottom of your <code class="language-plaintext highlighter-rouge">svg</code> document. Alternatively, you can create a callback function at the top of your document that is only invoked when the rest of the document is ready:</li>
+</ul>
+
+<p><a href="#rna-web-demo"><strong><em>Back</em></strong> to subcontents <strong><em>RNA web demo</em></strong></a></p>
+
+<h4 id="12302017-sat">12/30/2017 Sat</h4>
+<h5 id="new-request">New Request:</h5>
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />(☆☆☆☆☆) In P/R/F-beam plot, remove the F-score series. It became a P/R-beam plot.</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />(★★★★☆) In P/R-beam plot, add a switch to let the user choose between log-scale and linear-scale. (default: log)
+    <ul>
+      <li>Time consuming, but it feels good when I finish it. The position of button is annoying. Finally I remove the designated size of the button.</li>
+      <li>Since x is number in log view, the <code class="language-plaintext highlighter-rouge">dataTable</code> is easy, while x is string in linear view, so I need another dataTable ready for log/linear view switch.</li>
+    </ul>
+  </li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />(★★★☆☆) In P/R-beam plot, show both PPV and sensitivity instead of just one with mouse hover. ‘This might be difficult.’
+    <ul>
+      <li>Learnt a concept named <code class="language-plaintext highlighter-rouge">tooltips</code>, displaying point values when a mouse hover on an element/button/plot point.</li>
+      <li>In google charts lib, tooltips are defaulted as <code class="language-plaintext highlighter-rouge">x_value \n y_series_label: y_value</code>. Now I want to show all series in 1 x value and show the x label.<br />
+  <img src="https://d2dq6e731uoz0t.cloudfront.net/fc5103f95daf83c8d256be9ddcc8d9f2/as/Screen+Shot+2017-12-30+at+3.56.55+PM.png" alt="multi series in tooltips in plot" title="multi series in tooltips in plot" /></li>
+      <li>Find an <a href="https://developers.google.com/chart/interactive/docs/roles#whatrolesavailable">example</a> on google developers after a <strong>really long</strong> search, in the section of <code class="language-plaintext highlighter-rouge">multi-domain chart</code>. But true solution is found in the example of <code class="language-plaintext highlighter-rouge">London Olympics Medals</code> frame from another <a href="https://developers.google.com/chart/interactive/docs/customizing_tooltip_content#customizing-html-content">google chart guide-Tooltips</a>, along with the definition of <a href="https://developers.google.com/chart/interactive/docs/gallery/linechart#Configuration_Options">Options Configuration</a>:
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  var options = {
+  ...
+  colors: ['#FFD700', '#C0C0C0', '#8C7853'], // assign colors for each series, or do it in 'series'
+  focusTarget: 'category',  // This line makes the entire category's tooltip active. 'category' - Focus on a grouping of all data points along the major axis. Correlates to a row in the data table.
+  ...
+  };
+</code></pre></div>        </div>
+      </li>
+      <li>Here is the result I’m satisfied with:<br />
+  <img src="https://kaiboliu.github.io/images/web%20demo/customized%20tooltips%20in%20R-P%20plot.png" alt="customized tooltips in R-P plot" title="customized tooltips in R-P plot" /></li>
+    </ul>
+  </li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />(★★★★★) In P/R-beam plot, use “b=1” instead of “1” in mouse hover(tooltip).
+    <ul>
+      <li>I can use the <code class="language-plaintext highlighter-rouge">category</code> option to list all series on hover, but x-label(domain label) is still missing from default.</li>
+    </ul>
+  </li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />(★☆☆☆☆) In P/R-beam plot, add a PPV line and a Sensitivity line for CONTRAfold/Vienna.
+    <ul>
+      <li>Done before requirement received in email.</li>
+    </ul>
+  </li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />(☆☆☆☆☆) In R-P plot, connect the points with a line, change <code class="language-plaintext highlighter-rouge">.ScatterChart()</code> to <code class="language-plaintext highlighter-rouge">LineChart() </code>.</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />(★★★★☆) In R-P plot, show beam size, besides the sens and ppv, in mouse hover.
+    <ul>
+      <li>Edit a lot for the tooltip(mouse hover) in R-P plot. If I want to add <code class="language-plaintext highlighter-rouge">beam size</code>, which is not shown in the graph, displayed in tooltip on each point, I need to creat a customized HTML as tooltip string.</li>
+      <li>Not only to add <code class="language-plaintext highlighter-rouge">'p': {'html': true}</code> in creating <code class="language-plaintext highlighter-rouge">.addColumn({'type': 'string', 'role': 'tooltip', 'p': {'html': true}})</code>, to add <code class="language-plaintext highlighter-rouge">tooltip: { isHtml: true }</code> in <code class="language-plaintext highlighter-rouge">options</code>, but also remember to add <code class="language-plaintext highlighter-rouge">focusTarget: 'category'</code> in <code class="language-plaintext highlighter-rouge">options</code>, <strong>this line makes the entire category’s tooltip active</strong>, for both HTML-based customized tooltip and default tooltip display in multi-series.<br />
+  <img src="https://d2dq6e731uoz0t.cloudfront.net/85857264b283ebc3d33164e5fef56aee/as/Screen+Shot+2017-12-31+at+2.58.14+AM.png" alt="Highlight for editing tooltips with html format in google chart" title="Customizing HTML content for tooltips in google charts" /></li>
+      <li>Scripting an HTML is annoying.</li>
+    </ul>
+  </li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />(★★★★★)(4 hours) In both plots, highlight the corresponding points when the user slides the sliding bar.
+    <ul>
+      <li>Find a solution in the section of <code class="language-plaintext highlighter-rouge">Customizing individual points</code> in <a href="https://developers.google.com/chart/interactive/docs/points#customizing-individual-points">google chart guide-Customizing Points</a>.</li>
+      <li>Read carefully and try millions times for the individual point display.</li>
+      <li>When it is <code class="language-plaintext highlighter-rouge">.Linechart()</code>, points are <strong>not</strong> shown by default, even there is an assigned customized individual point. Only adding sth like <code class="language-plaintext highlighter-rouge">pointSize: 7,</code> in <code class="language-plaintext highlighter-rouge">options</code> can make points displayed. In fact, all the points will be that size, which is ulgy in a <code class="language-plaintext highlighter-rouge">line</code> chart, I have to minimize the pointSize to resume a clear line chart. However, this size is also the one for hover-highlighted point size. So there is a <strong>trade-off</strong>. Sigh…(This problem doesn’t appear one day later even no pointSize given. ???)</li>
+      <li>Customizing individual point in P/R-beam plot goes well. Spent some time in choosing point style(star/sides/dent, ect.). However, I spent 3 hours in debugging individual point customization in R-P plot. Why?
+        <ul>
+          <li>In P/R-beam plot, beam starts from 1 and rowIndex starts from 0. Everything is OK.
+            <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  dataTable.setValue(rowIndex-1, 2, style);   
+  // [beam, P, null, R, null, P_fix, R_fix] --&gt; [beam, P, style, R, null, P_fix, R_fix]
+  dataTable.setValue(rowIndex-1, 4, style);   
+  // [beam, P, style, R, null, P_fix, R_fix] --&gt; [beam, P, style, R, style, P_fix, R_fix]
+</code></pre></div>            </div>
+          </li>
+          <li>In R-P plot, beam starts from 1 and rowIndex starts from 1, there is a fixed point (CONTRAfold MFE) at the top of row, so beam data starts from 1.
+            <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  dataTable.setValue(rowIndex, 2, style); 
+  // [beam, P, null, R, null, P_fix, R_fix] --&gt; [beam, P, style, R, null, P_fix, R_fix]
+  dataTable.setValue(rowIndex, 4, style); 
+  // [beam, P, style, R, null, P_fix, R_fix] --&gt; [beam, P, style, R, style, P_fix, R_fix]
+</code></pre></div>            </div>
+            <p>There was an error running this code. I spent a lot of time to figure it out: <code class="language-plaintext highlighter-rouge">rowIndex</code> is a <strong>string</strong> instead of a number, which comes from <code class="language-plaintext highlighter-rouge">document.getElementById("beamslidebar").value</code> (what??? beamslidebar is a slide bar using standard ‘range’). <code class="language-plaintext highlighter-rouge">rowIndex</code> will remain a string, not be converted to a number, until operated with a math (like rowIndex+=1). <strong>New find</strong>!</p>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p><a href="#rna-web-demo"><strong><em>Back</em></strong> to subcontents <strong><em>RNA web demo</em></strong></a></p>
+
+<h4 id="12312017-sun">12/31/2017 Sun</h4>
+<h5 id="my-own-update">My own update</h5>
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Adjust the position of plots to left, solving the problem of overlaping, by transparent ground with <code class="language-plaintext highlighter-rouge">backgroundColor: { fill:'transparent' }</code> in <code class="language-plaintext highlighter-rouge">options</code>.
+Re-write the function <code class="language-plaintext highlighter-rouge">plot_411</code>, combine two dataTable instead of generating two seperately.
+    <ul>
+      <li>If I want to display pure linear x axis(beam size) from 1-800, I can use the same dataTable for both log and linear view.</li>
+      <li>If I want to enlarge the range of major range (1-200) and shrink (300-800), I can map 300-&gt;201,400-&gt;201,..,800-&gt;206, and make (1-206) linear. Then use <code class="language-plaintext highlighter-rouge">ticks:[{v:201,f:'300'},...]</code> in hAxis iption to make x label right.</li>
+    </ul>
+  </li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Regroup functions to a bettle structure.</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Solve the <strong>unchecked</strong> item in log, ‘(★★★★★) In P/R-beam plot, use “b=1” instead of “1” in mouse hover(tooltip).’
+    <ul>
+      <li>In order to list all series on hover, as well as x-label(domain label), I need to abandon the default <code class="language-plaintext highlighter-rouge">category</code> display. The only way I figured out is customized HTML as tooltip string, the same as used in R-P plot.
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  data_C_1.addRow([beam, createCustomHTMLContent_1(beam,
+                              data_C_1.getColumnLabel(2),
+                              data_C_1.getColumnLabel(4),
+                              data_C_1.getColumnLabel(6),
+                              data_C_1.getColumnLabel(7), P, R, P_fix, R_fix), 
+                   P, , R, , P_fix, R_fix]);
+</code></pre></div>        </div>
+        <p>The second element in a row is a tooltip, added as a column header <code class="language-plaintext highlighter-rouge">data_C_1.addColumn({'type': 'string', 'role': 'tooltip', 'p': {'html': true}});</code></p>
+      </li>
+      <li>In the function <code class="language-plaintext highlighter-rouge">createCustomHTMLContent_1</code>, I editted a new html line, including series line color, with times of trails of hex colors.</li>
+      <li>Here is the result I’m satisfied with:<br />
+  <img src="https://kaiboliu.github.io/images/web%20demo/customized%20tooltips%20in%20PR-beam%20plot.png" alt="customized tooltips in PR-beam plot" title="customized tooltips in PR-beam plot" /></li>
+    </ul>
+  </li>
+</ul>
+
+<p><a href="#rna-web-demo"><strong><em>Back</em></strong> to subcontents <strong><em>RNA web demo</em></strong></a></p>
+
+<h4 id="01012018-mon">01/01/2018 Mon</h4>
+<h5 id="problem-shooting">Problem shooting</h5>
+<p>My call to <code class="language-plaintext highlighter-rouge">google.visualization.DataTable()</code> returns <strong>“Uncaught TypeError: google.visualization.DataTable is not a constructor(…)”</strong>.<br />
+On the first click I got the error and no chart, but on the second click the page would display the chart correctly without any errors.<br />
+The same problem discussed on <a href="https://groups.google.com/forum/#!topic/google-visualization-api/yzBtf7xl0dE">Google Groups</a>.<br />
+My function was `
+google.charts.setOnLoadCallback(load_draw_go(d,R,circleScale,halfOpen));`<br />
+It should be:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>google.charts.setOnLoadCallback(function(){load_draw_go(d,R,circleScale,halfOpen)});    // draw graphs and plots on the right
+function load_draw_go(d,R,circleScale,halfOpen){}   // define the function
+...
+</code></pre></div></div>
+<blockquote>
+  <p>By naming your callback function and giving it parameters, you are actually calling it at that time and only the result of that function call will be passed in to the setOnLoadCallback.  If you call your draw function before the library is loaded, then many things will be undefined, such as the DataTable constructor.  By just naming the callback function (e.g. just drawChart), you are passing in a reference to that function.  So if you want to pass parameters to your drawChart function, you need to wrap that call in another function declaration, like this:</p>
+  <blockquote>
+    <p>google.charts.load(‘current’, {packages: [‘corechart’, ‘line’]);<br />
+   google.charts.setOnLoadCallback( function() { drawChart(loc) });<br />
+   function drawChart(loc) { … }</p>
+  </blockquote>
+</blockquote>
+
+<p><a href="#rna-web-demo"><strong><em>Back</em></strong> to subcontents <strong><em>RNA web demo</em></strong></a></p>
+
+<h4 id="01022018-tue">01/02/2018 Tue</h4>
+<ul class="task-list">
+  <li>Meeting with Prof. Huang and Dezhong, discussed a little about the web demo, then asked me to read about R&amp;E (<code class="language-plaintext highlighter-rouge">$n^6$</code>) and D&amp;P (<code class="language-plaintext highlighter-rouge">$n^5$</code>), then run the corresponding software ? and NUPACK.</li>
+  <li>Prof. Huang felt the webpage may freeze when we slide to much. I explained with console log that each move on slide bar, beam value is updated then data file loaded and graphs/plots are rendered.</li>
+  <li>At home, I tried two methods to speed up the demo for frequent silde.
+    <ul class="task-list">
+      <li>I tried to load data at the beginning, save it to a <code class="language-plaintext highlighter-rouge">global</code> variable (pairingList). Then the draw module and plot module can use the current pairingList to finish the job. Codes are updated and rearranged. But I found that the beam value is always the same as last click, not from current click.</li>
+      <li>After variable monitoring in console log, I got a conclusion, which seemed to be in my sight days ago, that <code class="language-plaintext highlighter-rouge">$.getJSON(url)</code> and <code class="language-plaintext highlighter-rouge">$.get(url)</code> are executed <strong>after</strong> the whole page is loaded. Here is the example. Line 59 is the first run in console, with previous seq length referred by beam value, then line 38, and finally line 52, with the correct seq length referred by the current beam value.
+  <img src="https://kaiboliu.github.io/images/web%20demo/getJSON%20after%20page%20loaded.png" alt="d" title="getJSON after page loaded" /></li>
+      <li>So I cannot use <code class="language-plaintext highlighter-rouge">$.getJSON(url)</code> or <code class="language-plaintext highlighter-rouge">$.get(url)</code> to save data globally. I can only manipulate the data from file within the function upon <code class="language-plaintext highlighter-rouge">$.getJSON(url)</code>.</li>
+      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />The last option I have, to avoid lagging refresh speed on webpage, is to change the attr event of slide bar(<code class="language-plaintext highlighter-rouge">range</code> type in <code class="language-plaintext highlighter-rouge">input</code> tag of html5) from <code class="language-plaintext highlighter-rouge">oninput=function()</code> to <code class="language-plaintext highlighter-rouge">onchange=function()</code>. The former is triggered simultaneously when we slide the bar (value inputted but mouse not released), while the latter is triggered when we finish sliding the bar (mouse click released).</li>
+    </ul>
+  </li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />(★★★★☆)(3 hours) Spent much time to enable re-draw when clicking on a chart/plot point with certain beam size. Digging in <a href="https://developers.google.com/chart/interactive/docs/gallery/linechart#events">Google guide-event</a>. The solution is <code class="language-plaintext highlighter-rouge">addListener</code> on <code class="language-plaintext highlighter-rouge">select</code> event.
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      // The select handler. Call the chart's getSelection() method
+  function selectHandler() {
+      var selectedItem = thisChart.getSelection()[0];
+      if (selectedItem) {
+      //var value = data.getValue(selectedItem.row, selectedItem.column);
+      BeamFromBar = selectedItem.row + 1;                             // 1-206, need to be converted to 1-200,300,400,500,600,700,800
+      document.getElementById("beamslidebar").value = BeamFromBar;    // update the position on beam size slide bar
+      if (BeamFromBar &gt; 200) BeamFromBar = (BeamFromBar - 200) * 100 + 200;       
+      // do other things, like re-draw
+      }
+  }
+
+  // Listen for the 'select' event, and call my function selectHandler() when the user selects something on the chart.
+  google.visualization.events.addListener(thisChart, 'select', selectHandler);
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a href="#rna-web-demo"><strong><em>Back</em></strong> to subcontents <strong><em>RNA web demo</em></strong></a><br />
+<a href="#pseudoknot"><strong><em>Back</em></strong> to subcontents <strong><em>Pseudoknot</em></strong></a></p>
+
+<h4 id="01042018-thu">01/04/2018 Thu</h4>
+<ul>
+  <li>Have trouble getting files from server end (forbidden:403), resume to get files from github end.</li>
+</ul>
+
+<p><a href="#rna-web-demo"><strong><em>Back</em></strong> to subcontents <strong><em>RNA web demo</em></strong></a></p>
+<ul>
+  <li>Add another family(series) named <code class="language-plaintext highlighter-rouge">grp1</code>.
+    <h4 id="01092018-tue">01/09/2018 Tue</h4>
+    <p><a href="#rna-web-demo"><strong><em>Back</em></strong> to subcontents <strong><em>RNA web demo</em></strong></a></p>
+  </li>
+</ul>
+
+<h4 id="01172018-wed">01/17/2018 Wed</h4>
+<ul>
+  <li>learn from encorechow’s innotator project</li>
+  <li>check ip for <code class="language-plaintext highlighter-rouge">flop</code> and <code class="language-plaintext highlighter-rouge">ironcreek</code> with <code class="language-plaintext highlighter-rouge">ip addr show</code>. I can only ping <code class="language-plaintext highlighter-rouge">ironcreek</code> within <code class="language-plaintext highlighter-rouge">flop</code>, not from home directly.</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>server</th>
+      <th>ip</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">flop.engr.oregonstate.edu</code></td>
+      <td>128.193.54.168/23(<code class="language-plaintext highlighter-rouge">ip addr show</code>)/ 73.67.241.185(log in, ping able)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">flip.engr.oregonstate.edu</code></td>
+      <td>128.193.36.41/22(<code class="language-plaintext highlighter-rouge">ip addr show</code> and ping)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ironcreek.eecs.oregonstate.edu</code></td>
+      <td>128.193.38.74/22(ping able in flop)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">web.engr.oregonstate.edu</code></td>
+      <td>128.193.40.12(ping able)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">shell.onid.oregonstate.edu</code></td>
+      <td>128.193.4.170(not ping able)</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>learn flask for web develop(request and response)
+    <ol>
+      <li>install flask in virtual environment
+        <div class="language-zsh highlighter-rouge"><div class="highlight"><pre class="highlight"><code> virtualenv <span class="nt">--system-site-packages</span> ~/.virtualenvs/flask
+ workon flask
+ pip <span class="nb">install </span>flask
+</code></pre></div>        </div>
+      </li>
+      <li>version of flask <code class="language-plaintext highlighter-rouge">0.12.2</code></li>
+      <li><a href="http://blog.csdn.net/iszhenyu/article/details/56846551">logger</a> in flask</li>
+      <li>auto-submit an upload form when a file is selected (skip clicking submit button)
+        <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">#file</span><span class="dl">'</span><span class="p">).</span><span class="nx">change</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+     <span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">#target</span><span class="dl">'</span><span class="p">).</span><span class="nx">submit</span><span class="p">();</span>
+ <span class="p">});</span>
+</code></pre></div>        </div>
+        <p>or, in the form with onchange event :</p>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> &lt;form action="upload.php" method="post" enctype="multipart/form-data"&gt;
+     &lt;input type="file" name="filename" onchange="form.submit()"&gt;
+ &lt;/form&gt;
+</code></pre></div>        </div>
+      </li>
+      <li><code class="language-plaintext highlighter-rouge">enctype="multipart/form-data"</code> in form tag is very important</li>
+      <li>However, the submission method to flask will make the whole page refresh. So I need ajax</li>
+    </ol>
+  </li>
+</ul>
+
+<p><a href="#rna-web-demo"><strong><em>Back</em></strong> to subcontents <strong><em>RNA web demo</em></strong></a></p>
+
+<h4 id="01182018-thu">01/18/2018 Thu</h4>
+<ul>
+  <li>explore communication between <code class="language-plaintext highlighter-rouge">flip</code> and <code class="language-plaintext highlighter-rouge">ironcreek</code></li>
+  <li>code location is <code class="language-plaintext highlighter-rouge">/scratch/dengde/fastdecode/fastcky_rerun/build_beamckypar</code>, we need to run a script <code class="language-plaintext highlighter-rouge">~dengde/run_beamckypar_new.sh</code> to use specific version of gcc.</li>
+  <li>line break in the attr <code class="language-plaintext highlighter-rouge">placeholder</code> in <areatext>: use `&#10;` instead of `\n`</areatext></li>
+  <li>terminologies in flask.(<a href="https://segmentfault.com/a/1190000010954676">source</a>)
+    <ul>
+      <li>PythonDecorato</li>
+      <li>view function: return string, no int or float</li>
+      <li>Variable in <code class="language-plaintext highlighter-rouge">&lt;&gt;</code> of <code class="language-plaintext highlighter-rouge">@app.route()</code> should be te same as the parameter view function</li>
+      <li><code class="language-plaintext highlighter-rouge">url_for()</code> pass the name of a view function as string parameter, return the url of the corresponding function.</li>
+      <li>good material: <a href="https://segmentfault.com/a/1190000004213652">flask设计思路</a></li>
+    </ul>
+  </li>
+</ul>
+
+<p><a href="#rna-web-demo"><strong><em>Back</em></strong> to subcontents <strong><em>RNA web demo</em></strong></a></p>
+
+<h4 id="01192018-fri">01/19/2018 Fri</h4>
+<ul>
+  <li>What’s the difference between <code class="language-plaintext highlighter-rouge">python hello.py</code> and <code class="language-plaintext highlighter-rouge">flask run</code>
+  ```bash
+  $ export FLASK_APP=hello.py
+  $ flask run
+    <ul>
+      <li>Running on http://127.0.0.1:5000/
+  ```
+<a href="#rna-web-demo"><strong><em>Back</em></strong> to subcontents <strong><em>RNA web demo</em></strong></a></li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="01212018-sun">01/21/2018 Sun</h4>
+<ul>
+  <li>Check if the uploaded file is allowed:
+    <ul>
+      <li>html form:
+  ```</li>
+    </ul>
+    <form method="POST" class="userSeq" enctype="multipart/form-data">
+      <input type="file" name="seqFile" id="seqFile" accept=".txt" /><br />
+      <input type="submit" value="Run &gt;&gt;" />
+  </form>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  ```python
+  ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
+  def allowed_file(filename):
+      return '.' in filename and filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a href="#rna-web-demo"><strong><em>Back</em></strong> to subcontents <strong><em>RNA web demo</em></strong></a></p>
+
+<h4 id="01292018-mon">01/29/2018 Mon</h4>
+<ul>
+  <li>Finish data transmission between flip and ironcreek with <code class="language-plaintext highlighter-rouge">socket</code> in python.</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>graph LR
+V(&lt;b&gt;browser&lt;/b&gt;&lt;br&gt;web.engr.ore.../onid&lt;br&gt;128.193.40.12/onid)--&gt;|visit  &lt;b&gt;but&lt;/b&gt; &lt;br&gt;no data upload|P(&lt;b&gt;./public_html/&lt;/b&gt;&lt;br&gt;html,css,js&lt;br&gt;)
+P--&gt;|in|D(&lt;b&gt;flop&lt;/b&gt;&lt;br&gt;&lt;b&gt;ip&lt;/b&gt;: 73.67.241.185)
+P--&gt;|in|B(&lt;b&gt;flip/access&lt;/b&gt;&lt;br&gt;&lt;b&gt;host&lt;/b&gt;: flip3.engr.oreg...&lt;br&gt;&lt;b&gt;ip&lt;/b&gt;: 128.193.36.41)
+
+P--&gt;|in|A(&lt;b&gt;ironcreek&lt;/b&gt;&lt;br&gt;&lt;b&gt;host&lt;/b&gt;:ironcreek.eecs...&lt;br&gt;&lt;b&gt;ip&lt;/b&gt;: 128.193.38.74&lt;br&gt;&lt;br&gt;&lt;b&gt;do the math&lt;/b&gt;)
+
+V--&gt;|ssh|D
+
+subgraph server data flow
+A
+B
+D
+P
+end
+subgraph client off campus
+V
+end
+classDef green fill:#9f6,stroke:#333,stroke-width:2px;;
+classDef orange fill:#f48c42,stroke:#f66,stroke-width:2px,stroke-dasharray: 5, 5;
+class A,V,B,D green
+%%class P orange
+</code></pre></div></div>
+
+<h4 id="01302018-wed">01/30/2018 Wed</h4>
+<p>read files with jQuery in local html, there is an error: Cross origin requests are only supported for protocol schemes: http, data, chrome, chrome-extension, https.
+I found a <a href="https://stackoverflow.com/questions/10752055/cross-origin-requests-are-only-supported-for-http-error-when-loading-a-local">solution</a> onlie:</p>
+<blockquote>
+  <p>Just to be explicit - Yes, the error is saying you cannot point your browser directly at file://some/path/some.html</p>
+  <ul>
+    <li>Python 2
+      <blockquote>
+        <p>If you have Python installed…
+Change directory into the folder where your file some.html or file(s) exist using the command cd /path/to/your/folder
+Start up a Python web server using the command python -m SimpleHTTPServer</p>
+
+        <p>This will start a web server that hosts your entire directory listing, which will be made accessible through the following URL: http://localhost:8000</p>
+
+        <p>This approach is built in to any Python installation.</p>
+      </blockquote>
+    </li>
+  </ul>
+</blockquote>
+
+<ul>
+  <li>Python 3
+    <blockquote>
+      <p>Do the same steps, but use the following command instead python3 -m http.server</p>
+    </blockquote>
+  </li>
+</ul>
+
+<p><a href="#rna-web-demo"><strong><em>Back</em></strong> to subcontents <strong><em>RNA web demo</em></strong></a></p>
+
+<h4 id="02022018-fri">02/02/2018 Fri</h4>
+
+<pre><code class="language-mermaid">sequenceDiagram
+
+    participant C as client off campus
+    participant S1 as flip/access
+    participant S2 as ironcreek
+%note left of C: visit
+note over C: visit web.engr.../~onid
+C-&gt;&gt;S1:customized seq
+alt file upload
+        C-&gt;&gt;S1: file request
+    else name &amp; seq input
+        C-&gt;&gt;S1: text request
+end
+note over S1: write seq to file save SeqName
+S1-&gt;&gt;S2: call prog with file name
+note over S2: run linear C/V  write to 'pairing'
+S2-&gt;&gt;S1:return the message 'done'
+note over S1: render a new page with 'pairing'
+S1-&gt;&gt;C: redirect to the new page
+note over C: Wow!
+
+
+</code></pre>
+
+<p><a href="#rna-web-demo"><strong><em>Back</em></strong> to subcontents <strong><em>RNA web demo</em></strong></a></p>
+
+:ET

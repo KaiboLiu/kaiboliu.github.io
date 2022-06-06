@@ -1,0 +1,521 @@
+I"t�<h2 id="gan">GAN</h2>
+<p><img src="https://raw.githubusercontent.com/KaiboLiu/CS519-DL/master/Project-GAN/images/output-CraterLake_to_starry_night_paint-g1-50.jpg" alt="" title="output-CraterLake_to_starry_night_paint-g1-50" /></p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Project</th>
+      <th style="text-align: center">Algorithm</th>
+      <th style="text-align: center">venv</th>
+      <th style="text-align: center">dataset</th>
+      <th style="text-align: center">result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">AC-GAN-burness-tf / <a href="https://github.com/burness/tensorflow-101/tree/master/GAN/AC-GAN">repo</a></td>
+      <td style="text-align: center">ACGAN</td>
+      <td style="text-align: center">-</td>
+      <td style="text-align: center">-</td>
+      <td style="text-align: center">:sleeping:</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="#dcgan-carpedm20-tensorflow">DCGAN-carpedm20-tf</a> / <a href="https://github.com/carpedm20/DCGAN-tensorflow">repo</a></td>
+      <td style="text-align: center">DCGAN</td>
+      <td style="text-align: center">envDL</td>
+      <td style="text-align: center">flower+mnist+celebA</td>
+      <td style="text-align: center">:ok_hand:</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">DCGAN-soumith-torch-lsun+ImageNet / <a href="https://github.com/soumith/dcgan.torch">repo</a></td>
+      <td style="text-align: center">DCGAN</td>
+      <td style="text-align: center">-</td>
+      <td style="text-align: center">-</td>
+      <td style="text-align: center">:sleeping:</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="#info-gan-burness-tensorflow">Info-GAN-burness-tf</a> / <a href="https://github.com/burness/tensorflow-101/tree/master/GAN/Info-GAN">repo</a></td>
+      <td style="text-align: center">Info-GAN</td>
+      <td style="text-align: center">envDL</td>
+      <td style="text-align: center">mnist</td>
+      <td style="text-align: center">:ok_hand:</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="#wassersteingan">WassersteinGAN-torch</a> / <a href="https://github.com/martinarjovsky/WassersteinGAN">repo</a></td>
+      <td style="text-align: center">WGAN</td>
+      <td style="text-align: center">envDL/envTorch</td>
+      <td style="text-align: center">LSUN+flower+mnist</td>
+      <td style="text-align: center">:ok_hand:</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="#stylesynthesis-machrisaa-tensorflowvgg19">StyleSynthesis-machrisaa-tf+VGG19</a> / <a href="https://github.com/machrisaa/stylenet">repo</a></td>
+      <td style="text-align: center">-</td>
+      <td style="text-align: center">envDL</td>
+      <td style="text-align: center">random img</td>
+      <td style="text-align: center">:ok_hand:</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li><a href="#video">video record</a></li>
+  <li><a href="#structure-of-report">structure of report</a></li>
+</ul>
+
+<h3 id="start-gan">Start-GAN</h3>
+<h4 id="02142017-tue-midnight">02/14/2017 Tue midnight</h4>
+<p>Intend to implement a GAN project <a href="https://github.com/reedscot/icml2016">Generative Adversarial Text-to-Image Synthesis</a>, needs Torch, CuDNN, and the display package as prerequisites. Then I started to configure them. The issues I has is listed in <a href="#torch-installation">torch installation</a>。<br />
+GANs have been primarily applied to modeling natural images. They are now producing <a href="https://arxiv.org/abs/1511.06434">excellent results in image generation tasks</a>, generating images that are significantly sharper than those trained using other leading generative methods based on maximum likelihood training objectives.</p>
+
+<p>A <a href="http://blog.aylien.com/introduction-generative-adversarial-networks-code-tensorflow/">project</a> of Approximating a 1D Gaussian distribution demo+<a href="https://github.com/AYLIEN/gan-intro">code</a>, with the video
+<a href="https://youtu.be/mObnwR-u8pc">Generative Adversarial Network visualization</a>.</p>
+
+<p><a href="#gan"><strong><em>Back</em></strong> to subcontents <strong><em>GAN</em></strong></a></p>
+
+<h3 id="info-gan-burness-tensorflow">Info-GAN-burness-tensorflow</h3>
+<h4 id="02152017-wed">02/15/2017 Wed</h4>
+<p>implement Info-GAN-burness-tensorflow with mnist dataset, from <a href="https://github.com/burness/tensorflow-101/tree/master/GAN/Info-GAN">repo</a><br />
+run <code class="language-plaintext highlighter-rouge">train.py</code>, then <code class="language-plaintext highlighter-rouge">generate.py</code>. The results are only 2 figures.<br />
+dir is <code class="language-plaintext highlighter-rouge">liukaib@lifgroup:/home/liukaib/tenso/GAN-burness/tensorflow-101/GAN/Info-GAN</code>, <br />
+then updated to <code class="language-plaintext highlighter-rouge">liukaib@lifgroup:/home/liukaib/GAN/Info-GAN-burness-tensorflow</code></p>
+
+<p><a href="#gan"><strong><em>Back</em></strong> to subcontents <strong><em>GAN</em></strong></a></p>
+
+<h3 id="dcgan-carpedm20-tensorflow">DCGAN-carpedm20-tensorflow</h3>
+<h4 id="03012017-wed">03/01/2017 Wed</h4>
+<p>implement DCGAN with celebA face dataset, from <a href="https://github.com/carpedm20/DCGAN-tensorflow">repo</a>. The type of dataset is a folder with 202599 <code class="language-plaintext highlighter-rouge">.jpg</code> images.<br />
+dir is <code class="language-plaintext highlighter-rouge">liukaib@lifgroup:/home/liukaib/GAN/DCGAN-tensorflow</code>, then updated to <code class="language-plaintext highlighter-rouge">liukaib@lifgroup:/home/liukaib/GAN/DCGAN-carpedm20-tensorflow</code> on 03/11/2017 Sat.
+total train is 24 epoch/7.7h.</p>
+
+<p>After group meeting, I tried mnist dataset and got some results which can be used as gif to illustrate.</p>
+
+<h4 id="03162017-thu">03/16/2017 Thu</h4>
+<p>I put Eugene’s flower folder into <code class="language-plaintext highlighter-rouge">DCGAN-carpedm20-tensorflow/data</code> and run with 100 epochs:</p>
+<div class="language-zsh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">CUDA_VISIBLE_DEVICES</span><span class="o">=</span>1 python main.py <span class="nt">--dataset</span> flower  <span class="nt">--epoch</span> 100 <span class="nt">--is_train</span> <span class="nt">--is_crop</span> True
+</code></pre></div></div>
+<p>But, the result is not good and we cannot generate any flower images.</p>
+
+<h4 id="03172017-fri">03/17/2017 Fri</h4>
+<p>I change the epoch to 3000 to see if the result will get better.</p>
+<div class="language-zsh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python main.py <span class="nt">--dataset</span> flower  <span class="nt">--epoch</span> 3000 <span class="nt">--is_train</span> <span class="nt">--is_crop</span> True
+</code></pre></div></div>
+
+<h4 id="03182017-sat">03/18/2017 Sat</h4>
+<p>The generated images is not consistent to the corresponding position. I believe it’s because the type of flower in the same folder are too different with unique features. Then I tried another time with:</p>
+<div class="language-zsh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python main.py <span class="nt">--dataset</span> flower  <span class="nt">--epoch</span> 1000 <span class="nt">--is_train</span> <span class="nt">--is_crop</span> True
+</code></pre></div></div>
+
+<p><a href="#gan"><strong><em>Back</em></strong> to subcontents <strong><em>GAN</em></strong></a></p>
+
+<h3 id="wassersteingan">WassersteinGAN</h3>
+<h4 id="03082017-wed">03/08/2017 Wed</h4>
+<p>workon WGAN on <code class="language-plaintext highlighter-rouge">lifgroup</code> at night<br />
+install <a href="http://pytorch.org/">PyTorch</a><br />
+with python-2.7+CUDA-8.0</p>
+<div class="language-zsh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip <span class="nb">install </span>https://s3.amazonaws.com/pytorch/whl/cu80/torch-0.1.10.post2-cp27-none-linux_x86_64.whl
+pip <span class="nb">install </span>torchvision
+</code></pre></div></div>
+<p>clone <a href="https://github.com/martinarjovsky/WassersteinGAN">WGAN repo</a> into <code class="language-plaintext highlighter-rouge">lifgroup:~/GAN</code> (moved to <code class="language-plaintext highlighter-rouge">/media/HDD/LargeDisk/liukaib/WassersteinGAN</code> on 03/10/2017)<br />
+venv is <code class="language-plaintext highlighter-rouge">envDL</code><br />
+execute command is not friendly given (fixed on <a href="#03102017-fri">03/10/2017 Fri</a>’s log):</p>
+<div class="language-zsh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># With DCGAN</span>
+python main.py <span class="nt">--dataset</span> lsun <span class="nt">--dataroot</span> <span class="o">[</span>lsun-train-folder] <span class="nt">--cuda</span>
+
+
+<span class="c"># With MLP</span>
+python main.py <span class="nt">--mlp_G</span> <span class="nt">--ngf</span> 512
+</code></pre></div></div>
+
+<p>After run <code class="language-plaintext highlighter-rouge">python main.py.....</code>, there is an error <code class="language-plaintext highlighter-rouge">ImportError: No module named lmdb</code>. So I install lmdb with <code class="language-plaintext highlighter-rouge">pip install lmdb</code>.<br />
+Then, run the main, turns out that LSUN dataset(bedroom) not found. After research, pytorch offers downloading command for mnist, not for lsun, which make users have do it manually. So I find a <a href="https://github.com/fyu/lsun">repo</a> for downloading LSUN-bedroom data. <strong>remember</strong>, do not use <code class="language-plaintext highlighter-rouge">wget</code> on git files which are in encrypted url, I just need to open ‘raw’ of a <code class="language-plaintext highlighter-rouge">.py</code> code then use <code class="language-plaintext highlighter-rouge">wget</code> to download a file separately.<br />
+So I run <code class="language-plaintext highlighter-rouge">python download.py -c bedroom</code> to start downloading the two 45GB zip files, which takes 1.5 hours. But it failed and left about a half un-downloaded. With that uncompleted zip I cannot unzip it.</p>
+
+<h4 id="03102017-fri">03/10/2017 Fri</h4>
+
+<p>After several trial of downloading with ssh and tmux, I turned to the desktop and login my accout directly to run the download code. Finally it works after about 2 hours. And I can unzip them successfully.</p>
+
+<h4 id="03112017-sat">03/11/2017 Sat</h4>
+<p>In the morning, I put both unzipped LSUN data folder (<code class="language-plaintext highlighter-rouge">bedroom_train_lmdb</code>/45GB-&gt;54GB,<code class="language-plaintext highlighter-rouge">bedroom_val_lmdb</code>/4MB-&gt;6MB) into <code class="language-plaintext highlighter-rouge">/WassersteinGAN</code>. <br />
+Since the <code class="language-plaintext highlighter-rouge">lsun-train-folder</code> is in <code class="language-plaintext highlighter-rouge">./</code>, the same path as <code class="language-plaintext highlighter-rouge">main.py</code>, so the run command <code class="language-plaintext highlighter-rouge">python main.py --dataset lsun --dataroot [lsun-train-folder] --cuda</code> should be</p>
+<div class="language-zsh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python main.py <span class="nt">--dataset</span> lsun <span class="nt">--dataroot</span> <span class="s1">'./'</span> <span class="nt">--cuda</span>
+</code></pre></div></div>
+<p>As is mentioned in the repo’s note,</p>
+<blockquote>
+  <p>The first time running on the LSUN dataset it can take a long time (up to an hour) to create the dataloader. After the first run a small cache file will be created and the process should take a matter of seconds. The cache is a list of indices in the lmdb database (of LSUN)</p>
+</blockquote>
+
+<p>It really took a while to create the dataloader.</p>
+
+<p>After cache created, both TitanX GPUs in group server got fully occupied again. So my plan has to stop for the moment.</p>
+
+<p>After waiting from noon to dusk, I can execute my code after the termination of Jialin’s project at about 18:00.</p>
+
+<h4 id="03132017-mon">03/13/2017 Mon</h4>
+<p>After 51 hours’ running, the program for DCGAN got end. Runtime is 2h/epoch.
+In total, N = 3M input_images, E = 25 epochs.<br />
+Training parameters are:</p>
+<ul>
+  <li>batch_size = 64 input_images</li>
+  <li>output_image_step = 500 iterations</li>
+  <li>iteration_step = 5 batches</li>
+</ul>
+
+<p>47392 batches = N / batch_size = 3M / 64<br />
+227862 iterations = N / batch_size / iteration_step * epochs = batches / iteration_step * epochs = batches / 5 * epochs<br />
+455 output_images = iterations / output_image_step = 227862 / 500<br />
+1 iteration = iteration_step * batch_size = (5*64) = 320 input_images<br />
+1 output_image = 500 iterations = (500*64*5) = 0.16M input_images<br />
+the format of output is:<br />
+[epoch_i][batch_i][gen_iterations]</p>
+<div class="language-zsh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>24/25][47380/47392][227859] Loss_D: <span class="nt">-0</span>.178149 Loss_G: 0.003281 Loss_D_real: 0.020692 Loss_D_fake 0.198841
+<span class="o">[</span>24/25][47385/47392][227860] Loss_D: <span class="nt">-0</span>.160666 Loss_G: 0.049911 Loss_D_real: <span class="nt">-0</span>.213569 Loss_D_fake <span class="nt">-0</span>.052902
+<span class="o">[</span>24/25][47390/47392][227861] Loss_D: <span class="nt">-0</span>.204119 Loss_G: 0.022151 Loss_D_real: <span class="nt">-0</span>.128741 Loss_D_fake 0.075378
+<span class="o">[</span>24/25][47392/47392][227862] Loss_D: <span class="nt">-0</span>.118183 Loss_G: 0.026365 Loss_D_real: <span class="nt">-0</span>.016479 Loss_D_fake 0.101703
+</code></pre></div></div>
+<p>If I want to use MLP:</p>
+<div class="language-zsh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">CUDA_VISIBLE_DEVICES</span><span class="o">=</span>1 python main.py <span class="nt">--dataset</span> lsun <span class="nt">--dataroot</span> <span class="s1">'./'</span> <span class="nt">--cuda</span> <span class="nt">--mlp_G</span> <span class="nt">--ngf</span> 512
+</code></pre></div></div>
+<p>If I want to to continue training:</p>
+<div class="language-zsh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># for DCGAN</span>
+<span class="nv">CUDA_VISIBLE_DEVICES</span><span class="o">=</span>1 python main.py <span class="nt">--dataset</span> lsun <span class="nt">--dataroot</span> <span class="s1">'./'</span> <span class="nt">--cuda</span> <span class="nt">--netG</span> <span class="s1">'./samples/netG_epoch_24.pth'</span> <span class="nt">--netD</span> <span class="s1">'./samples/netD_epoch_24.pth'</span>
+
+<span class="c"># for MLP</span>
+<span class="nv">CUDA_VISIBLE_DEVICES</span><span class="o">=</span>1 python main.py <span class="nt">--dataset</span> lsun <span class="nt">--dataroot</span> <span class="s1">'./'</span> <span class="nt">--cuda</span> <span class="nt">--netG</span> <span class="s1">'./samples-MLP/netG_epoch_24.pth'</span> <span class="nt">--netD</span> <span class="s1">'./samples-MLP/netD_epoch_24.pth'</span> <span class="nt">--mlp_G</span> <span class="nt">--ngf</span> 512
+</code></pre></div></div>
+<p><strong>Remember</strong>, checkpoint of DCGAN cannot be loaded to a continued MLP execution, or the other way round, i.e. DCGAN mode can only load DCGAN checkpoint <code class="language-plaintext highlighter-rouge">.pth</code>, and MLP mode can only load MLP checkpoint <code class="language-plaintext highlighter-rouge">.pth</code>,</p>
+
+<p>At night, I add a function to save 4 types of loss into <code class="language-plaintext highlighter-rouge">.csv</code> so that I can plot some curves later.<br />
+Then I start 3 rounds of training simultaneously on DCGAN-cont.+loss, DCGAN+loss, and MLP+loss.</p>
+
+<h4 id="03152017-wed">03/15/2017 Wed</h4>
+<p>I found running WGAN much slower on the server(2.5h/epoch). Maybe because there are multiple processes simultaneously including Zheng’s project on GPU1.</p>
+
+<p>And, the 54GB data is located in HDD(2TB) due to the limited space in SSD (512GB), so the transfer between disk and CPU is another bottleneck for speed.</p>
+
+<p>My teammates Eugene and Bill have some problems running the projects. I found that tensorflow version has a great update from 0 to 1, which are listed in the <a href="https://www.tensorflow.org/install/migration">official website</a>. So I recommend them to install older version <code class="language-plaintext highlighter-rouge">0.12.1</code> in their virtual environment.
+At afternoon, I copied the generated images from servers with filter command <code class="language-plaintext highlighter-rouge">find</code>. Then I recorded the fast review of generated bedroom images into <code class="language-plaintext highlighter-rouge">.mov</code> file and converted it to <code class="language-plaintext highlighter-rouge">.gif</code> for further presentation.</p>
+
+<p><img src="https://raw.githubusercontent.com/KaiboLiu/CS519-DL/master/Project-GAN/images/WGAN/WGAN-DC.gif" alt="" title="WGAN-DC-animation" /></p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">1000</th>
+      <th style="text-align: center">50000</th>
+      <th style="text-align: center">227500</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><img src="https://raw.githubusercontent.com/KaiboLiu/CS519-DL/master/Project-GAN/images/WGAN/WGAN_DC_p1000.png" alt="" title="1000" /></td>
+      <td style="text-align: center"><img src="https://raw.githubusercontent.com/KaiboLiu/CS519-DL/master/Project-GAN/images/WGAN/WGAN_DC_p50000.png" alt="" title="50000" /></td>
+      <td style="text-align: center"><img src="https://raw.githubusercontent.com/KaiboLiu/CS519-DL/master/Project-GAN/images/WGAN/WGAN_DC_p227500.png" alt="" title="227500" /></td>
+    </tr>
+  </tbody>
+</table>
+
+<p><a href="#gan"><strong><em>Back</em></strong> to subcontents <strong><em>GAN</em></strong></a></p>
+
+<h4 id="03162017-thu-1">03/16/2017 Thu</h4>
+<p>After 62.5 hours’ running, all executions DCGAN-cont.+loss, DCGAN+loss, and MLP+loss end.<br />
+Results are in folders named samples-DCGAN-cont, samples-DCGAN+loss, and samples-MLP, respectively.<br />
+Now there are 3 types of files: <code class="language-plaintext highlighter-rouge">.png</code>, <code class="language-plaintext highlighter-rouge">loss_data.csv</code>, <code class="language-plaintext highlighter-rouge">.pth</code>.</p>
+
+<p>Then I start 2nd round of MLP at 17:21. 1.87 second/step * <br />
+And 1st round of Eugene’s flowers(1,360 images) after putting flower folder into <code class="language-plaintext highlighter-rouge">./17flowers/</code>, making epochs = 5000 and image_output each 50 steps.</p>
+<div class="language-zsh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python main.py <span class="nt">--dataset</span> folder <span class="nt">--dataroot</span> <span class="s1">'./17flowers/'</span> <span class="nt">--cuda</span> <span class="nt">--niter</span> 5000
+</code></pre></div></div>
+
+<p>At night, I use Eugene’s handwriting data(3,529 images), putting folder <code class="language-plaintext highlighter-rouge">EnglishHnd</code> to the server <code class="language-plaintext highlighter-rouge">./</code> to run WGAN.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>EnglishHnd/Sample001/img001-001.png
+EnglishHnd/Sample001/img001-002.png
+EnglishHnd/Sample001/img001-003.png
+...
+EnglishHnd/Sample062/img001-001.png
+EnglishHnd/Sample062/img001-002.png
+EnglishHnd/Sample062/img001-003.png
+</code></pre></div></div>
+<div class="language-zsh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python main.py <span class="nt">--dataset</span> folder <span class="nt">--dataroot</span> <span class="s1">'./EnglishHnd/'</span> <span class="nt">--cuda</span> <span class="nt">--niter</span> 5000
+</code></pre></div></div>
+<p>Almost 1min/epoch</p>
+
+<h4 id="03172017-fri-1">03/17/2017 Fri</h4>
+<p>I check the result of training, flowers ends first while EnglishHnd is still on the stage of less than one third…<br />
+Results of <code class="language-plaintext highlighter-rouge">python main.py --dataset folder --dataroot './17flowers/' --cuda --niter 5000</code>:</p>
+<div class="language-zsh highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="o">[</span>4999/5000][15/22][24894] Loss_D: <span class="nt">-0</span>.595433 Loss_G: 0.157938 Loss_D_real: <span class="nt">-0</span>.189094 Loss_D_fake 0.406339
+ <span class="o">[</span>4999/5000][20/22][24895] Loss_D: <span class="nt">-0</span>.495998 Loss_G: 0.419604 Loss_D_real: <span class="nt">-0</span>.469681 Loss_D_fake 0.026317
+ <span class="o">[</span>4999/5000][22/22][24896] Loss_D: <span class="nt">-0</span>.504061 Loss_G: 0.375015 Loss_D_real: <span class="nt">-0</span>.432782 Loss_D_fake 0.071279
+</code></pre></div></div>
+<p>And the generated images are good.</p>
+
+<h4 id="03182017-fri">03/18/2017 Fri</h4>
+<p>EnglishHnd and bedroom-MLP-cont is still running.<br />
+I tried to extract the number images from EnglishHnd. First option is making 0~9 numbers into <code class="language-plaintext highlighter-rouge">NumHnd</code> with separate folders, the other option is putting them into one folder <code class="language-plaintext highlighter-rouge">NumHnd-one</code> for WGAN.</p>
+<div class="language-zsh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python main.py <span class="nt">--dataset</span> folder <span class="nt">--dataroot</span> <span class="s1">'./NumHnd/'</span> <span class="nt">--cuda</span> <span class="nt">--niter</span> 1000 <span class="nt">--batchSize</span> 16
+python main.py <span class="nt">--dataset</span> folder <span class="nt">--dataroot</span> <span class="s1">'./NumHnd-one/'</span> <span class="nt">--cuda</span> <span class="nt">--niter</span> 1000 <span class="nt">--batchSize</span> 16
+</code></pre></div></div>
+<p>each of them takes 7 second/epoch.</p>
+
+<h3 id="stylesynthesis-machrisaa-tensorflowvgg19">StyleSynthesis-machrisaa-tensorflow+VGG19</h3>
+
+<h4 id="03102017-fri-1">03/10/2017 Fri</h4>
+
+<p>clone the <a href="https://github.com/machrisaa/stylenet">repo</a>, run and fail. <br />
+Then I modified the import function/files, which is not maitained for one year. Moreover, the stylesyn project relies on vgg19 project. So I download the <a href="https://github.com/machrisaa/tensorflow-vgg/blob/master/vgg19.py">vgg19.py</a> file into the folder to be imported.</p>
+
+<p>in <code class="language-plaintext highlighter-rouge">stylenet_patch.py</code>:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">neural_style</span> <span class="kn">import</span> <span class="n">custom_vgg19</span>
+<span class="o">--&gt;</span>
+<span class="kn">import</span> <span class="nn">custom_vgg19</span>
+</code></pre></div></div>
+<p>in <code class="language-plaintext highlighter-rouge">custom_vgg19.py</code></p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">tensoflow_vgg</span> <span class="kn">import</span> <span class="n">vgg19</span>
+<span class="o">--&gt;</span>
+<span class="kn">import</span> <span class="nn">vgg19</span>
+</code></pre></div></div>
+<p>Then I find I need a <code class="language-plaintext highlighter-rouge">vgg19.npy</code> downloaded into the same path according to the same author’s another <a href="https://github.com/machrisaa/tensorflow-vgg">repo</a>. So a 574.7 MB file is downloaded from <a href="https://mega.nz/#!xZ8glS6J!MAnE91ND_WyfZ_8mvkuSa2YcA7q-1ehfSm-Q1fxOvvs">cloud disk</a> into my local laptop and copied to <strong>TitanX</strong> server.</p>
+
+<p>Since <strong>TitanX</strong> is occupied by Jialin and Lawrance fully, I turned to <strong>pelican</strong> server.</p>
+
+<p>However, <code class="language-plaintext highlighter-rouge">.meta</code> files are generated frequently, each of which has the size <strong>500MB~2GB</strong>, making the server stop me from continuing.  <br />
+To disable the creation of the <code class="language-plaintext highlighter-rouge">.meta</code> file, I need to add <code class="language-plaintext highlighter-rouge">write_meta_graph=False</code>, into line 237 in <code class="language-plaintext highlighter-rouge">stylenet_patch.py</code>, like this:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">saved_path</span> <span class="o">=</span> <span class="n">saver</span><span class="p">.</span><span class="n">save</span><span class="p">(</span><span class="n">sess</span><span class="p">,</span> <span class="s">"./train/saves-"</span> <span class="o">+</span> <span class="n">get_filename</span><span class="p">(</span><span class="n">content_file</span><span class="p">),</span> <span class="n">global_step</span><span class="o">=</span><span class="n">global_step</span><span class="p">,</span> <span class="n">write_meta_graph</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</code></pre></div></div>
+<p>So everything is OK for running.<br />
+Basic usage is, in main of <code class="language-plaintext highlighter-rouge">stylenet_patch.py</code>, set</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>stylenet_patch.render_gen( &lt;content image path&gt; , &lt;style image path&gt;, height=&lt;output height&gt;)
+</code></pre></div></div>
+<p>and run <code class="language-plaintext highlighter-rouge">python stylenet_patch.py</code>.</p>
+
+<p>Alternatively, you can go as I did. I wrote another <code class="language-plaintext highlighter-rouge">run_main.py</code> to import <code class="language-plaintext highlighter-rouge">stylenet_patch</code> and set image paths to run the <code class="language-plaintext highlighter-rouge">render_gen()</code> function from <code class="language-plaintext highlighter-rouge">stylenet_patch.py</code>.</p>
+
+<p>Husky (without region) after running,</p>
+<div class="language-zsh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Step 199: cost:0.0030512088     <span class="o">(</span>27.3 sec<span class="o">)</span>       content:0.00000, style_3:0.00089, style_4:0.00216, gram:0.00000, diff_cost_out:0.00000
+Step 200: cost:0.0030384166     <span class="o">(</span>27.4 sec<span class="o">)</span>       content:0.00000, style_3:0.00089, style_4:0.00215, gram:0.00000, diff_cost_out:0.00000
+net saved:  ./train/saves-output-g1-80-200
+img saved:  ./train/output-g2-200.jpg
+<span class="nt">-----------</span> 2 generation finished <span class="k">in </span>52 sec <span class="nt">-----------</span>
+</code></pre></div></div>
+
+<p>cat after running:</p>
+<div class="language-zsh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Step 199: cost:0.0070971507     <span class="o">(</span>15.9 sec<span class="o">)</span>       content:0.00000, style_3:0.00220, style_4:0.00490, gram:0.00000, diff_cost_out:0.00000
+Step 200: cost:0.0070948927     <span class="o">(</span>15.9 sec<span class="o">)</span>       content:0.00000, style_3:0.00219, style_4:0.00490, gram:0.00000, diff_cost_out:0.00000
+net saved:  ./train/saves-output-g1-80-200
+img saved:  ./train/output-g2-200.jpg
+<span class="nt">-----------</span> 2 generation finished <span class="k">in </span>28 sec <span class="nt">-----------</span>
+</code></pre></div></div>
+<p>starry night after running:</p>
+<div class="language-zsh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Step 199: cost:0.0043881140     <span class="o">(</span>27.2 sec<span class="o">)</span>       content:0.00000, style_3:0.00126, style_4:0.00312, gram:0.00000, diff_cost_out:0.00000
+Step 200: cost:0.0043800147     <span class="o">(</span>27.3 sec<span class="o">)</span>       content:0.00000, style_3:0.00126, style_4:0.00312, gram:0.00000, diff_cost_out:0.00000
+net saved:  ./train/saves-output-g1-80-200
+img saved:  ./train/output-g2-200.jpg
+<span class="nt">-----------</span> 2 generation finished <span class="k">in </span>51 sec <span class="nt">-----------</span>
+</code></pre></div></div>
+<p>Then I generate some oil painting style pics of natural OSU landscapes with the app <code class="language-plaintext highlighter-rouge">prisma</code> and upload them to the server.<br />
+But the <strong>pelican</strong> is also fully occupied by a guy named alizades.<br />
+Then I have to switch to <strong>steed</strong> instead.</p>
+
+<p>After some environment configuration, I upgrade the <code class="language-plaintext highlighter-rouge">numpy</code> then I can import tensorflow successfully on <strong>steed</strong>.</p>
+
+<p>Some results from OSU landscapes are generated with famous painting styles and saved to my own computer. Here are part of them.</p>
+
+<p>The Starry Night, 1889 by Vincent van Gogh<br />
+Les Demoiselles d’Avignon, 1907, Pablo Picasso<br />
+The Scream, 1893 by Edvard Munch<br />
+Mona Lisa, 1503 by Leonardo da Vinci</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Content</th>
+      <th style="text-align: center">Style</th>
+      <th style="text-align: center">Result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><img src="https://raw.githubusercontent.com/KaiboLiu/CS519-DL/master/Project-GAN/images/OSU-buil-real.jpg" alt="" title="OSU-buil-real" /></td>
+      <td style="text-align: center"><img src="https://raw.githubusercontent.com/KaiboLiu/CS519-DL/master/Project-GAN/images/OSU-pole-sty2.jpg" alt="" title="OSU-pole-sty2" /></td>
+      <td style="text-align: center"><img src="https://raw.githubusercontent.com/KaiboLiu/CS519-DL/master/Project-GAN/images/output-OSU_built_to_pole-sty2-g1-50.jpg" alt="" title="output-OSU_built_to_pole-sty2-g1-50" /></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Content</td>
+      <td style="text-align: center">+[Style]</td>
+      <td style="text-align: center">=Result</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="https://raw.githubusercontent.com/KaiboLiu/CS519-DL/master/Project-GAN/images/OSU-buil-real.jpg" alt="" title="OSU-buil-real" /></td>
+      <td style="text-align: center"><img src="https://raw.githubusercontent.com/KaiboLiu/CS519-DL/master/Project-GAN/images/Les_Demoiselles_dAvignon.jpg" alt="" title="Les Demoiselles dAvignon, 1907, Pablo Picasso" /></td>
+      <td style="text-align: center"><img src="https://raw.githubusercontent.com/KaiboLiu/CS519-DL/master/Project-GAN/images/output-OSU-buil-real_to_Les_Demoiselles_dAvignon-g1-55.jpg" alt="" title="output-OSU-buil-real_to_Les_Demoiselles_dAvignon-g1-55" /></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Content</td>
+      <td style="text-align: center">+[Style]</td>
+      <td style="text-align: center">=Result</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="https://raw.githubusercontent.com/KaiboLiu/CS519-DL/master/Project-GAN/images/OSU-Valley-real.jpg" alt="" title="OSU-Valley-real" /></td>
+      <td style="text-align: center"><img src="https://raw.githubusercontent.com/KaiboLiu/CS519-DL/master/Project-GAN/images/Les_Demoiselles_dAvignon.jpg" alt="" title="Les Demoiselles dAvignon, 1907, Pablo Picasso" /></td>
+      <td style="text-align: center"><img src="https://raw.githubusercontent.com/KaiboLiu/CS519-DL/master/Project-GAN/images/output-OSU-Valley_to_Les_Demoiselles_dAvignon-g1-50.jpg" alt="" title="output-OSU-Valley_to_Les_Demoiselles_dAvignon-g1-50" /></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Content</td>
+      <td style="text-align: center">+[Style]</td>
+      <td style="text-align: center">=Result</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="https://raw.githubusercontent.com/KaiboLiu/CS519-DL/master/Project-GAN/images/OSU-Valley-real.jpg" alt="" title="OSU-Valley-real" /></td>
+      <td style="text-align: center"><img src="https://raw.githubusercontent.com/KaiboLiu/CS519-DL/master/Project-GAN/images/OSU-buil-sty3.jpg" alt="" title="OSU-buil-sty3" /></td>
+      <td style="text-align: center"><img src="https://raw.githubusercontent.com/KaiboLiu/CS519-DL/master/Project-GAN/images/output-OSU-Valley_to_OSU-buil-sty3-g1-15.jpg" alt="" title="output-OSU-Valley_to_OSU-buil-sty3-g1-15" /></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Content</td>
+      <td style="text-align: center">+[Style]</td>
+      <td style="text-align: center">=Result</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="https://raw.githubusercontent.com/KaiboLiu/CS519-DL/master/Project-GAN/images/OSU-Valley-real.jpg" alt="" title="OSU-Valley-real" /></td>
+      <td style="text-align: center"><img src="https://raw.githubusercontent.com/KaiboLiu/CS519-DL/master/Project-GAN/images/starry_night_paint.jpg" alt="" title="starry_night_paint" /></td>
+      <td style="text-align: center"><img src="https://raw.githubusercontent.com/KaiboLiu/CS519-DL/master/Project-GAN/images/output-OSU-Valley_to_starry_night_paint-g1-25.jpg" alt="" title="output-OSU-Valley_to_starry_night_paint-g1-25" /></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Content</td>
+      <td style="text-align: center">+[Style]</td>
+      <td style="text-align: center">=Result</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="https://raw.githubusercontent.com/KaiboLiu/CS519-DL/master/Project-GAN/images/CraterLake-real.jpg" alt="" title="CraterLake-real" /></td>
+      <td style="text-align: center"><img src="https://raw.githubusercontent.com/KaiboLiu/CS519-DL/master/Project-GAN/images/starry_night_paint.jpg" alt="" title="starry_night_paint" /></td>
+      <td style="text-align: center"><img src="https://raw.githubusercontent.com/KaiboLiu/CS519-DL/master/Project-GAN/images/output-CraterLake_to_starry_night_paint-g1-50.jpg" alt="" title="output-CraterLake_to_starry_night_paint-g1-50" /></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Content</td>
+      <td style="text-align: center">+[Style]</td>
+      <td style="text-align: center">=Result</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="https://raw.githubusercontent.com/KaiboLiu/CS519-DL/master/Project-GAN/images/cat_h.jpg" alt="" title="cat" /></td>
+      <td style="text-align: center"><img src="https://raw.githubusercontent.com/KaiboLiu/CS519-DL/master/Project-GAN/images/monnalisa.jpg" alt="" title="Mona Lisa, 1503 by Leonardo da Vinci" /></td>
+      <td style="text-align: center"><img src="https://raw.githubusercontent.com/KaiboLiu/CS519-DL/master/Project-GAN/images/output-cat_to_monnalisa-g1-55.jpg" alt="" title="output-cat_to_monnalisa-g1-55" /></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Content</td>
+      <td style="text-align: center">+[Style]</td>
+      <td style="text-align: center">=Result</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="https://raw.githubusercontent.com/KaiboLiu/CS519-DL/master/Project-GAN/images/husky_real.jpg" alt="" title="husky_real" /></td>
+      <td style="text-align: center"><img src="https://raw.githubusercontent.com/KaiboLiu/CS519-DL/master/Project-GAN/images/the-scream.jpg" alt="" title="The Scream, 1893 by Edvard Munch" /></td>
+      <td style="text-align: center"><img src="https://raw.githubusercontent.com/KaiboLiu/CS519-DL/master/Project-GAN/images/output-husky_real_to_the-scream-g1-50.jpg" alt="" title="output-husky_real_to_the-scream-g1-50" /></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Content</td>
+      <td style="text-align: center">+[Style]</td>
+      <td style="text-align: center">=Result</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="https://raw.githubusercontent.com/KaiboLiu/CS519-DL/master/Project-GAN/images/beaverlogo.jpg" alt="" title="beaverlogo" /></td>
+      <td style="text-align: center"><img src="https://raw.githubusercontent.com/KaiboLiu/CS519-DL/master/Project-GAN/images/OSU-kec-sty.jpg" alt="" title="OSU-kec-sty" /></td>
+      <td style="text-align: center"><img src="https://raw.githubusercontent.com/KaiboLiu/CS519-DL/master/Project-GAN/images/output-beaverlogo_to_OSU-kec-sty-g2-50.jpg" alt="" title="output-beaverlogo_to_OSU-kec-sty-g2-50" /></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Content</td>
+      <td style="text-align: center">+[Style]</td>
+      <td style="text-align: center">=Result</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="https://raw.githubusercontent.com/KaiboLiu/CS519-DL/master/Project-GAN/images/OSU-kec-sty.jpg" alt="" title="OSU-kec-sty" /></td>
+      <td style="text-align: center"><img src="https://raw.githubusercontent.com/KaiboLiu/CS519-DL/master/Project-GAN/images/OSU-kec-real.jpg" alt="" title="OSU-kec-real" /></td>
+      <td style="text-align: center"><img src="https://raw.githubusercontent.com/KaiboLiu/CS519-DL/master/Project-GAN/images/OSU-kec-output-g0-80.jpg" alt="" title="OSU-kec-output-g0-80" /></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Content</td>
+      <td style="text-align: center">+[Style]</td>
+      <td style="text-align: center">=Result</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="https://raw.githubusercontent.com/KaiboLiu/CS519-DL/master/Project-GAN/images/OSU-pole-sty1.jpg" alt="" title="OSU-pole-sty1" /></td>
+      <td style="text-align: center"><img src="https://raw.githubusercontent.com/KaiboLiu/CS519-DL/master/Project-GAN/images/OSU-pole-real.jpg" alt="" title="OSU-pole-real" /></td>
+      <td style="text-align: center"><img src="https://raw.githubusercontent.com/KaiboLiu/CS519-DL/master/Project-GAN/images/OSU-pole-sty1-output-g0-80.jpg" alt="" title="OSU-pole-sty1-output-g0-80" /></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Content</td>
+      <td style="text-align: center">+[Style]</td>
+      <td style="text-align: center">=Result</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="https://raw.githubusercontent.com/KaiboLiu/CS519-DL/master/Project-GAN/images/starry_night_paint.jpg" alt="" title="starry_night_paint" /></td>
+      <td style="text-align: center"><img src="https://raw.githubusercontent.com/KaiboLiu/CS519-DL/master/Project-GAN/images/starry_night_real.jpg" alt="" title="starry_night_real" /></td>
+      <td style="text-align: center"><img src="https://raw.githubusercontent.com/KaiboLiu/CS519-DL/master/Project-GAN/images/starry_night_output-g1-80.jpg" alt="" title="starry_night_output-g1-80" /></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Content</td>
+      <td style="text-align: center">+[Style]</td>
+      <td style="text-align: center">=Result</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>This project can be executed on <strong>TitanX</strong> server under my <code class="language-plaintext highlighter-rouge">envDL</code> virtualenv other than <code class="language-plaintext highlighter-rouge">keras_theano_py2</code>.</p>
+
+<p><a href="#gan"><strong><em>Back</em></strong> to subcontents <strong><em>GAN</em></strong></a></p>
+
+<h3 id="video">Video</h3>
+
+<p><a href="https://youtu.be/Mbb6TD_8p98">Video for DCGAN mnist</a>
+<a href="https://youtu.be/298K3OalzKM">Video for DCGAN mixed flower</a>
+<a href="https://youtu.be/1uC40kYTr8I">Video for DCGAN sunflower</a></p>
+
+<p><a href="https://youtu.be/e50WBRManWU" title="WGAN flowers">Video for WGAN flowers</a><br />
+<a href="https://youtu.be/wQKdqHHEvg0" title="WGAN-bedroom-DC">Video for WGAN-LSUN-bedroom</a></p>
+
+<p><a href="https://youtu.be/Au0RY8onKMk" title="Style CraterLake to starry night">Video for Style CraterLake to starry night</a><br />
+<a href="https://youtu.be/TsWGWEtyIPg" title="Style OSU Valley to starry night">Video for Style OSU Valley to starry night</a><br />
+<a href="https://youtu.be/xIMjj269z7w" title="Style OSU Valley to OSU buil sty3">Video for Style OSU Valley to OSU buil sty3</a><br />
+<a href="https://youtu.be/Tg4G3nEljf8" title="Style OSU Valley to Les Demoiselles dAvignon">Video for Style OSU Valley to Les Demoiselles dAvignon</a><br />
+<a href="https://youtu.be/MmTYH6zKO9g" title="Style husky to the scream">Video for Style husky to the scream</a></p>
+
+<h3 id="structure-of-report">structure of report</h3>
+<ul>
+  <li>Abstract (E)</li>
+  <li>introduction (E)</li>
+  <li>Related work
+    <ul>
+      <li>GAN (E,K)</li>
+      <li>Style (B)</li>
+    </ul>
+  </li>
+  <li>methods
+    <ul>
+      <li>DCGAN (E)</li>
+      <li>WGAN (K)</li>
+      <li>Style (B)</li>
+    </ul>
+  </li>
+  <li>Experiment &amp; result
+    <ul>
+      <li>DCGAN
+        <ul>
+          <li>mnist (K)</li>
+          <li>celebA (K)</li>
+          <li>flower (E)</li>
+        </ul>
+      </li>
+      <li>WGAN
+        <ul>
+          <li>flower (K)</li>
+          <li>bedroom (k)</li>
+        </ul>
+      </li>
+      <li>Style
+        <ul>
+          <li>pooling (B)</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Discussion (added in experiment)</li>
+  <li>Conclusion (E)</li>
+  <li>Reference</li>
+</ul>
+:ET
